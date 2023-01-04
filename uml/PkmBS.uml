@@ -1,0 +1,85 @@
+@startuml
+
+class Trainer{
+    - name : String
+    - team : Pokemon[]
+    Trainer()
+}
+
+class Pokemon{
+    - name : String
+    - currentPv : int
+    - PV_MAX : int
+    - ATK : int 
+    - DEF : int 
+    - VIT : int 
+    - isKO : boolean
+    - currentPv : int
+    - moveA : Move 
+    - moveB : Move
+    - type : Type
+    - statut : Statut
+    + getPV(), getAtk(), ...
+    + applyDamage() 
+    + setStatus()
+    + getIsKo() : boolean
+    + faint()
+}
+
+class Type{
+    - name : String
+    - description : String ?? (mouse over)
+    - resitances : Type[]
+    - weaknesses : Type[]
+    + setResistances(Type[] res)
+    + setWeakness(Type[] weak)
+    + getEfficiency(Type t) : int 
+}
+
+class GameData{
+    - feu, plante, eau : Type
+    - pokemons : Pokemon[]
+    + getPokemons()
+}
+
+class Move{
+    - name : String
+    - description : String ??
+    - power : int
+    - accuracy : int 
+    - type : Type
+    - sndEffect : Effect
+    - priority : boolean
+    + applySndEffect(Pokemon ally,Pokemon foe)
+}
+
+interface MoveEffect{
+    //For example : apply status with x%
+} 
+
+interface Statut{
+    + applyEffect()
+}
+
+class PoisonStatut implements Statut
+class ParalyzisStatut implements Statut
+class SleepStatut implements Statut
+
+
+class FightController{
+    - pView : PkmnView
+    + selectAction()
+    + playTurn()
+
+    //Action : attack or switch
+}
+
+interface PkmnView{
+    + askAction()
+    + withdrawAlly()
+    + withdrawFoe()
+    + displayAlly(Pokemon p) 
+    + displayFoe(Pokemon p)
+}
+
+@enduml

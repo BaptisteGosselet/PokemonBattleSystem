@@ -15,8 +15,8 @@ Ce système de combat étant très complet, il est nécessaire de simplifier plu
 Les mécaniques conservées sont les suivantes : 
 - Dresseur : équipe de 1 à 6 Pokémon
 - Liste des Pokémon : https://www.smogon.com/dex/rb/formats/ou/
-- Pokémon : base stat (pas d'EV/IV) + un seul type + 2 capacités prédéfinies 
-- Capacité : puissance + catégorie physique/spécial + précision + type + effet secondaire
+- Pokémon : base stat (pas d'EV/IV, pas de Spé) + un seul type + 2 capacités prédéfinies 
+- Capacité : puissance + précision + type + effet secondaire + priorité de l'attaque (pas de catégorie physique/spécial)
 - Type : les 15 premiers types 
 - Statuts : Poison, Sommeil, Paralysie
 - Action : Attaquer ou Changer
