@@ -12,26 +12,27 @@ class BattleController() :
         self.view = view
 
     def newGame(self):
-        pkmFactory = PokemonFactory()
+        pkFact = PokemonFactory()
 
+        namesList_p1 = self.view.selectTeam(pkFact.getNamesList(), True)
+        namesList_p2 = self.view.selectTeam(pkFact.getNamesList(), False)
 
-        dracaufeu = pkmFactory.generatePokemon("dracaufeu")
-        leviator = pkmFactory.generatePokemon("leviator")
-        grolem = pkmFactory.generatePokemon("grolem")
-        alakazam = pkmFactory.generatePokemon("alakazam")
-        ectoplasma = pkmFactory.generatePokemon("ectoplasma")
-        tauros = pkmFactory.generatePokemon("tauros")
-
-
-        t1 = Trainer("Joueur",[dracaufeu, leviator, grolem])
-        t2 = Trainer("Ordinateur",[alakazam, ectoplasma, tauros])
+        t1 = Trainer("Joueur", [
+                    pkFact.generatePokemon(namesList_p1[0]), 
+                    pkFact.generatePokemon(namesList_p1[1]), 
+                    pkFact.generatePokemon(namesList_p1[2]), 
+                ])        
+                
+        t2 = Trainer("Ordinateur", [
+                    pkFact.generatePokemon(namesList_p2[0]), 
+                    pkFact.generatePokemon(namesList_p2[1]), 
+                    pkFact.generatePokemon(namesList_p2[2]), 
+                ])
 
         self.view.setOpponentPokemon(t2.getCurrentPokemon())
-
         self.view.setAllyPokemon(t1.getCurrentPokemon())
         
         self.play()
 
     def play(self):
-
         pass

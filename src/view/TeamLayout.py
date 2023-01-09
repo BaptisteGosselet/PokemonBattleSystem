@@ -11,7 +11,8 @@ class TeamLayout(QGridLayout):
 
         onclick_functions = [self.onclick_pkmButton_1, self.onclick_pkmButton_2]
         for i in range(2) :
-            teamButton_i = QPushButton("Pokemon")
+            teamButton_i = QPushButton("")
+            teamButton_i.setEnabled(False)
             teamButton_i.clicked.connect(onclick_functions[i])
             teamButton_i.setMinimumSize(150,30)
             self.addWidget(teamButton_i,i,1) 

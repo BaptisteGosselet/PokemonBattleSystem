@@ -1,6 +1,7 @@
 from time import sleep
 from PyQt5.QtCore import QCoreApplication
 from PyQt5.QtWidgets import *
+from view.SelectPopup import SelectPopup
 
 from view.MovesLayout import MovesLayout
 from view.PokemonLayout import PokemonLayout
@@ -71,3 +72,29 @@ class MainWindow(QWidget):
             QCoreApplication.processEvents()
             sleep(1)
             
+    def selectTeam(self, namesList, forPlayer1):
+
+        statusBar = QStatusBar()
+        if forPlayer1 : 
+            statusBar.showMessage("Selectionner vos Pokemon")
+        else : 
+            statusBar.showMessage("Selectionner les Pokemon adverses")
+
+        combo_1 = QComboBox()
+        combo_2 = QComboBox()
+        combo_3 = QComboBox()
+
+        combo_1.addItems(namesList)
+        combo_2.addItems(namesList)
+        combo_3.addItems(namesList)
+
+        popup = SelectPopup(statusBar, combo_1, combo_2, combo_3)
+
+        selectedNames = [
+            combo_1.currentText(),
+            combo_2.currentText(),
+            combo_3.currentText()
+        ]
+
+        return selectedNames
+        

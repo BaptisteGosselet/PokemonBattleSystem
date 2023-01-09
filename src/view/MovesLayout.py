@@ -10,7 +10,8 @@ class MovesLayout(QGridLayout):
 
         onclick_functions = [self.onclick_moveButton_1, self.onclick_moveButton_2]
         for i in range(2) :
-            moveButton_i = QPushButton("Attaque")
+            moveButton_i = QPushButton("")
+            moveButton_i.setEnabled(False)
             moveButton_i.clicked.connect(onclick_functions[i])
             moveButton_i.setMinimumSize(150,50)
             self.addWidget(moveButton_i,i,1) 
