@@ -1,4 +1,5 @@
 from model.Pokemon import Pokemon
+from model.PokemonFactory import PokemonFactory
 from model.Trainer import Trainer
 
 
@@ -11,13 +12,15 @@ class BattleController() :
         self.view = view
 
     def newGame(self):
+        pkmFactory = PokemonFactory()
 
-        dracaufeu = Pokemon("Dracaufeu", 120)
-        leviator = Pokemon("Leviator", 140)
-        grolem = Pokemon("Grolem", 140)
-        alakazam = Pokemon("Alakazam", 140)
-        ectoplasma = Pokemon("Ectoplasma", 140)
-        tauros = Pokemon("Tauros", 140)
+
+        dracaufeu = pkmFactory.generatePokemon("dracaufeu")
+        leviator = pkmFactory.generatePokemon("leviator")
+        grolem = pkmFactory.generatePokemon("grolem")
+        alakazam = pkmFactory.generatePokemon("alakazam")
+        ectoplasma = pkmFactory.generatePokemon("ectoplasma")
+        tauros = pkmFactory.generatePokemon("tauros")
 
 
         t1 = Trainer("Joueur",[dracaufeu, leviator, grolem])
