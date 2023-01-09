@@ -8,8 +8,8 @@ class MovesLayout(QGridLayout):
         self.buttons = []
         self.addItem(QSpacerItem(20,0),0,0)
 
-        onclick_functions = [self.onclick_moveButton_1, self.onclick_moveButton_2, self.onclick_moveButton_3, self.onclick_moveButton_4]
-        for i in range(4) :
+        onclick_functions = [self.onclick_moveButton_1, self.onclick_moveButton_2]
+        for i in range(2) :
             moveButton_i = QPushButton("Attaque")
             moveButton_i.clicked.connect(onclick_functions[i])
             moveButton_i.setMinimumSize(150,50)
@@ -23,9 +23,3 @@ class MovesLayout(QGridLayout):
 
     def onclick_moveButton_2(self):
         print("Attaque 2")
-
-    def onclick_moveButton_3(self):
-        print("Attaque 3")
-
-    def onclick_moveButton_4(self):
-        print("Attaque 4")
