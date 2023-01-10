@@ -17,22 +17,22 @@ class BattleController() :
         namesList_p1 = self.view.selectTeam(pkFact.getNamesList(), True)
         namesList_p2 = self.view.selectTeam(pkFact.getNamesList(), False)
 
-        t1 = Trainer("Joueur", [
+        self.t1 = Trainer("Joueur", [
                     pkFact.generatePokemon(namesList_p1[0]), 
                     pkFact.generatePokemon(namesList_p1[1]), 
                     pkFact.generatePokemon(namesList_p1[2]), 
                 ])        
                 
-        t2 = Trainer("Ordinateur", [
+        self.t2 = Trainer("Ordinateur", [
                     pkFact.generatePokemon(namesList_p2[0]), 
                     pkFact.generatePokemon(namesList_p2[1]), 
                     pkFact.generatePokemon(namesList_p2[2]), 
                 ])
 
-        self.view.setOpponentPokemon(t2.getCurrentPokemon())
-        self.view.setAllyPokemon(t1.getCurrentPokemon())
+        self.view.setOpponentPokemon(self.t2.getCurrentPokemon())
+        self.view.setAllyPokemon(self.t1.getCurrentPokemon())
         
         self.play()
 
     def play(self):
-        pass
+        self.view.askAction(self.t1)

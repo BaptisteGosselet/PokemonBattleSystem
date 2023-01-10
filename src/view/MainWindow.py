@@ -67,6 +67,10 @@ class MainWindow(QWidget):
         self.pause(2)
         self.displayText("")
 
+    def askAction(self, trainer):
+        pkm = trainer.getCurrentPokemon()
+        self.movesLayout.setAttacks(pkm)
+
     def pause(self, secondes):
         for s in range(secondes):
             QCoreApplication.processEvents()

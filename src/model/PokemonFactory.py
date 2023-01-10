@@ -1,20 +1,36 @@
+from model.Move import Move
 from model.Pokemon import Pokemon
 
 class PokemonFactory() : 
 
     def __init__(self):
-        #init moves in a dictionnary
+
         #init types
 
+        #Init Moves
+        self.moves = {
+            "" : None,
+            "deflagration":     Move("Déflagration",110,85,None, None), #10% de brûlure
+            "seisme" :          Move("Séisme", 100, 100, None, None),
+            "eboulement" :      Move("Eboulement", 75, 90, None, None),
+            "hydrocanon" :      Move("Hydrocanon", 120, 85, None, None),
+            "ultralaser" :      Move("Ultralaser", 150, 90, None, None), #rechagement
+            "plaquage" :        Move("Plaquage", 85, 100, None, None), #30% de paralysie
+            "psyko" :           Move("Psyko", 90, 100, None, None),
+            "cage-eclair" :     Move("Cage-Eclair", 0, 90, None, None), #Paralysie 100% + attaque de status
+            "hypnose" :         Move("Hypnose", 0, 70, None, None), #sommeil 100% 
+            "ball'ombre":       Move("Ball'Ombre", 80, 100, None, None) #20% de baisse de def spé
+        }
 
         #Init Pokemon
-        self.pokemons = {"dracaufeu": Pokemon("Dracaufeu", None, None, 78, 84, 78, 85, 85, 100, None, None), 
-                    "leviator": Pokemon("Leviator", None, None, 95, 125, 79, 100, 100, 81, None, None), 
-                    "grolem": Pokemon("Grolem", None, None, 80, 110, 130, 55, 55, 45, None, None), 
-                    "alakazam": Pokemon("Alakazam", None, None, 55, 50, 45, 135, 135, 120, None, None), 
-                    "ectoplasma": Pokemon("Ectoplasma", None, None, 60, 65, 60, 130, 130, 110, None, None),
-                    "tauros": Pokemon("Tauros", None, None, 75, 100, 95, 70, 70, 110, None, None)
-                }
+        self.pokemons = {
+            "dracaufeu" :   Pokemon("Dracaufeu", None, None, 78, 84, 78, 85, 85, 100, self.moves["deflagration"], self.moves["seisme"]), 
+            "leviator" :    Pokemon("Leviator", None, None, 95, 125, 79, 100, 100, 81, self.moves["hydrocanon"], self.moves["ultralaser"]), 
+            "grolem" :      Pokemon("Grolem", None, None, 80, 110, 130, 55, 55, 45, self.moves["seisme"], self.moves["eboulement"]), 
+            "alakazam" :    Pokemon("Alakazam", None, None, 55, 50, 45, 135, 135, 120, self.moves["psyko"], self.moves["cage-eclair"]), 
+            "ectoplasma" :  Pokemon("Ectoplasma", None, None, 60, 65, 60, 130, 130, 110, self.moves["ball'ombre"], self.moves["hypnose"]),
+            "tauros":       Pokemon("Tauros", None, None, 75, 100, 95, 70, 70, 110, self.moves["plaquage"], self.moves["ultralaser"])
+        }
         
 
     def getNamesList(self):
