@@ -5,7 +5,6 @@ from PyQt5.QtWidgets import *
 from view.SelectPopup import SelectPopup
 
 from view.PokemonLayout import PokemonLayout
-from view.TeamLayout import TeamLayout
 
 
 class MainWindow(QWidget):
@@ -22,6 +21,7 @@ class MainWindow(QWidget):
         battleScreen.addItem(QSpacerItem(200, 100),1,0)
         battleScreen.addLayout(self.opponentPokemon,0,2)
         battleScreen.addLayout(self.allyPokemon,1,0)
+        mainLayout.addLayout(battleScreen,0,1)
 
         #Moves buttons layout
         movesGrid = QGridLayout()
@@ -42,18 +42,27 @@ class MainWindow(QWidget):
 
         mainLayout.addLayout(movesGrid,0,0)
 
+        #Switch buttons layout
+        switchLayout = QGridLayout()
+        switchLayout.addItem(QSpacerItem(50,0),0,0)
 
 
         self.switch_button_1 = QPushButton()
+        self.switch_button_1.setEnabled(False)
+        self.switch_button_1.setMinimumSize(150,30)
         self.switch_button_1.clicked.connect(self.onclick_switchButton_1)
+        switchLayout.addWidget(self.switch_button_1,0,1)
+        
+
         self.switch_button_2 = QPushButton()
+        self.switch_button_2.setEnabled(False)
+        self.switch_button_2.setMinimumSize(150,30)
         self.switch_button_2.clicked.connect(self.onclick_switchButton_2)
+        switchLayout.addWidget(self.switch_button_2,1,1)
+                
+        switchLayout.addItem(QSpacerItem(20,0),0,2)
 
-
-        self.teamLayout = TeamLayout(self.switch_button_1, self.switch_button_2)
-
-        mainLayout.addLayout(battleScreen,0,1)
-        mainLayout.addLayout(self.teamLayout,0,2)
+        mainLayout.addLayout(switchLayout,0,2)
 
         #Play Button
         playButton = QPushButton("Nouvelle Partie")
