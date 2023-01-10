@@ -28,3 +28,6 @@ class Move():
 
     def getPriority(self):
         return self.priority
+
+    def getType(self):
+        return self.type

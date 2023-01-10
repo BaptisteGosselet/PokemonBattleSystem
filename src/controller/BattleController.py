@@ -57,7 +57,6 @@ class BattleController() :
             #When trainer 1's pokemon is ko
             if(self.t1.getCurrentPokemon().getIsKo()):
                 if(not self.t1.canContinue()):
-                    print("t1 cant continue")
                     break
                 else:
                     self.t1.waitForAction(self.view)
@@ -66,7 +65,6 @@ class BattleController() :
             #When trainer 2's pokemon is ko
             if(self.t2.getCurrentPokemon().getIsKo()):
                 if(not self.t2.canContinue()):
-                    print("t2 cant continue")
                     break
                 else:
                     self.t2.waitForAction(self.view)

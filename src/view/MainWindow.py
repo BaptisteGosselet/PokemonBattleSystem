@@ -191,6 +191,7 @@ class MainWindow(QWidget):
         self.switch_button_1.setEnabled(False)
         self.switch_button_2.setEnabled(False)
         self.currentTrainer.setActionCommand(command)
+        self.pause(1)
 
     def onclick_moveButton_1(self):
         self.sendAction("move_1")
@@ -204,17 +205,31 @@ class MainWindow(QWidget):
     def onclick_switchButton_2(self):
         self.sendAction("switch_2")
 
-    def playMove_success(self, user, move, target, damage, coupCritique):
+    def playMove_success(self, user, move, target, damage, coupCritique, peuEfficace, superEfficace, insensible):
         self.displayText("{} utilise {} !".format(user.getName(), move.getName()))
         self.pause(1)
         self.allyPokemon.refreshHP()
         self.opponentPokemon.refreshHP()
-        self.displayText("{} perd {} PV.".format(target.getName(), damage))
-        self.pause(1)
-        if(coupCritique):
-            self.displayText("Coup Critique !")
-            self.pause(1)
-        self.pause(1)
+
+        if(insensible):
+            self.displayText("Ça n'affecte pas.")
+            self.pause(2)
+        else:
+            self.displayText("{} perd {} PV.".format(target.getName(), damage))
+            self.pause(2)
+            
+            if(coupCritique):
+                self.displayText("Coup Critique !")
+                self.pause(1)
+
+            if(peuEfficace):
+                self.displayText("Ce n'est pas très efficace...")
+                self.pause(1)
+            elif(superEfficace):
+                self.displayText("C'est super efficace !")
+                self.pause(1)
+            
+
         if(self.opponentPokemon.getPokemon().getPourcentageHP() == 0):
             self.displayText("{} est K.O. !!".format(self.opponentPokemon.getPokemon().getName(), damage))
             self.pause(3)
