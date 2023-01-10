@@ -6,8 +6,8 @@ class Pokemon :
         self.type1 = type1
         self.type2 = type2
         
-        self.MAX_HP = hp        
-        self.current_HP = hp
+        self.MAX_HP = 2*hp+100+10
+        self.current_HP = self.MAX_HP
         self.atkStat = atkStat
         self.defStat = defStat
         self.spaStat = spaStat
@@ -49,6 +49,12 @@ class Pokemon :
 
     def getIsKo(self):
         return self.isKo
+
+    def getType1(self):
+        return self.type1
+
+    def getType2(self):
+        return self.type2
 
     def applyDamage(self, damage):
         self.current_HP -= damage
