@@ -24,6 +24,6 @@ class SwitchAction():
             return True
 
     def execute(self, view, opponentPokemon):
-        view.withdrawAllyPokemon(self.trainer.getCurrentPokemon())
+        view.withdrawAllyPokemon()
         self.trainer.switchPokemon(self.indexTeam)
         view.setAllyPokemon(self.trainer.getCurrentPokemon())

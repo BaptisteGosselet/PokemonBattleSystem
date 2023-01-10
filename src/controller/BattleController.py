@@ -7,27 +7,28 @@ from model.trainer.Trainer import Trainer
 class BattleController() : 
 
     def __init__(self):
-        pass
+        self.pkFact = PokemonFactory()
 
     def setView(self, view):
         self.view = view
 
     def newGame(self):
-        pkFact = PokemonFactory()
 
-        namesList_p1 = self.view.selectTeam(pkFact.getNamesList(), True)
-        namesList_p2 = self.view.selectTeam(pkFact.getNamesList(), False)
+        self.view.resetGame()
+
+        namesList_p1 = self.view.selectTeam(self.pkFact.getNamesList(), True)
+        namesList_p2 = self.view.selectTeam(self.pkFact.getNamesList(), False)
 
         self.t1 = Trainer("Joueur", [
-                    pkFact.generatePokemon(namesList_p1[0]), 
-                    pkFact.generatePokemon(namesList_p1[1]), 
-                    pkFact.generatePokemon(namesList_p1[2]), 
+                    self.pkFact.generatePokemon(namesList_p1[0]), 
+                    self.pkFact.generatePokemon(namesList_p1[1]), 
+                    self.pkFact.generatePokemon(namesList_p1[2]), 
                 ])        
                 
         self.t2 = AITrainer("Ordinateur", [
-                    pkFact.generatePokemon(namesList_p2[0]), 
-                    pkFact.generatePokemon(namesList_p2[1]), 
-                    pkFact.generatePokemon(namesList_p2[2]), 
+                    self.pkFact.generatePokemon(namesList_p2[0]), 
+                    self.pkFact.generatePokemon(namesList_p2[1]), 
+                    self.pkFact.generatePokemon(namesList_p2[2]), 
                 ])
 
         self.view.setOpponentPokemon(self.t2.getCurrentPokemon())

@@ -28,17 +28,17 @@ class MainWindow(QWidget):
         self.move_button_1 = QPushButton()
         self.move_button_2 = QPushButton()
         
-        movesButtons = [self.move_button_1, self.move_button_2]
+        self.movesButtons = [self.move_button_1, self.move_button_2]
         movesFunctions = [self.onclick_moveButton_1, self.onclick_moveButton_2]
         
-        for i in range(len(movesButtons)):
-            movesButtons[i].setEnabled(False)
-            movesButtons[i].setMinimumSize(150,50)
-            movesButtons[i].clicked.connect(movesFunctions[i])
-            movesGrid.addWidget(movesButtons[i],0+i,1)
+        for i in range(len(self.movesButtons)):
+            self.movesButtons[i].setEnabled(False)
+            self.movesButtons[i].setMinimumSize(150,50)
+            self.movesButtons[i].clicked.connect(movesFunctions[i])
+            movesGrid.addWidget(self.movesButtons[i],0+i,1)
         
         movesGrid.addItem(QSpacerItem(20,0),0,0)
-        movesGrid.addItem(QSpacerItem(50,0),0,2+len(movesButtons))
+        movesGrid.addItem(QSpacerItem(50,0),0,2+len(self.movesButtons))
         
         mainLayout.addLayout(movesGrid,0,0)
 
@@ -47,14 +47,14 @@ class MainWindow(QWidget):
         self.switch_button_1 = QPushButton()
         self.switch_button_2 = QPushButton()
 
-        switchButtons = [self.switch_button_1, self.switch_button_2]
+        self.switchButtons = [self.switch_button_1, self.switch_button_2]
         switchFunctions = [self.onclick_switchButton_1, self.onclick_switchButton_2]
 
-        for i in range(len(switchButtons)):
-            switchButtons[i].setEnabled(False)
-            switchButtons[i].setMinimumSize(150,30)
-            switchButtons[i].clicked.connect(switchFunctions[i])
-            switchLayout.addWidget(switchButtons[i],0+i,1)
+        for i in range(len(self.switchButtons)):
+            self.switchButtons[i].setEnabled(False)
+            self.switchButtons[i].setMinimumSize(150,30)
+            self.switchButtons[i].clicked.connect(switchFunctions[i])
+            switchLayout.addWidget(self.switchButtons[i],0+i,1)
         
         switchLayout.addItem(QSpacerItem(50,0),0,0)
         switchLayout.addItem(QSpacerItem(20,0),0,2)
@@ -72,6 +72,20 @@ class MainWindow(QWidget):
         mainLayout.addWidget(self.statusBar,1,1)
 
         self.setLayout(mainLayout)
+
+    
+    def resetGame(self):
+        
+        for b in self.movesButtons:
+            b.setText("")
+            b.setEnabled(False)
+
+        for b in self.switchButtons:
+            b.setText("")
+            b.setEnabled(False)
+
+        self.allyPokemon.withdrawPokemon()
+        self.opponentPokemon.withdrawPokemon()
 
     def setController(self, controller):
         self.controller = controller   
@@ -127,8 +141,8 @@ class MainWindow(QWidget):
         self.pause(2)
         self.displayText("")
 
-    def withdrawAllyPokemon(self, pokemon):
-        self.displayText("{}, reviens !".format(pokemon.getName()))
+    def withdrawAllyPokemon(self):
+        self.displayText("{}, reviens !".format(self.allyPokemon.getPokemonName()))
         self.pause(1)
         self.allyPokemon.withdrawPokemon()
         self.pause(1)
@@ -176,6 +190,4 @@ class MainWindow(QWidget):
 
     def onclick_switchButton_2(self):
         self.sendAction("switch_2")
-
-
 
