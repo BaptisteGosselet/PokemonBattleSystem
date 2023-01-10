@@ -109,7 +109,17 @@ class MainWindow(QWidget):
         self.pause(2)
         self.displayText("")
 
+    def withdrawAllyPokemon(self, pokemon):
+        self.displayText("{}, reviens !".format(pokemon.getName()))
+        self.pause(1)
+        self.allyPokemon.withdrawPokemon()
+        self.pause(1)
+        self.displayText("")
+
+
     def waitForAction(self, trainer):
+
+        self.displayText("Que dois faire {} ?".format(trainer.getCurrentPokemon().getName()))
 
         self.currentTrainer = trainer
 

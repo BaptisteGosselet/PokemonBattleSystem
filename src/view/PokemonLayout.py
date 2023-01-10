@@ -47,6 +47,10 @@ class PokemonLayout(QVBoxLayout):
         pix = pix.scaled(150, 150, QtCore.Qt.KeepAspectRatio)
         self.sprite.setPixmap(pix)
 
+    def withdrawPokemon(self):
+        self.name.setText("")
+        self.health_bar.setVisible(False)
+        self.sprite.setPixmap(QPixmap())
 
 #Ressources : 
     #https://archives.bulbagarden.net/wiki/Category:Red_and_Blue_sprites

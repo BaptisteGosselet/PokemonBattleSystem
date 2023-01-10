@@ -29,11 +29,16 @@ class Trainer() :
         elif(self.actionCommand == "move_2"):
             self.action = MoveAction(self.currentPokemon, self.currentPokemon.getMove2())
         elif(self.actionCommand == "switch_1"):
-            self.action = SwitchAction(self.currentPokemon, 0)
+            self.action = SwitchAction(self, 0)
         elif(self.actionCommand == "switch_2"):
-            self.action = SwitchAction(self.currentPokemon, 1)
+            self.action = SwitchAction(self, 1)
         else:
             print("Erreur")
 
     def getAction(self):
         return self.action
+
+    def switchPokemon(self, indexTeam):
+        leavingPokemon = self.currentPokemon
+        self.currentPokemon = self.team[indexTeam]
+        self.team[indexTeam] = leavingPokemon

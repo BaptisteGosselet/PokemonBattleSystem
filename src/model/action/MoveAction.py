@@ -37,7 +37,7 @@ class MoveAction():
         else: 
             return bool(random.getrandbits(1))
 
-    def execute(self):
+    def execute(self, view, opponentPokemon):
         print("TODO Move", self.myPokemon.getName(), self.move.getName())
 
         

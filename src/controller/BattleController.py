@@ -40,8 +40,8 @@ class BattleController() :
         self.t2.waitForAction(self.view)
 
         if(self.t1.getAction().isFirst(self.t2.getAction())):
-            self.t1.getAction().execute()
-            self.t2.getAction().execute()
+            self.t1.getAction().execute(self.view, self.t2.getCurrentPokemon())
+            self.t2.getAction().execute(self.view, self.t1.getCurrentPokemon())
         else:
-            self.t2.getAction().execute()
-            self.t1.getAction().execute()
+            self.t2.getAction().execute(self.view, self.t1.getCurrentPokemon())
+            self.t1.getAction().execute(self.view, self.t2.getCurrentPokemon())

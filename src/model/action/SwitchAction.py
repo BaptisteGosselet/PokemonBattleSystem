@@ -2,15 +2,15 @@ import random
 
 
 class SwitchAction():
-    def __init__(self, myPokemon, indexTeam):
-        self.myPokemon = myPokemon
+    def __init__(self, trainer, indexTeam):
+        self.trainer = trainer
         self.indexTeam = indexTeam
 
     def isFirst(self, action):
 
         if(type(action)==SwitchAction):
             
-            mySpe = self.myPokemon.getSpeStat()
+            mySpe = self.trainer.getCurrentPokemon().getSpeStat()
             oppSpe = action.getPokemon().getSpeStat()
             
             if(mySpe > oppSpe):
@@ -23,5 +23,7 @@ class SwitchAction():
         else:
             return True
 
-    def execute(self):
-        print("TODO Switch", self.myPokemon.getName(), self.indexTeam)
+    def execute(self, view, opponentPokemon):
+        view.withdrawAllyPokemon(self.trainer.getCurrentPokemon())
+        self.trainer.switchPokemon(self.indexTeam)
+        view.setAllyPokemon(self.trainer.getCurrentPokemon())
