@@ -4,9 +4,9 @@ from model.action.SwitchAction import SwitchAction
 
 class Trainer() :
 
-    def __init__(self, name, pokemons):
+    def __init__(self, name, pokemons, isAlly):
         self.name = name
-        
+        self.isAlly = isAlly
         self.currentPokemon = pokemons[0]
         self.team = []
         for i in range(1,len(pokemons)):
@@ -14,6 +14,7 @@ class Trainer() :
 
     def getCurrentPokemon(self):
         return self.currentPokemon
+
 
     def getTeam(self):
         return self.team
@@ -29,9 +30,9 @@ class Trainer() :
         elif(self.actionCommand == "move_2"):
             self.action = MoveAction(self.currentPokemon, self.currentPokemon.getMove2())
         elif(self.actionCommand == "switch_1"):
-            self.action = SwitchAction(self, 0)
+            self.action = SwitchAction(self, 0, self.isAlly)
         elif(self.actionCommand == "switch_2"):
-            self.action = SwitchAction(self, 1)
+            self.action = SwitchAction(self, 1, self.isAlly)
         else:
             print("Erreur")
 

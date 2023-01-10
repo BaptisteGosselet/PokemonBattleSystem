@@ -2,9 +2,10 @@ import random
 
 
 class SwitchAction():
-    def __init__(self, trainer, indexTeam):
+    def __init__(self, trainer, indexTeam, isAlly):
         self.trainer = trainer
         self.indexTeam = indexTeam
+        self.isAlly = isAlly
 
     def isFirst(self, action):
 
@@ -24,6 +25,12 @@ class SwitchAction():
             return True
 
     def execute(self, view, opponentPokemon):
-        view.withdrawAllyPokemon()
-        self.trainer.switchPokemon(self.indexTeam)
-        view.setAllyPokemon(self.trainer.getCurrentPokemon())
+        
+        if(self.isAlly):
+            view.withdrawAllyPokemon()
+            self.trainer.switchPokemon(self.indexTeam)
+            view.setAllyPokemon(self.trainer.getCurrentPokemon())
+        else:
+            view.withdrawOpponentPokemon()
+            self.trainer.switchPokemon(self.indexTeam)
+            view.setOpponentPokemon(self.trainer.getCurrentPokemon())

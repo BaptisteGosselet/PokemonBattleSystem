@@ -142,24 +142,34 @@ class MainWindow(QWidget):
         self.displayText("")
 
     def withdrawAllyPokemon(self):
-        self.displayText("{}, reviens !".format(self.allyPokemon.getPokemonName()))
-        self.pause(1)
-        self.allyPokemon.withdrawPokemon()
-        self.pause(1)
-        self.displayText("")
+        if(self.allyPokemon.getPokemon() != None):
+            self.displayText("{}, reviens !".format(self.allyPokemon.getPokemon().getName()))
+            self.pause(1)
+            self.allyPokemon.withdrawPokemon()
+            self.pause(1)
+            self.displayText("")
+
+    def withdrawOpponentPokemon(self):
+        if(self.opponentPokemon.getPokemon() != None):
+            self.displayText("{} est retiré.".format(self.opponentPokemon.getPokemon().getName()))
+            self.pause(1)
+            self.opponentPokemon.withdrawPokemon()
+            self.pause(1)
+            self.displayText("")
 
 
     def waitForAction(self, trainer):
 
-        self.displayText("Que dois faire {} ?".format(trainer.getCurrentPokemon().getName()))
+        if(not trainer.getCurrentPokemon().getIsKo()):
+            self.displayText("Que dois faire {} ?".format(trainer.getCurrentPokemon().getName()))
 
-        self.currentTrainer = trainer
+            self.currentTrainer = trainer
 
-        #Set moves
-        self.move_button_1.setText(trainer.getCurrentPokemon().move1.getName())
-        self.move_button_2.setText(trainer.getCurrentPokemon().move2.getName())
-        self.move_button_1.setEnabled(True)
-        self.move_button_2.setEnabled(True)
+            #Set moves
+            self.move_button_1.setText(trainer.getCurrentPokemon().move1.getName())
+            self.move_button_2.setText(trainer.getCurrentPokemon().move2.getName())
+            self.move_button_1.setEnabled(True)
+            self.move_button_2.setEnabled(True)
         
         #Set team
         self.switch_button_1.setText(trainer.getTeam()[0].getName())
@@ -207,6 +217,7 @@ class MainWindow(QWidget):
             self.pause(2)
             self.allyPokemon.withdrawPokemon()
         self.displayText("")
+        self.pause(1)
 
     def playMove_miss(self, user, move, target):
         self.displayText("{} utilise {} !".format(user.getName(), move.getName()))

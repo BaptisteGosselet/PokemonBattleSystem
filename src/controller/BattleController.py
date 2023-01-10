@@ -23,13 +23,13 @@ class BattleController() :
                     self.pkFact.generatePokemon(namesList_p1[0]), 
                     self.pkFact.generatePokemon(namesList_p1[1]), 
                     self.pkFact.generatePokemon(namesList_p1[2]), 
-                ])        
+                ], True)        
                 
         self.t2 = AITrainer("Ordinateur", [
                     self.pkFact.generatePokemon(namesList_p2[0]), 
                     self.pkFact.generatePokemon(namesList_p2[1]), 
                     self.pkFact.generatePokemon(namesList_p2[2]), 
-                ])
+                ], False)
 
         self.view.setOpponentPokemon(self.t2.getCurrentPokemon())
         self.view.setAllyPokemon(self.t1.getCurrentPokemon())
@@ -42,7 +42,19 @@ class BattleController() :
 
         if(self.t1.getAction().isFirst(self.t2.getAction())):
             self.t1.getAction().execute(self.view, self.t2.getCurrentPokemon())
-            self.t2.getAction().execute(self.view, self.t1.getCurrentPokemon())
+            if(not self.t2.getCurrentPokemon().getIsKo()):
+                self.t2.getAction().execute(self.view, self.t1.getCurrentPokemon())
         else:
             self.t2.getAction().execute(self.view, self.t1.getCurrentPokemon())
+            if(not self.t1.getCurrentPokemon().getIsKo()):
+                self.t1.getAction().execute(self.view, self.t2.getCurrentPokemon())
+
+
+        if(self.t1.getCurrentPokemon().getIsKo()):
+            self.t1.waitForAction(self.view)
             self.t1.getAction().execute(self.view, self.t2.getCurrentPokemon())
+        if(self.t2.getCurrentPokemon().getIsKo()):
+            self.t2.waitForAction(self.view)
+            self.t2.getAction().execute(self.view, self.t1.getCurrentPokemon())
+
+        print("fin")
