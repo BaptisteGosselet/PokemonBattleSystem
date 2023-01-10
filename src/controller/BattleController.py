@@ -1,6 +1,7 @@
 from model.Pokemon import Pokemon
 from model.PokemonFactory import PokemonFactory
-from model.Trainer import Trainer
+from model.trainer.AITrainer import AITrainer
+from model.trainer.Trainer import Trainer
 
 
 class BattleController() : 
@@ -23,7 +24,7 @@ class BattleController() :
                     pkFact.generatePokemon(namesList_p1[2]), 
                 ])        
                 
-        self.t2 = Trainer("Ordinateur", [
+        self.t2 = AITrainer("Ordinateur", [
                     pkFact.generatePokemon(namesList_p2[0]), 
                     pkFact.generatePokemon(namesList_p2[1]), 
                     pkFact.generatePokemon(namesList_p2[2]), 
@@ -35,4 +36,5 @@ class BattleController() :
         self.play()
 
     def play(self):
-        self.view.askAction(self.t1)
+        self.t1.waitForAction(self.view)
+        self.t2.waitForAction(self.view)

@@ -1,4 +1,5 @@
 from time import sleep
+from PyQt5 import QtGui
 from PyQt5.QtCore import QCoreApplication
 from PyQt5.QtWidgets import *
 from view.SelectPopup import SelectPopup
@@ -24,8 +25,18 @@ class MainWindow(QWidget):
         battleScreen.addLayout(self.allyPokemon,1,0)
 
         #Buttons layouts
-        self.movesLayout = MovesLayout()
-        self.teamLayout = TeamLayout()
+        self.move_button_1 = QPushButton()
+        self.move_button_1.clicked.connect(self.onclick_moveButton_1)
+        self.move_button_2 = QPushButton()
+        self.move_button_2.clicked.connect(self.onclick_moveButton_2)
+        self.switch_button_1 = QPushButton()
+        self.switch_button_1.clicked.connect(self.onclick_switchButton_1)
+        self.switch_button_2 = QPushButton()
+        self.switch_button_2.clicked.connect(self.onclick_switchButton_2)
+
+
+        self.movesLayout = MovesLayout(self.move_button_1, self.move_button_2)
+        self.teamLayout = TeamLayout(self.switch_button_1, self.switch_button_2)
 
         #Place all layouts
         mainLayout.addLayout(self.movesLayout,0,0)
@@ -45,37 +56,19 @@ class MainWindow(QWidget):
         self.setLayout(mainLayout)
 
     def setController(self, controller):
-        self.controller = controller
+        self.controller = controller   
 
     def displayText(self,msg) : 
         self.statusBar.showMessage(msg)
 
-    def onClick_playButton(self):
-        self.controller.newGame()
-
-    def setAllyPokemon(self, pokemon):
-        self.displayText("{}, go !".format(pokemon.getName()))
-        self.pause(1)
-        self.allyPokemon.setPokemon(pokemon, True)
-        self.pause(2)
-        self.displayText("")
-
-    def setOpponentPokemon(self, pokemon):
-        self.displayText("L'adversaire envoie {}.".format(pokemon.getName()))
-        self.pause(1)
-        self.opponentPokemon.setPokemon(pokemon, False)
-        self.pause(2)
-        self.displayText("")
-
-    def askAction(self, trainer):
-        pkm = trainer.getCurrentPokemon()
-        self.movesLayout.setAttacks(pkm)
-
     def pause(self, secondes):
         for s in range(secondes):
             QCoreApplication.processEvents()
-            sleep(1)
-            
+            sleep(1)  
+
+    def onClick_playButton(self):
+        self.controller.newGame()
+    
     def selectTeam(self, namesList, forPlayer1):
 
         statusBar = QStatusBar()
@@ -102,3 +95,59 @@ class MainWindow(QWidget):
 
         return selectedNames
         
+    def setAllyPokemon(self, pokemon):
+        self.displayText("{}, go !".format(pokemon.getName()))
+        self.pause(1)
+        self.allyPokemon.setPokemon(pokemon, True)
+        self.pause(2)
+        self.displayText("")
+
+    def setOpponentPokemon(self, pokemon):
+        self.displayText("L'adversaire envoie {}.".format(pokemon.getName()))
+        self.pause(1)
+        self.opponentPokemon.setPokemon(pokemon, False)
+        self.pause(2)
+        self.displayText("")
+
+    def waitForAction(self, trainer):
+
+        self.currentTrainer = trainer
+
+        #Set moves
+        self.move_button_1.setText(trainer.getCurrentPokemon().move1.getName())
+        self.move_button_2.setText(trainer.getCurrentPokemon().move2.getName())
+        self.move_button_1.setEnabled(True)
+        self.move_button_2.setEnabled(True)
+        
+        #Set team
+        self.switch_button_1.setText(trainer.getTeam()[0].getName())
+        self.switch_button_2.setText(trainer.getTeam()[1].getName())
+        self.switch_button_1.setEnabled(True)
+        self.switch_button_2.setEnabled(True)
+
+        self.waitingAction = True
+        while self.waitingAction :
+            qApp.processEvents()
+
+    def sendAction(self, command):
+        self.waitingAction = False
+        self.move_button_1.setEnabled(False)
+        self.move_button_2.setEnabled(False)
+        self.switch_button_1.setEnabled(False)
+        self.switch_button_2.setEnabled(False)
+        self.currentTrainer.setActionCommand(command)
+
+    def onclick_moveButton_1(self):
+        self.sendAction("move_1")
+
+    def onclick_moveButton_2(self):
+        self.sendAction("move_2")
+
+    def onclick_switchButton_1(self):
+        self.sendAction("switch_1")
+
+    def onclick_switchButton_2(self):
+        self.sendAction("switch_2")
+
+
+

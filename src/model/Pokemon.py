@@ -21,5 +21,11 @@ class Pokemon :
     def getName(self):
         return self.name
 
+    def getMove1(self):
+        return self.move1
+
+    def getMove2(self):
+        return self.move2
+
     def getPourcentageHP(self):
         return int((self.current_HP / self.MAX_HP) * 100)
