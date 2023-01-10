@@ -48,7 +48,7 @@ class MainWindow(QWidget):
         self.switch_button_2 = QPushButton()
 
         switchButtons = [self.switch_button_1, self.switch_button_2]
-        switchFunctions = [self.onclick_switchButton_1, self.onclick_moveButton_2]
+        switchFunctions = [self.onclick_switchButton_1, self.onclick_switchButton_2]
 
         for i in range(len(switchButtons)):
             switchButtons[i].setEnabled(False)
