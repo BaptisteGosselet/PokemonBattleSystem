@@ -17,6 +17,8 @@ class Pokemon :
         self.move1 = move1
         self.move2 = move2
 
+        self.isKo = False
+
 
     def getName(self):
         return self.name
@@ -30,5 +32,26 @@ class Pokemon :
     def getPourcentageHP(self):
         return int((self.current_HP / self.MAX_HP) * 100)
 
+    def getAtkStat(self):
+        return self.atkStat
+
+    def getDefStat(self):
+        return self.defStat
+
+    def getSpaStat(self):
+        return self.spaStat
+
+    def getSpdStat(self):
+        return self.spdStat
+
     def getSpeStat(self):
         return self.speStat
+
+    def getIsKo(self):
+        return self.isKo
+
+    def applyDamage(self, damage):
+        self.current_HP -= damage
+        if(self.current_HP < 0):
+            self.current_HP = 0
+            self.isKo = True

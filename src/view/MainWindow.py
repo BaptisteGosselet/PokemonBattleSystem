@@ -191,3 +191,26 @@ class MainWindow(QWidget):
     def onclick_switchButton_2(self):
         self.sendAction("switch_2")
 
+    def playMove_success(self, user, move, target, damage):
+        self.displayText("{} utilise {} !".format(user.getName(), move.getName()))
+        self.pause(1)
+        self.allyPokemon.refreshHP()
+        self.opponentPokemon.refreshHP()
+        self.displayText("{} perd {} PV.".format(target.getName(), damage))
+        self.pause(2)
+        if(self.opponentPokemon.getPokemon().getPourcentageHP() == 0):
+            self.displayText("{} est K.O. !!".format(self.opponentPokemon.getPokemon().getName(), damage))
+            self.pause(2)
+            self.opponentPokemon.withdrawPokemon()
+        if(self.allyPokemon.getPokemon().getPourcentageHP() == 0):
+            self.displayText("{} est K.O. !!".format(self.allyPokemon.getPokemon().getName(), damage))
+            self.pause(2)
+            self.allyPokemon.withdrawPokemon()
+        self.displayText("")
+
+    def playMove_miss(self, user, move, target):
+        self.displayText("{} utilise {} !".format(user.getName(), move.getName()))
+        self.pause(2)
+        self.displayText("{} évite l'attaque...".format(target.getName()))
+        self.pause(1)
+        self.displayText("")

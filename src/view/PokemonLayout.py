@@ -30,6 +30,9 @@ class PokemonLayout(QVBoxLayout):
 
     def setPokemon(self, pokemon, backSprite=False):
         
+        #Set pokemon
+        self.pokemon = pokemon
+
         #Set name
         self.name.setText(pokemon.getName())
 
@@ -56,6 +59,13 @@ class PokemonLayout(QVBoxLayout):
         sprite_filename += pokemon.getName().lower()
         sprite_filename += ".png"
         return sprite_filename
+
+    def getPokemon(self):
+        return self.pokemon
+
+    def refreshHP(self):
+        self.health_bar.setValue(self.pokemon.getPourcentageHP())
+
 
 #Ressources : 
     #https://archives.bulbagarden.net/wiki/Category:Red_and_Blue_sprites
