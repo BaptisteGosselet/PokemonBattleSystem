@@ -29,3 +29,6 @@ class Pokemon :
 
     def getPourcentageHP(self):
         return int((self.current_HP / self.MAX_HP) * 100)
+
+    def getSpeStat(self):
+        return self.speStat

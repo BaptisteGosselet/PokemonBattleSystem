@@ -1,4 +1,5 @@
 from model.action.MoveAction import MoveAction
+from model.action.SwitchAction import SwitchAction
 
 
 class Trainer() :
@@ -28,9 +29,9 @@ class Trainer() :
         elif(self.actionCommand == "move_2"):
             self.action = MoveAction(self.currentPokemon, self.currentPokemon.getMove2())
         elif(self.actionCommand == "switch_1"):
-            print("non dispo")
+            self.action = SwitchAction(self.currentPokemon, 0)
         elif(self.actionCommand == "switch_2"):
-            print("non dispo")
+            self.action = SwitchAction(self.currentPokemon, 1)
         else:
             print("Erreur")
 

@@ -38,3 +38,10 @@ class BattleController() :
     def play(self):
         self.t1.waitForAction(self.view)
         self.t2.waitForAction(self.view)
+
+        if(self.t1.getAction().isFirst(self.t2.getAction())):
+            self.t1.getAction().execute()
+            self.t2.getAction().execute()
+        else:
+            self.t2.getAction().execute()
+            self.t1.getAction().execute()

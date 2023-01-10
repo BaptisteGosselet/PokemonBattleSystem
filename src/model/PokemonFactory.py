@@ -10,16 +10,16 @@ class PokemonFactory() :
         #Init Moves
         self.moves = {
             "" : None,
-            "deflagration":     Move("Déflagration",110,85,None, None), #10% de brûlure
-            "seisme" :          Move("Séisme", 100, 100, None, None),
-            "eboulement" :      Move("Eboulement", 75, 90, None, None),
-            "hydrocanon" :      Move("Hydrocanon", 120, 85, None, None),
-            "ultralaser" :      Move("Ultralaser", 150, 90, None, None), #rechagement
-            "plaquage" :        Move("Plaquage", 85, 100, None, None), #30% de paralysie
-            "psyko" :           Move("Psyko", 90, 100, None, None),
-            "cage-eclair" :     Move("Cage-Eclair", 0, 90, None, None), #Paralysie 100% + attaque de status
-            "hypnose" :         Move("Hypnose", 0, 70, None, None), #sommeil 100% 
-            "ball'ombre":       Move("Ball'Ombre", 80, 100, None, None) #20% de baisse de def spé
+            "deflagration":     Move("Déflagration",110,85,None, 0, None), #10% de brûlure
+            "seisme" :          Move("Séisme", 100, 100, None, 0, None),
+            "eboulement" :      Move("Eboulement", 75, 90, None, 0, None),
+            "hydrocanon" :      Move("Hydrocanon", 120, 85, None, 0, None),
+            "ultralaser" :      Move("Ultralaser", 150, 90, None, 0, None), #rechagement
+            "plaquage" :        Move("Plaquage", 85, 100, None, 0, None), #30% de paralysie
+            "psyko" :           Move("Psyko", 90, 100, None, 0, None),
+            "cage-eclair" :     Move("Cage-Eclair", 0, 90, None, 0, None), #Paralysie 100% + attaque de status
+            "hypnose" :         Move("Hypnose", 0, 70, None, 0, None), #sommeil 100% 
+            "ball'ombre":       Move("Ball'Ombre", 80, 100, None, 0, None) #20% de baisse de def spé
         }
 
         #Init Pokemon
