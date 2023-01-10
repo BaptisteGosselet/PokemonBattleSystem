@@ -25,41 +25,38 @@ class MainWindow(QWidget):
 
         #Moves buttons layout
         movesGrid = QGridLayout()
-        movesGrid.addItem(QSpacerItem(20,0),0,0)
-        
         self.move_button_1 = QPushButton()
-        self.move_button_1.setEnabled(False)
-        self.move_button_1.setMinimumSize(150,50)
-        self.move_button_1.clicked.connect(self.onclick_moveButton_1)
-        movesGrid.addWidget(self.move_button_1,0,1)
-
         self.move_button_2 = QPushButton()
-        self.move_button_2.setEnabled(False)
-        self.move_button_2.setMinimumSize(150,50)
-        self.move_button_2.clicked.connect(self.onclick_moveButton_2)
-        movesGrid.addWidget(self.move_button_2,1,1)
-        movesGrid.addItem(QSpacerItem(50,0),0,2)
-
+        
+        movesButtons = [self.move_button_1, self.move_button_2]
+        movesFunctions = [self.onclick_moveButton_1, self.onclick_moveButton_2]
+        
+        for i in range(len(movesButtons)):
+            movesButtons[i].setEnabled(False)
+            movesButtons[i].setMinimumSize(150,50)
+            movesButtons[i].clicked.connect(movesFunctions[i])
+            movesGrid.addWidget(movesButtons[i],0+i,1)
+        
+        movesGrid.addItem(QSpacerItem(20,0),0,0)
+        movesGrid.addItem(QSpacerItem(50,0),0,2+len(movesButtons))
+        
         mainLayout.addLayout(movesGrid,0,0)
 
         #Switch buttons layout
         switchLayout = QGridLayout()
-        switchLayout.addItem(QSpacerItem(50,0),0,0)
-
-
         self.switch_button_1 = QPushButton()
-        self.switch_button_1.setEnabled(False)
-        self.switch_button_1.setMinimumSize(150,30)
-        self.switch_button_1.clicked.connect(self.onclick_switchButton_1)
-        switchLayout.addWidget(self.switch_button_1,0,1)
-        
-
         self.switch_button_2 = QPushButton()
-        self.switch_button_2.setEnabled(False)
-        self.switch_button_2.setMinimumSize(150,30)
-        self.switch_button_2.clicked.connect(self.onclick_switchButton_2)
-        switchLayout.addWidget(self.switch_button_2,1,1)
-                
+
+        switchButtons = [self.switch_button_1, self.switch_button_2]
+        switchFunctions = [self.onclick_switchButton_1, self.onclick_moveButton_2]
+
+        for i in range(len(switchButtons)):
+            switchButtons[i].setEnabled(False)
+            switchButtons[i].setMinimumSize(150,30)
+            switchButtons[i].clicked.connect(switchFunctions[i])
+            switchLayout.addWidget(switchButtons[i],0+i,1)
+        
+        switchLayout.addItem(QSpacerItem(50,0),0,0)
         switchLayout.addItem(QSpacerItem(20,0),0,2)
 
         mainLayout.addLayout(switchLayout,0,2)
