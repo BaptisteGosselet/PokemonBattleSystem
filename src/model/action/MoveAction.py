@@ -59,7 +59,6 @@ class MoveAction():
             coupCritique = False
             if(random.randint(0,100) <= 16):
                 coupCritique = True
-                print("crit")
                 damage *= 2
 
             #Modificateur 2 : Port de l'orbe vie ou effet de l'objet métronome
@@ -78,17 +77,14 @@ class MoveAction():
             damage = int(damage)
 
             opponentPokemon.applyDamage(damage)
-            view.playMove_success(self.myPokemon, self.move, opponentPokemon, damage)
-            #si crit, peu efficace super efficace
+            view.playMove_success(self.myPokemon, self.move, opponentPokemon, damage, coupCritique)
+            #si peu efficace super efficace
 
             #effet TODO
-            print("Move", self.myPokemon.getName(), self.move.getName())
-
             #Pokemon is KO
             if(opponentPokemon.getIsKo):
                 pass
 
-            print(self.myPokemon.getPourcentageHP(), opponentPokemon.getPourcentageHP())
         
         else:
             view.playMove_miss(self.myPokemon, self.move, opponentPokemon)

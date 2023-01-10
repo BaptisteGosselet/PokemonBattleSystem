@@ -173,9 +173,12 @@ class MainWindow(QWidget):
         
         #Set team
         self.switch_button_1.setText(trainer.getTeam()[0].getName())
+        if(not trainer.getTeam()[0].getIsKo()):
+            self.switch_button_1.setEnabled(True)   
+        
         self.switch_button_2.setText(trainer.getTeam()[1].getName())
-        self.switch_button_1.setEnabled(True)
-        self.switch_button_2.setEnabled(True)
+        if(not trainer.getTeam()[1].getIsKo()):
+            self.switch_button_2.setEnabled(True)
 
         self.waitingAction = True
         while self.waitingAction :
@@ -201,20 +204,23 @@ class MainWindow(QWidget):
     def onclick_switchButton_2(self):
         self.sendAction("switch_2")
 
-    def playMove_success(self, user, move, target, damage):
+    def playMove_success(self, user, move, target, damage, coupCritique):
         self.displayText("{} utilise {} !".format(user.getName(), move.getName()))
         self.pause(1)
         self.allyPokemon.refreshHP()
         self.opponentPokemon.refreshHP()
         self.displayText("{} perd {} PV.".format(target.getName(), damage))
-        self.pause(2)
+        self.pause(1)
+        if(coupCritique):
+            self.displayText("Coup Critique !")
+            self.pause(1)
+        self.pause(1)
         if(self.opponentPokemon.getPokemon().getPourcentageHP() == 0):
             self.displayText("{} est K.O. !!".format(self.opponentPokemon.getPokemon().getName(), damage))
-            self.pause(2)
+            self.pause(3)
             self.opponentPokemon.withdrawPokemon()
         if(self.allyPokemon.getPokemon().getPourcentageHP() == 0):
             self.displayText("{} est K.O. !!".format(self.allyPokemon.getPokemon().getName(), damage))
-            self.pause(2)
             self.allyPokemon.withdrawPokemon()
         self.displayText("")
         self.pause(1)

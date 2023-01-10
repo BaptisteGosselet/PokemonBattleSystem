@@ -8,7 +8,10 @@ class AITrainer(Trainer) :
         #l'ia choisit son action, pour l'instant elle fait toujours sa première attaque
         
         if(self.currentPokemon.getIsKo()):
-            self.action = SwitchAction(self,0, self.isAlly)
+            for i in range(len(self.team)):
+                if(not self.team[i].getIsKo()):
+                    self.action = SwitchAction(self,i, self.isAlly)
+                    break
         else:
             self.action = MoveAction(self.currentPokemon, self.currentPokemon.getMove1())
         

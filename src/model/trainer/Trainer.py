@@ -43,3 +43,12 @@ class Trainer() :
         leavingPokemon = self.currentPokemon
         self.currentPokemon = self.team[indexTeam]
         self.team[indexTeam] = leavingPokemon
+
+    def canContinue(self):
+        if(self.currentPokemon.getIsKo()):
+            for pkm in self.team:
+                if (not pkm.getIsKo()):
+                    return True
+            return False
+        else:
+            return False

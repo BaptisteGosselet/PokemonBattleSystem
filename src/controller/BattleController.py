@@ -37,24 +37,39 @@ class BattleController() :
         self.play()
 
     def play(self):
-        self.t1.waitForAction(self.view)
-        self.t2.waitForAction(self.view)
 
-        if(self.t1.getAction().isFirst(self.t2.getAction())):
-            self.t1.getAction().execute(self.view, self.t2.getCurrentPokemon())
-            if(not self.t2.getCurrentPokemon().getIsKo()):
-                self.t2.getAction().execute(self.view, self.t1.getCurrentPokemon())
-        else:
-            self.t2.getAction().execute(self.view, self.t1.getCurrentPokemon())
-            if(not self.t1.getCurrentPokemon().getIsKo()):
-                self.t1.getAction().execute(self.view, self.t2.getCurrentPokemon())
+        gameContinue = True
+        while(gameContinue):
 
-
-        if(self.t1.getCurrentPokemon().getIsKo()):
+            #Main loop
             self.t1.waitForAction(self.view)
-            self.t1.getAction().execute(self.view, self.t2.getCurrentPokemon())
-        if(self.t2.getCurrentPokemon().getIsKo()):
             self.t2.waitForAction(self.view)
-            self.t2.getAction().execute(self.view, self.t1.getCurrentPokemon())
+
+            if(self.t1.getAction().isFirst(self.t2.getAction())):
+                self.t1.getAction().execute(self.view, self.t2.getCurrentPokemon())
+                if(not self.t2.getCurrentPokemon().getIsKo()):
+                    self.t2.getAction().execute(self.view, self.t1.getCurrentPokemon())
+            else:
+                self.t2.getAction().execute(self.view, self.t1.getCurrentPokemon())
+                if(not self.t1.getCurrentPokemon().getIsKo()):
+                    self.t1.getAction().execute(self.view, self.t2.getCurrentPokemon())
+
+            #When trainer 1's pokemon is ko
+            if(self.t1.getCurrentPokemon().getIsKo()):
+                if(not self.t1.canContinue()):
+                    print("t1 cant continue")
+                    break
+                else:
+                    self.t1.waitForAction(self.view)
+                    self.t1.getAction().execute(self.view, self.t2.getCurrentPokemon())
+            
+            #When trainer 2's pokemon is ko
+            if(self.t2.getCurrentPokemon().getIsKo()):
+                if(not self.t2.canContinue()):
+                    print("t2 cant continue")
+                    break
+                else:
+                    self.t2.waitForAction(self.view)
+                    self.t2.getAction().execute(self.view, self.t1.getCurrentPokemon())
 
         print("fin")
