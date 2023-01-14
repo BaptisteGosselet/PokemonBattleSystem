@@ -5,13 +5,16 @@ from model.trainer.Trainer import Trainer
 class AITrainer(Trainer) :
 
     def waitForAction(self, view):
-        #l'ia choisit son action, pour l'instant elle fait toujours sa première attaque
-        
+        """
+        Choose and generate an action to play
+        """
         if(self.currentPokemon.getIsKo()):
             for i in range(len(self.team)):
                 if(not self.team[i].getIsKo()):
-                    self.action = SwitchAction(self,i, self.isAlly)
+                    self.action = SwitchAction(self,i)
                     break
         else:
             self.action = MoveAction(self.currentPokemon, self.currentPokemon.getMove1())
         
+    def getIsAI(self):
+        return True

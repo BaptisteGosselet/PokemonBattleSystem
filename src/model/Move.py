@@ -1,3 +1,6 @@
+from model.TypePkmn import TypePkmn
+
+
 class Move():
 
     def __init__(self, name, power, accuracy, type, isSpecial, priority, sndEffect):
@@ -11,23 +14,20 @@ class Move():
         self.sndEffect = sndEffect
         #description : string ?
 
-    def getName(self):
+    def getName(self) -> str:
         return self.name
 
-    def getPower(self):
+    def getPower(self) -> int:
         return self.power
 
-    def getAccuracy(self):
+    def getAccuracy(self) -> int:
         return self.accuracy
 
-    def getType(self):
+    def getType(self) -> TypePkmn :
         return self.type
 
-    def getIsSpecial(self):
+    def getIsSpecial(self) -> bool:
         return self.isSpecial
 
-    def getPriority(self):
+    def getPriority(self) -> int:
         return self.priority
-
-    def getType(self):
-        return self.type

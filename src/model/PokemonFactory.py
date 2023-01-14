@@ -67,6 +67,7 @@ class PokemonFactory() :
                             "Move1":self.moves["plaquage"], "Move2":self.moves["ultralaser"]}
         }
         
+
     def initTypeTable(self):
         
         self.types["normal"].setWeaknesses([self.types["combat"]])
@@ -112,10 +113,17 @@ class PokemonFactory() :
         self.types["glace"].setWeaknesses([self.types["combat"],self.types["feu"],self.types["roche"]])
         self.types["glace"].setResistances([self.types["glace"]])
 
-    def getNamesList(self):
+    def getNamesList(self)->list[str]:
+        """
+        return a list with names of all availables pokemon
+        """
         return self.pokemons.keys()
 
     def generatePokemon(self, name):
+        """
+        Generate a pokemon from its name
+        @param : pokemon's name
+        """
         data = self.pokemons[name.lower()]
         return Pokemon(
             data["Nom"],

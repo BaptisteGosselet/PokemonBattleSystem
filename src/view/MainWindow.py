@@ -1,20 +1,32 @@
 from time import sleep
-from PyQt5 import QtGui
 from PyQt5.QtCore import QCoreApplication
+from PyQt5 import Qt
 from PyQt5.QtWidgets import *
-from view.SelectPopup import SelectPopup
+from model.PokemonFactory import PokemonFactory
+from model.trainer.AITrainer import AITrainer
+from view.TrainerGeneratorPopup import TrainerGeneratorPopup
+
+from controller.BattleController import BattleController
+from model.trainer.Trainer import Trainer
+from model.Pokemon import Pokemon
+from model.action.MoveAction import MoveAction
 
 from view.PokemonLayout import PokemonLayout
 
 
 class MainWindow(QWidget):
 
-    def __init__(self):
+    def __init__(self) -> None :
         super().__init__()
         mainLayout = QGridLayout()
 
-        self.opponentPokemon = PokemonLayout()
-        self.allyPokemon = PokemonLayout()
+        #Status Bar
+        self.statusBar = QStatusBar()
+        mainLayout.addWidget(self.statusBar,1,1)
+
+        #Pokemon's layout
+        self.opponentPokemon = PokemonLayout(False, self)
+        self.allyPokemon = PokemonLayout(True, self)
 
         #Battle screen
         battleScreen = QGridLayout()
@@ -63,19 +75,19 @@ class MainWindow(QWidget):
 
         #Play Button
         playButton = QPushButton("Nouvelle Partie")
-        playButton.clicked.connect(self.onClick_playButton)
+        playButton.clicked.connect(self.onClick_newGameButton)
         playButton.setMinimumSize(150,50)
         mainLayout.addWidget(playButton,1,0) 
 
-        #Status Bar
-        self.statusBar = QStatusBar()
-        mainLayout.addWidget(self.statusBar,1,1)
-
         self.setLayout(mainLayout)
 
+    def resetGame(self) -> None :
+        """
+        Reset game's element such as buttons and displayed pokemons
+        """
     
-    def resetGame(self):
-        
+        self.statusBar.showMessage("")
+
         for b in self.movesButtons:
             b.setText("")
             b.setEnabled(False)
@@ -87,83 +99,80 @@ class MainWindow(QWidget):
         self.allyPokemon.withdrawPokemon()
         self.opponentPokemon.withdrawPokemon()
 
-    def setController(self, controller):
+    def setController(self, controller : BattleController) -> None :
+        """
+        Controller's setter
+        @param : controller : BattleController
+        """
         self.controller = controller   
 
-    def displayText(self,msg) : 
+    def displayText(self, msg : str = "", seconds : int = 1) -> None : 
         self.statusBar.showMessage(msg)
-
-    def pause(self, secondes):
-        for s in range(secondes):
+        for s in range(seconds):
             QCoreApplication.processEvents()
-            sleep(1)  
+            sleep(1) 
+        self.statusBar.showMessage("")
 
-    def onClick_playButton(self):
+    def onClick_newGameButton(self) -> None:
         self.controller.newGame()
     
-    def selectTeam(self, namesList, forPlayer1):
+    def generateTrainers(self, pkmFactory : PokemonFactory) -> list[Trainer]:
+        """
+        Display a popup window in order to generate the two trainers of the game, their name and their pokemon
+        @param : pkmFactory, the class allowing pokemon's generation
+        """
 
-        statusBar = QStatusBar()
-        if forPlayer1 : 
-            statusBar.showMessage("Selectionner vos Pokemon")
-        else : 
-            statusBar.showMessage("Selectionner les Pokemon adverses")
+        namesList = pkmFactory.getNamesList()
 
-        combo_1 = QComboBox()
-        combo_2 = QComboBox()
-        combo_3 = QComboBox()
+        #Initialisation des champs de la fenêtre
+        combos_J1 = [QComboBox(), QComboBox(), QComboBox()]
+        combos_J2 = [QComboBox(), QComboBox(), QComboBox()]
 
-        combo_1.addItems(namesList)
-        combo_2.addItems(namesList)
-        combo_3.addItems(namesList)
-
-        popup = SelectPopup(statusBar, combo_1, combo_2, combo_3)
-
-        selectedNames = [
-            combo_1.currentText(),
-            combo_2.currentText(),
-            combo_3.currentText()
-        ]
-
-        return selectedNames
+        for combo in combos_J1 : 
+            combo.addItems(namesList)
         
-    def setAllyPokemon(self, pokemon):
-        self.displayText("{}, go !".format(pokemon.getName()))
-        self.pause(1)
-        self.allyPokemon.setPokemon(pokemon, True)
-        self.pause(2)
-        self.displayText("")
+        for combo in combos_J2 : 
+            combo.addItems(namesList)
 
-    def setOpponentPokemon(self, pokemon):
-        self.displayText("L'adversaire envoie {}.".format(pokemon.getName()))
-        self.pause(1)
-        self.opponentPokemon.setPokemon(pokemon, False)
-        self.pause(2)
-        self.displayText("")
-
-    def withdrawAllyPokemon(self):
-        if(self.allyPokemon.getPokemon() != None):
-            self.displayText("{}, reviens !".format(self.allyPokemon.getPokemon().getName()))
-            self.pause(1)
-            self.allyPokemon.withdrawPokemon()
-            self.pause(1)
-            self.displayText("")
-
-    def withdrawOpponentPokemon(self):
-        if(self.opponentPokemon.getPokemon() != None):
-            self.displayText("{} est retiré.".format(self.opponentPokemon.getPokemon().getName()))
-            self.pause(1)
-            self.opponentPokemon.withdrawPokemon()
-            self.pause(1)
-            self.displayText("")
+        saisieNom_J1 = QTextEdit("Joueur 1")
+        saisieNom_J2 = QTextEdit("Joueur 2")
+        caseAI = QCheckBox("J2 ORDI")
+        caseAI.setChecked(True)
 
 
-    def waitForAction(self, trainer):
+        popup = TrainerGeneratorPopup(saisieNom_J1, saisieNom_J2, caseAI, combos_J1, combos_J2)
+
+        trainer_1 = Trainer(saisieNom_J1.toPlainText(), [
+                    pkmFactory.generatePokemon(combos_J1[0].currentText()), 
+                    pkmFactory.generatePokemon(combos_J1[1].currentText()), 
+                    pkmFactory.generatePokemon(combos_J1[2].currentText()), 
+                ], self.allyPokemon)        
+                
+        if(caseAI.isChecked()):
+            trainer_2 = AITrainer(saisieNom_J2.toPlainText(), [
+                        pkmFactory.generatePokemon(combos_J2[0].currentText()), 
+                        pkmFactory.generatePokemon(combos_J2[1].currentText()), 
+                        pkmFactory.generatePokemon(combos_J2[2].currentText()), 
+                    ], self.opponentPokemon)
+        else : 
+            trainer_2 = Trainer(saisieNom_J2.toPlainText(), [
+                        pkmFactory.generatePokemon(combos_J2[0].currentText()), 
+                        pkmFactory.generatePokemon(combos_J2[1].currentText()), 
+                        pkmFactory.generatePokemon(combos_J2[2].currentText()), 
+                    ], self.opponentPokemon)
+
+        return [trainer_1, trainer_2]
+
+    def waitForAction(self, trainer : Trainer) -> None :
+        """
+        Pause the program until the player choose an action
+        @param : trainer, the player who must play
+        """
+
+        self.currentTrainer = trainer
 
         if(not trainer.getCurrentPokemon().getIsKo()):
-            self.displayText("Que dois faire {} ?".format(trainer.getCurrentPokemon().getName()))
-
-            self.currentTrainer = trainer
+            self.statusBar.showMessage("Que dois faire {} ?".format(trainer.getCurrentPokemon().getName()))
 
             #Set moves
             self.move_button_1.setText(trainer.getCurrentPokemon().move1.getName())
@@ -184,65 +193,79 @@ class MainWindow(QWidget):
         while self.waitingAction :
             qApp.processEvents()
 
-    def sendAction(self, command):
+    def sendCommand(self, command : str) -> None :
+        """
+        A method receiving the command (such as move_1 or switch_1) from a button click, and send it to the playing trainer
+        @param : command, a command to send
+        """
         self.waitingAction = False
         self.move_button_1.setEnabled(False)
         self.move_button_2.setEnabled(False)
         self.switch_button_1.setEnabled(False)
         self.switch_button_2.setEnabled(False)
         self.currentTrainer.setActionCommand(command)
-        self.pause(1)
 
-    def onclick_moveButton_1(self):
-        self.sendAction("move_1")
+    def onclick_moveButton_1(self) -> None :
+        """
+        A method executed by a button press, it calls the sendCommand method with the corresponding parameter
+        """
+        self.sendCommand("move_1")
 
     def onclick_moveButton_2(self):
-        self.sendAction("move_2")
+        """
+        A method executed by a button press, it calls the sendCommand method with the corresponding parameter
+        """
+        self.sendCommand("move_2")
 
     def onclick_switchButton_1(self):
-        self.sendAction("switch_1")
+        """
+        A method executed by a button press, it calls the sendCommand method with the corresponding parameter
+        """
+        self.sendCommand("switch_1")
 
     def onclick_switchButton_2(self):
-        self.sendAction("switch_2")
+        """
+        A method executed by a button press, it calls the sendCommand method with the corresponding parameter
+        """
+        self.sendCommand("switch_2")
 
-    def playMove_success(self, user, move, target, damage, coupCritique, peuEfficace, superEfficace, insensible):
-        self.displayText("{} utilise {} !".format(user.getName(), move.getName()))
-        self.pause(1)
-        self.allyPokemon.refreshHP()
-        self.opponentPokemon.refreshHP()
-
-        if(insensible):
-            self.displayText("Ça n'affecte pas.")
-            self.pause(2)
-        else:
-            self.displayText("{} perd {} PV.".format(target.getName(), damage))
-            self.pause(2)
+    def playMove(self, action : MoveAction) -> None:
+        """Show a action after its execution
+        @param action, the action to show on the screen
+        """
+        if(type(action)==MoveAction):
             
-            if(coupCritique):
-                self.displayText("Coup Critique !")
-                self.pause(1)
+            self.displayText("{} utilise {} !".format(action.getMyPokemon().getName(), action.getMove().getName()))
+            self.allyPokemon.refresh()
+            self.opponentPokemon.refresh()
 
-            if(peuEfficace):
-                self.displayText("Ce n'est pas très efficace...")
-                self.pause(1)
-            elif(superEfficace):
-                self.displayText("C'est super efficace !")
-                self.pause(1)
-            
+            if(action.getMissed()):
+                self.displayText("{} évite l'attaque...".format(action.getTarget().getName()), 2)
+            else:    
+                if(action.getDamage() == 0):
+                    self.displayText("Ça n'affecte pas.")
+                else:
+                    self.displayText("{} perd {} PV.".format(action.getTarget().getName(), action.getDamage()))
 
-        if(self.opponentPokemon.getPokemon().getPourcentageHP() == 0):
-            self.displayText("{} est K.O. !!".format(self.opponentPokemon.getPokemon().getName(), damage))
-            self.pause(3)
-            self.opponentPokemon.withdrawPokemon()
-        if(self.allyPokemon.getPokemon().getPourcentageHP() == 0):
-            self.displayText("{} est K.O. !!".format(self.allyPokemon.getPokemon().getName(), damage))
-            self.allyPokemon.withdrawPokemon()
-        self.displayText("")
-        self.pause(1)
+                    if(action.getCoupCritique()):
+                        self.displayText("Coup Critique !")
 
-    def playMove_miss(self, user, move, target):
-        self.displayText("{} utilise {} !".format(user.getName(), move.getName()))
-        self.pause(2)
-        self.displayText("{} évite l'attaque...".format(target.getName()))
-        self.pause(1)
-        self.displayText("")
+                    if(action.getPeuEfficace()):
+                        self.displayText("Ce n'est pas très efficace...")
+
+                    elif(action.getSuperEfficace()):
+                        self.displayText("C'est super efficace !")
+                    
+
+                if(self.opponentPokemon.getPokemon().getIsKo()):
+                    self.displayText("{} est K.O. !!".format(self.opponentPokemon.getPokemon().getName(), action.getDamage()),3)
+                    self.opponentPokemon.withdrawPokemon_noMessage()
+                if(self.allyPokemon.getPokemon().getIsKo()):
+                    self.displayText("{} est K.O. !!".format(self.allyPokemon.getPokemon().getName(), action.getDamage()),3)
+                    self.allyPokemon.withdrawPokemon_noMessage()            
+
+    def displayWinner(self, winner) -> None :
+        """
+        Display the winner's name at the end of the game
+        """
+        self.statusBar.showMessage("{} remporte le combat !".format(winner.getName()))

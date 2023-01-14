@@ -1,13 +1,16 @@
 import random
 
-
 class SwitchAction():
-    def __init__(self, trainer, indexTeam, isAlly):
+
+    def __init__(self, trainer, indexTeam : int):
         self.trainer = trainer
         self.indexTeam = indexTeam
-        self.isAlly = isAlly
 
-    def isFirst(self, action):
+    def isFirst(self, action) -> bool:
+        """
+        Compare the order between this action and the action in argument
+        @return true if this action is executable before the action in argument, else false
+        """
 
         if(type(action)==SwitchAction):
             
@@ -24,13 +27,9 @@ class SwitchAction():
         else:
             return True
 
-    def execute(self, view, opponentPokemon):
+    def execute(self, opponentPokemon) -> None:
+        """
+        Execute this action : do the switch of pokemon
+        """
+        self.trainer.switchPokemon(self.indexTeam)
         
-        if(self.isAlly):
-            view.withdrawAllyPokemon()
-            self.trainer.switchPokemon(self.indexTeam)
-            view.setAllyPokemon(self.trainer.getCurrentPokemon())
-        else:
-            view.withdrawOpponentPokemon()
-            self.trainer.switchPokemon(self.indexTeam)
-            view.setOpponentPokemon(self.trainer.getCurrentPokemon())

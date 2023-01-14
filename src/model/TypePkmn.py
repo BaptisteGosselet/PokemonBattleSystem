@@ -5,19 +5,22 @@ class TypePkmn:
         self.resistances = []
         self.immunities = []
 
-    def getName(self):
+    def getName(self)->str:
         return self.name
 
-    def setWeaknesses(self, weaknesses):
+    def setWeaknesses(self, weaknesses)->None:
         self.weaknesses = weaknesses
 
-    def setResistances(self, resistances):
+    def setResistances(self, resistances)->None:
         self.resistances = resistances
 
-    def setImmunities(self, immunities):
+    def setImmunities(self, immunities)->None:
         self.immunities = immunities
 
-    def getMultiplicator(self, typ):
+    def getMultiplicator(self, typ)->float:
+        """
+        Calculate a damage multiplicator regarding to weaknesses and resistances of this type
+        """
         
         for i in self.immunities:
             if (i == typ):

@@ -1,3 +1,7 @@
+from model.Move import Move
+from model.TypePkmn import TypePkmn
+
+
 class Pokemon : 
 
     def __init__(self, name, type1, type2,  hp, atkStat, defStat, spaStat, spdStat, speStat, move1, move2):
@@ -17,46 +21,57 @@ class Pokemon :
         self.move1 = move1
         self.move2 = move2
 
+        self.trainer = None
+
         self.isKo = False
 
 
-    def getName(self):
+    def getName(self)->str:
         return self.name
 
-    def getMove1(self):
+    def getMove1(self)->Move:
         return self.move1
 
-    def getMove2(self):
+    def getMove2(self)->Move:
         return self.move2
 
-    def getPourcentageHP(self):
+    def getPourcentageHP(self)->int:
         return int((self.current_HP / self.MAX_HP) * 100)
 
-    def getAtkStat(self):
+    def getAtkStat(self)->int:
         return self.atkStat
 
-    def getDefStat(self):
+    def getDefStat(self)->int:
         return self.defStat
 
-    def getSpaStat(self):
+    def getSpaStat(self)->int:
         return self.spaStat
 
-    def getSpdStat(self):
+    def getSpdStat(self)->int:
         return self.spdStat
 
-    def getSpeStat(self):
+    def getSpeStat(self)->int:
         return self.speStat
 
-    def getIsKo(self):
+    def getIsKo(self)->bool:
         return self.isKo
 
-    def getType1(self):
+    def getType1(self)->TypePkmn:
         return self.type1
 
-    def getType2(self):
+    def getType2(self)->TypePkmn:
         return self.type2
 
-    def applyDamage(self, damage):
+    def setTrainer(self, trainer)->None:
+        self.trainer = trainer
+
+    def getTrainer(self):
+        return self.trainer
+
+    def applyDamage(self, damage)->None:
+        """
+        Apply a number of damage to the HP, if current HPs are lower to 0 then the pokemon is K.O.
+        """
         self.current_HP -= damage
         if(self.current_HP < 0):
             self.current_HP = 0
