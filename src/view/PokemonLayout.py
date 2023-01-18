@@ -78,7 +78,7 @@ class PokemonLayout(QVBoxLayout):
         """
         if(self.pokemon != None) : 
             if(self.pokemon.getTrainer().getIsAI()) : 
-                self.view.displayText("{} est retiré par Dresseur {}.".format(self.pokemon.getTrainer().getName(), self.pokemon.getName()))
+                self.view.displayText("{} est retiré par Dresseur {}.".format(self.pokemon.getName(), self.pokemon.getTrainer().getName()))
             else :
                 self.view.displayText("{}, reviens !".format(self.pokemon.getName()))
             self.withdrawPokemon_noMessage()
