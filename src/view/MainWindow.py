@@ -229,6 +229,7 @@ class MainWindow(QWidget):
         """
         self.sendCommand("switch_2")
 
+    #TODO Display status
     def playMove(self, action : MoveAction) -> None:
         """Show a action after its execution
         @param action, the action to show on the screen
@@ -242,9 +243,9 @@ class MainWindow(QWidget):
             if(action.getMissed()):
                 self.displayText("{} évite l'attaque...".format(action.getTarget().getName()), 2)
             else:    
-                if(action.getDamage() == 0):
+                if(action.getDoesntAffect()):
                     self.displayText("Ça n'affecte pas.")
-                else:
+                elif(action.getDamage() > 0):
                     self.displayText("{} perd {} PV.".format(action.getTarget().getName(), action.getDamage()))
 
                     if(action.getCoupCritique()):

@@ -1,6 +1,7 @@
 from model.Move import Move
 from model.Pokemon import Pokemon
 from model.TypePkmn import TypePkmn
+from model.status.statusEffect.ParalysisEffect import ParalisysEffect
 
 class PokemonFactory() : 
 
@@ -40,7 +41,7 @@ class PokemonFactory() :
             "ultralaser" :      Move("Ultralaser", 150, 90, self.types["normal"], True, 0, None), #rechagement
             "plaquage" :        Move("Plaquage", 85, 100, self.types["normal"], False, 0, None), #30% de paralysie
             "psyko" :           Move("Psyko", 90, 100, self.types["psy"], 0, True, None),
-            "cage-eclair" :     Move("Cage-Eclair", 0, 90, self.types["electrik"], False, 0, None), #Paralysie 100% + attaque de status
+            "cage-eclair" :     Move("Cage-Eclair", 0, 90, self.types["electrik"], False, 0, ParalisysEffect(100)), #Paralysie 100% + attaque de status
             "hypnose" :         Move("Hypnose", 0, 70, self.types["psy"], 0, False, None), #sommeil 100% 
             "ball'ombre":       Move("Ball'Ombre", 80, 100, self.types["spectre"], True, 0, None) #20% de baisse de def spé
         }
