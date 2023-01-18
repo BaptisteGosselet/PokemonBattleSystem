@@ -11,7 +11,10 @@ class MoveAction():
 
         self.target = None
         self.damage = 0
+
         self.missed = False
+        self.failByStatus = False
+        
         self.coupCritique = False
         self.peuEfficace = False
         self.superEfficace = False
@@ -43,6 +46,7 @@ class MoveAction():
     def isFirst(self, action) -> bool:
         """
         Compare the order between this action and the action in argument
+        @param the action to compare with
         @return true if this action is executable before the action in argument, else false
         """
 
@@ -67,6 +71,13 @@ class MoveAction():
         else: 
             return bool(random.getrandbits(1))
 
+    def canMove(self) -> bool:
+        """
+        TODO
+        Check if the pokemon can move according to his status
+        """
+        return True
+
     #TODO Effet
     def execute(self, opponentPokemon:Pokemon):
         """
@@ -76,57 +87,62 @@ class MoveAction():
         
         self.target = opponentPokemon
 
-        if(random.randint(0,100) <= self.move.getAccuracy()):
+        if(self.canMove()):
 
-            #Dégât au niveau 100
-            self.damage = 42 
+            if(random.randint(0,100) <= self.move.getAccuracy()):
 
-            #Puissance multiplié par la stat d'Atk/Def ou de Spa/Spd
-            moveIsSpecial = self.move.getIsSpecial()
+                #Dégât au niveau 100
+                self.damage = 42 
 
-            if (moveIsSpecial):
-                self.damage *= self.move.getPower() * self.myPokemon.getSpaStat() / opponentPokemon.getSpdStat()
+                #Puissance multiplié par la stat d'Atk/Def ou de Spa/Spd
+                moveIsSpecial = self.move.getIsSpecial()
+
+                if (moveIsSpecial):
+                    self.damage *= self.move.getPower() * self.myPokemon.getSpaStat() / opponentPokemon.getSpdStat()
+                else:
+                    self.damage *= self.move.getPower() * self.myPokemon.getAtkStat() / opponentPokemon.getDefStat()
+
+                self.damage = self.damage / 50 + 2
+
+                #Coup critique 
+                if(random.randint(0,100) <= 6.25):
+                    self.coupCritique = True
+                    self.damage *= 2
+
+                #Roll
+                self.damage *= (random.randint(85,100) / 100)
+                
+                #STAB
+                if(self.move.getType() == self.myPokemon.getType1() or self.move.getType() == self.myPokemon.getType2()):
+                    self.damage *= 1.5
+
+                #Faiblesse et resistance de type
+                multType = opponentPokemon.getType1().getMultiplicator(self.move.getType())
+                if(opponentPokemon.getType2() != None):
+                    multType *= opponentPokemon.getType2().getMultiplicator(self.move.getType())
+
+
+                if(multType == 0.5):
+                    self.peuEfficace = True
+                elif(multType == 2):
+                        self.superEfficace = True
+
+                self.damage *= multType
+                
+                #Modificateur 3 : port d'objet ect.
+                #...
+
+                self.damage = int(self.damage)
+
+                opponentPokemon.applyDamage(self.damage)
+
+                #effet #si pas ko
+            
             else:
-                self.damage *= self.move.getPower() * self.myPokemon.getAtkStat() / opponentPokemon.getDefStat()
+                self.missed = True
 
-            self.damage = self.damage / 50 + 2
-
-            #Coup critique 
-            if(random.randint(0,100) <= 16):
-                self.coupCritique = True
-                self.damage *= 2
-
-            #Roll
-            self.damage *= (random.randint(85,100) / 100)
-            
-            #STAB
-            if(self.move.getType() == self.myPokemon.getType1() or self.move.getType() == self.myPokemon.getType2()):
-                self.damage *= 1.5
-
-            #Faiblesse et resistance de type
-            multType = opponentPokemon.getType1().getMultiplicator(self.move.getType())
-            if(opponentPokemon.getType2() != None):
-                multType *= opponentPokemon.getType2().getMultiplicator(self.move.getType())
-
-
-            if(multType == 0.5):
-                self.peuEfficace = True
-            elif(multType == 2):
-                    self.superEfficace = True
-
-            self.damage *= multType
-            
-            #Modificateur 3 : port d'objet ect.
-            #...
-
-            self.damage = int(self.damage)
-
-            opponentPokemon.applyDamage(self.damage)
-
-            #effet #si pas ko
-        
         else:
-            self.missed = True
+            self.failByStatus = True
 
         
         
