@@ -21,12 +21,6 @@ class Trainer() :
     def getName(self) -> str:
         return self.name
 
-    def setCurrentPokemon(self, pokemon):
-        self.currentPokemon = pokemon
-        self.currentPokemon.setTrainer(self)
-        self.displayer.setPokemon_noMessage(self.currentPokemon)
-        self.displayer.refresh()
-
     def getCurrentPokemon(self) -> Pokemon :
         return self.currentPokemon
 

@@ -1,10 +1,9 @@
 from model.TypePkmn import TypePkmn
-from model.status.statusEffect.StatusEffect import StatusEffect
 
 
 class Move():
 
-    def __init__(self, name : str, power : int, accuracy : int, type : TypePkmn, isSpecial : bool, priority : int, sndEffect : StatusEffect):
+    def __init__(self, name, power, accuracy, type, isSpecial, priority, sndEffect):
 
         self.name = name
         self.power = power
@@ -32,9 +31,3 @@ class Move():
 
     def getPriority(self) -> int:
         return self.priority
-
-    def applySecondaryEffect(self, pokemon)->bool:
-        if(not self.sndEffect is None):
-            return self.sndEffect.applyEffect(pokemon)
-        return False
-

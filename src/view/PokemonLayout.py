@@ -72,24 +72,6 @@ class PokemonLayout(QVBoxLayout):
 
         self.view.displayText()
 
-    def setPokemon_noMessage(self, pokemon : Pokemon) -> None:
-        """
-        setPokemon method without message
-        @param : pokemon, the pokemon to display
-        """
-
-        self.pokemon = pokemon
-        self.name.setText(pokemon.getName())
-        self.health_bar.setValue(pokemon.getPourcentageHP())
-        self.health_bar.setVisible(True)
-
-        #Set the sprite
-        pix = QPixmap(self.getCurrentPokemonSpriteFilename())
-        if pix.isNull() : 
-            pix = QPixmap("img/sprites/missing.png")
-        pix = pix.scaled(150, 150, QtCore.Qt.KeepAspectRatio)
-        self.sprite.setPixmap(pix)
-
     def withdrawPokemon(self) -> None :
         """
         Withdraw the displayed pokemon from the screen (and unset it)
@@ -125,7 +107,6 @@ class PokemonLayout(QVBoxLayout):
         sprite_filename += ".png"
         return sprite_filename
 
-    #TODO Status
     def refresh(self) -> None:
         """
         Refresh pokemon's datas such as his HP or status

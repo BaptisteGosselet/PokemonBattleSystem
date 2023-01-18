@@ -1,3 +1,4 @@
+from model.Move import Move
 from model.TypePkmn import TypePkmn
 
 
@@ -20,28 +21,19 @@ class Pokemon :
         self.move1 = move1
         self.move2 = move2
 
-
         self.trainer = None
+
         self.isKo = False
 
 
     def getName(self)->str:
         return self.name
 
-    def getMove1(self):
+    def getMove1(self)->Move:
         return self.move1
 
-    def getMove2(self):
+    def getMove2(self)->Move:
         return self.move2
-
-    def getCurrentHP(self):
-        return self.current_HP
-
-    def setCurrentHP(self, n):
-        self.current_HP = n
-
-    def getMaxHPStat(self):
-        return self.MAX_HP
 
     def getPourcentageHP(self)->int:
         return int((self.current_HP / self.MAX_HP) * 100)
@@ -84,33 +76,3 @@ class Pokemon :
         if(self.current_HP < 0):
             self.current_HP = 0
             self.isKo = True
-
-    def canMove(self)->bool:
-        """
-        Calcul if the pokemon can move dispite his status
-        """
-        return True
-
-    def applyStatus(self):
-        """
-        Apply effects of the status to the pokemon
-        """
-        return
-
-    def setStatus(self, statusPokemon)->bool: 
-        """
-        Change the instance to a decorator in order to apply a status
-        @param the decorate pokemon
-        """
-        print(self.current_HP,"/",self.MAX_HP)
-        self.trainer.setCurrentPokemon(statusPokemon)
-        self = statusPokemon
-        print(self.current_HP,"/",self.MAX_HP)
-
-        return True
-
-    def healStatus(self):
-        """
-        Transform the decorate instance to the pure instance in order to unset the status
-        """
-        return
