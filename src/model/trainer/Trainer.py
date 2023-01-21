@@ -1,6 +1,6 @@
 from model.Pokemon import Pokemon
-from model.action.MoveAction import MoveAction
-from model.action.SwitchAction import SwitchAction
+from controller.action.MoveAction import MoveAction
+from controller.action.SwitchAction import SwitchAction
 from view.PokemonLayout import PokemonLayout
 
 

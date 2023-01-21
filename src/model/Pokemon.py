@@ -1,5 +1,8 @@
+from math import ceil
 from model.Move import Move
 from model.TypePkmn import TypePkmn
+from model.status.ParalysisStatus import ParalysisStatus
+from model.status.Status import Status
 
 
 class Pokemon : 
@@ -21,6 +24,8 @@ class Pokemon :
         self.move1 = move1
         self.move2 = move2
 
+        self.status = None
+
         self.trainer = None
 
         self.isKo = False
@@ -36,7 +41,7 @@ class Pokemon :
         return self.move2
 
     def getPourcentageHP(self)->int:
-        return int((self.current_HP / self.MAX_HP) * 100)
+        return ceil((self.current_HP / self.MAX_HP) * 100)
 
     def getAtkStat(self)->int:
         return self.atkStat
@@ -51,6 +56,8 @@ class Pokemon :
         return self.spdStat
 
     def getSpeStat(self)->int:
+        if(type(self.status)==ParalysisStatus):
+            return self.speStat // 4
         return self.speStat
 
     def getIsKo(self)->bool:
@@ -67,6 +74,12 @@ class Pokemon :
 
     def getTrainer(self):
         return self.trainer
+
+    def setStatus(self, status):
+        self.status = status
+
+    def getStatus(self)->Status:
+        return self.status
 
     def applyDamage(self, damage)->None:
         """

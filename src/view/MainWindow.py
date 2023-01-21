@@ -9,7 +9,7 @@ from view.TrainerGeneratorPopup import TrainerGeneratorPopup
 from controller.BattleController import BattleController
 from model.trainer.Trainer import Trainer
 from model.Pokemon import Pokemon
-from model.action.MoveAction import MoveAction
+from controller.action.MoveAction import MoveAction
 
 from view.PokemonLayout import PokemonLayout
 
@@ -211,19 +211,19 @@ class MainWindow(QWidget):
         """
         self.sendCommand("move_1")
 
-    def onclick_moveButton_2(self):
+    def onclick_moveButton_2(self) -> None :
         """
         A method executed by a button press, it calls the sendCommand method with the corresponding parameter
         """
         self.sendCommand("move_2")
 
-    def onclick_switchButton_1(self):
+    def onclick_switchButton_1(self) -> None:
         """
         A method executed by a button press, it calls the sendCommand method with the corresponding parameter
         """
         self.sendCommand("switch_1")
 
-    def onclick_switchButton_2(self):
+    def onclick_switchButton_2(self) -> None:
         """
         A method executed by a button press, it calls the sendCommand method with the corresponding parameter
         """
@@ -241,20 +241,23 @@ class MainWindow(QWidget):
 
             if(action.getMissed()):
                 self.displayText("{} évite l'attaque...".format(action.getTarget().getName()), 2)
+            elif(action.getFailByStatus()):
+                self.displayText(action.getMyPokemon().getStatus().getFailMessage(action.getMyPokemon()),2)
             else:    
-                if(action.getDamage() == 0):
+                if(action.getImmunite()):
                     self.displayText("Ça n'affecte pas.")
                 else:
-                    self.displayText("{} perd {} PV.".format(action.getTarget().getName(), action.getDamage()))
+                    if(action.getDamage()>0):
+                        self.displayText("{} perd {} PV.".format(action.getTarget().getName(), action.getDamage()))
 
-                    if(action.getCoupCritique()):
-                        self.displayText("Coup Critique !")
+                        if(action.getCoupCritique()):
+                            self.displayText("Coup Critique !")
 
-                    if(action.getPeuEfficace()):
-                        self.displayText("Ce n'est pas très efficace...")
+                        if(action.getPeuEfficace()):
+                            self.displayText("Ce n'est pas très efficace...")
 
-                    elif(action.getSuperEfficace()):
-                        self.displayText("C'est super efficace !")
+                        elif(action.getSuperEfficace()):
+                            self.displayText("C'est super efficace !")
                     
 
                 if(self.opponentPokemon.getPokemon().getIsKo()):

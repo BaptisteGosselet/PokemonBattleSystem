@@ -31,3 +31,6 @@ class Move():
 
     def getPriority(self) -> int:
         return self.priority
+
+    def getSndEffect(self) : 
+        return self.sndEffect

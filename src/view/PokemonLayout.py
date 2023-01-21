@@ -60,7 +60,6 @@ class PokemonLayout(QVBoxLayout):
         self.name.setText(pokemon.getName())
 
         #Set health_bar
-        self.health_bar.setValue(pokemon.getPourcentageHP())
         self.health_bar.setVisible(True)
 
         #Set the sprite
@@ -69,6 +68,8 @@ class PokemonLayout(QVBoxLayout):
             pix = QPixmap("img/sprites/missing.png")
         pix = pix.scaled(150, 150, QtCore.Qt.KeepAspectRatio)
         self.sprite.setPixmap(pix)
+
+        self.refresh()
 
         self.view.displayText()
 
@@ -112,4 +113,8 @@ class PokemonLayout(QVBoxLayout):
         Refresh pokemon's datas such as his HP or status
         """
         self.health_bar.setValue(self.pokemon.getPourcentageHP())
-
+        
+        if(self.pokemon.getStatus() != None):
+            self.name.setText("{} ({})".format(self.pokemon.getName(),self.pokemon.getStatus().getAbbreviation()))
+        else:
+            self.name.setText(self.pokemon.getName())
