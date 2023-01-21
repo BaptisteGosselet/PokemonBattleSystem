@@ -46,6 +46,10 @@ class Trainer() :
             self.action = MoveAction(self.currentPokemon, self.currentPokemon.getMove1())
         elif(self.actionCommand == "move_2"):
             self.action = MoveAction(self.currentPokemon, self.currentPokemon.getMove2())
+        elif(self.actionCommand == "move_3"):
+            self.action = MoveAction(self.currentPokemon, self.currentPokemon.getMove3())
+        elif(self.actionCommand == "move_4"):
+            self.action = MoveAction(self.currentPokemon, self.currentPokemon.getMove4())
         elif(self.actionCommand == "switch_1"):
             self.action = SwitchAction(self, 0)
         elif(self.actionCommand == "switch_2"):
