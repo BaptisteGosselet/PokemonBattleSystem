@@ -22,6 +22,12 @@ class Pokemon :
         self.spdStat = spdStat
         self.speStat = speStat
 
+        self.atkModif = 0
+        self.defModif = 0
+        self.spaModif = 0
+        self.spdModif = 0
+        self.speModif = 0
+
         self.move1 = move1
         self.move2 = move2
 
@@ -49,22 +55,22 @@ class Pokemon :
 
     def getAtkStat(self)->int:
         if(type(self.status)==BurnStatus):
-            return self.atkStat // 2
-        return self.atkStat
+            return int(self.atkStat // 2 + (self.atkModif*25/100))
+        return int(self.atkStat + (self.atkModif*25/100))
 
     def getDefStat(self)->int:
-        return self.defStat
+        return int(self.defStat + (self.defModif*25/100))
 
     def getSpaStat(self)->int:
-        return self.spaStat
+        return int(self.spaStat + (self.spaModif*25/100))
 
     def getSpdStat(self)->int:
-        return self.spdStat
+        return int(self.spdStat + (self.spdModif*25/100))
 
     def getSpeStat(self)->int:
         if(type(self.status)==ParalysisStatus):
-            return self.speStat // 4
-        return self.speStat
+            return int(self.speStat // 4 + (self.speModif*25/100))
+        return int(self.speStat + (self.speModif*25/100))
 
     def getIsKo(self)->bool:
         return self.isKo
@@ -90,6 +96,43 @@ class Pokemon :
     def applyStatus(self):
         if(self.status != None):
             self.status.applyStatus(self)
+
+    def increaseAtk(self):
+        self.atkModif += 1  
+
+    def decreaseAtk(self):
+        self.atkModif -= 1
+
+    def increaseDef(self):
+        self.defModif += 1  
+
+    def decreaseDef(self):
+        self.defModif -= 1
+
+    def increaseSpa(self):
+        self.spaModif += 1  
+
+    def decreaseSpa(self):
+        self.spaModif -= 1
+
+    def increaseSpd(self):
+        self.spdModif += 1  
+
+    def decreaseSpd(self):
+        self.spdModif -= 1
+
+    def increaseSpe(self):
+        self.speModif += 1  
+
+    def decreaseSpe(self):
+        self.speModif -= 1
+
+    def resetModif(self):
+        self.atkModif = 0
+        self.defModif = 0
+        self.spaModif = 0
+        self.spdModif = 0
+        self.speModif = 0
 
     def applyDamage(self, damage)->None:
         """

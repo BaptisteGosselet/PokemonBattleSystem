@@ -13,7 +13,7 @@ class MoveAction():
         self.damage = 0
 
         self.missed = False
-        self.statusSetted = False
+        self.effectSetted = False
         self.failByStatus = False
         
         self.immunite = False
@@ -55,6 +55,15 @@ class MoveAction():
 
     def getMissed(self) -> bool:
         return self.missed
+
+    def getEffectSetted(self) -> bool:
+        return self.getEffectSetted
+
+    def getEffectMessage(self) -> str:
+        if(self.move.getSndEffect() == None):
+            return ""
+        else:
+            return self.move.getSndEffect().getEffectMessage()
 
     def getFailMessage(self) -> str:
         return self.failMessage
@@ -149,17 +158,19 @@ class MoveAction():
                     #(Modificateur 3 : port d'objet ect.)
                     
                     self.damage = int(self.damage)
+                    if(self.damage <= 0 and not self.immunite):
+                        self.damage = 1
 
                     opponentPokemon.applyDamage(self.damage)
 
                 if(not opponentPokemon.getIsKo() and not self.immunite):
                     if(self.move.getSndEffect() != None):
                         if(not self.move.getSndEffect().getForUser()):
-                            self.statusSetted = self.move.getSndEffect().applyEffect(opponentPokemon)
+                            self.effectSetted = self.move.getSndEffect().applyEffect(opponentPokemon)
                 
                 if(self.move.getSndEffect() != None):
                     if(self.move.getSndEffect().getForUser()):
-                        self.statusSetted = self.move.getSndEffect().applyEffect(self.myPokemon)
+                        self.effectSetted = self.move.getSndEffect().applyEffect(self.myPokemon)
 
             
 

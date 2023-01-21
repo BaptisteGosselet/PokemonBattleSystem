@@ -10,3 +10,6 @@ class BurnStatus(Status):
 
     def applyStatus(self, pokemon):
         pokemon.applyDamage(int(pokemon.getMaxHP() // 16))
+
+    def getStatusMessage(self) -> str:
+        return "Le Pokémon est brûlé."

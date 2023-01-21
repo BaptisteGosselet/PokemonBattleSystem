@@ -72,6 +72,7 @@ class Trainer() :
         self.team[indexTeam] = leavingPokemon
         self.withdrawPokemon()
         self.sendCurrentPokemon()
+        self.currentPokemon.resetModif()
 
     def sendCurrentPokemon(self):
         """

@@ -13,3 +13,6 @@ class ParalysisStatus(Status):
 
     def getFailMessage(self, pokemon) -> str:
         return "La Paralysie empêche {} de bouger.".format(pokemon.getName())
+
+    def getStatusMessage(self) -> str:
+        return "Le Pokémon est paralysé."

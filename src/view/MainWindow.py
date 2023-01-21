@@ -260,7 +260,9 @@ class MainWindow(QWidget):
 
                             elif(action.getSuperEfficace()):
                                 self.displayText("C'est super efficace !")
-                        
+                
+                if(action.getEffectSetted()):
+                    self.displayText(action.getEffectMessage(),1)                        
 
                 if(self.opponentPokemon.getPokemon().getIsKo()):
                     self.displayText("{} est K.O. !!".format(self.opponentPokemon.getPokemon().getName(), action.getDamage()),3)

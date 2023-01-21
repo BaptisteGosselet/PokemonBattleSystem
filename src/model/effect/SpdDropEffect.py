@@ -2,10 +2,9 @@ from random import randint
 from model.status.Status import Status
 from model.Pokemon import Pokemon
 
-class StatusEffect():
+class SpdDropEffect():
 
-    def __init__(self, status : Status, probability : int, forUser : bool = False):
-        self.status = status
+    def __init__(self, probability : int, forUser : bool = False):
         self.probability = probability
         self.forUser = forUser
 
@@ -24,12 +23,10 @@ class StatusEffect():
         @return if the effect has been applied
         """
         if(randint(0,100)<=self.probability):
-            if(pokemon.getStatus() == None):
-                pokemon.setStatus(self.status)
-                return True
-            else:
-                return False
+            pokemon.decreaseSpd()
+            return True
         return False
 
+
     def getEffectMessage(self):
-        return self.status.getStatusMessage()
+        return "Defense Spéciale baisse !"

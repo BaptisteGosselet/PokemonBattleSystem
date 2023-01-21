@@ -21,3 +21,6 @@ class SleepStatus(Status):
         if(self.turn >= self.sleepTurn):
             pokemon.setStatus(None)
         self.turn += 1
+
+    def getStatusMessage(self) -> str:
+        return "Le Pokémon s'endort."

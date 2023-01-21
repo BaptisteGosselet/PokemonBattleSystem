@@ -26,6 +26,9 @@ class Status():
         """
         return True
     
+    def getStatusMessage(self) -> str:
+        return ""
+
     def getFailMessage(self, pokemon) -> str:
         """
         @return a string to display when the pokemon miss his move due to the status

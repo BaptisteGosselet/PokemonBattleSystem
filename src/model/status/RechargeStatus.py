@@ -23,3 +23,6 @@ class RechargeStatus(Status):
 
     def getFailMessage(self, pokemon) -> str:
         return "{} doit se recharger".format(pokemon.getName())
+
+    def getStatusMessage(self) -> str:
+        return "Le Pokémon doit se recharger."
