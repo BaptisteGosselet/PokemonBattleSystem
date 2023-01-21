@@ -12,7 +12,6 @@ class Move():
         self.isSpecial = isSpecial
         self.priority = priority
         self.sndEffect = sndEffect
-        #description : string ?
 
     def getName(self) -> str:
         return self.name
@@ -34,3 +33,17 @@ class Move():
 
     def getSndEffect(self) : 
         return self.sndEffect
+
+
+    def getDescriptionText(self) -> str:
+        """
+        @return the description to display on hover the move button
+        """
+        if(self.isSpecial):
+            return "Puissance : {}\nPrécision : {}\nSpécial".format(self.power, self.accuracy)
+        elif(self.power == 0):
+            return "Précision : {}\nStatut".format(self.accuracy)
+        else:
+            return "Puissance : {}\nPrécision : {}\nPhysique".format(self.power, self.accuracy)
+
+        

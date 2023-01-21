@@ -175,8 +175,12 @@ class MainWindow(QWidget):
             self.statusBar.showMessage("Que dois faire {} ?".format(trainer.getCurrentPokemon().getName()))
 
             #Set moves
-            self.move_button_1.setText(trainer.getCurrentPokemon().move1.getName())
-            self.move_button_2.setText(trainer.getCurrentPokemon().move2.getName())
+            self.move_button_1.setText(trainer.getCurrentPokemon().getMove1().getName())
+            self.move_button_1.setToolTip(trainer.getCurrentPokemon().getMove1().getDescriptionText())
+
+            self.move_button_2.setText(trainer.getCurrentPokemon().getMove2().getName())
+            self.move_button_2.setToolTip(trainer.getCurrentPokemon().getMove2().getDescriptionText())
+
             self.move_button_1.setEnabled(True)
             self.move_button_2.setEnabled(True)
         
