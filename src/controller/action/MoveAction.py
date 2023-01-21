@@ -57,7 +57,7 @@ class MoveAction():
         return self.missed
 
     def getEffectSetted(self) -> bool:
-        return self.getEffectSetted
+        return self.effectSetted
 
     def getEffectMessage(self) -> str:
         if(self.move.getSndEffect() == None):
@@ -167,10 +167,10 @@ class MoveAction():
                     if(self.move.getSndEffect() != None):
                         if(not self.move.getSndEffect().getForUser()):
                             self.effectSetted = self.move.getSndEffect().applyEffect(opponentPokemon)
-                
+
                 if(self.move.getSndEffect() != None):
                     if(self.move.getSndEffect().getForUser()):
-                        self.effectSetted = self.move.getSndEffect().applyEffect(self.myPokemon)
+                        self.effectSetted = self.move.getSndEffect().applyEffect(self.myPokemon) or self.effectSetted
 
             
 

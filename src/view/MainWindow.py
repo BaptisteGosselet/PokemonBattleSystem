@@ -39,9 +39,11 @@ class MainWindow(QWidget):
         movesGrid = QGridLayout()
         self.move_button_1 = QPushButton()
         self.move_button_2 = QPushButton()
+        self.move_button_3 = QPushButton()
+        self.move_button_4 = QPushButton()
         
-        self.movesButtons = [self.move_button_1, self.move_button_2]
-        movesFunctions = [self.onclick_moveButton_1, self.onclick_moveButton_2]
+        self.movesButtons = [self.move_button_1, self.move_button_2, self.move_button_3, self.move_button_4]
+        movesFunctions = [self.onclick_moveButton_1, self.onclick_moveButton_2, self.onclick_moveButton_3, self.onclick_moveButton_4]
         
         for i in range(len(self.movesButtons)):
             self.movesButtons[i].setEnabled(False)
@@ -181,8 +183,16 @@ class MainWindow(QWidget):
             self.move_button_2.setText(trainer.getCurrentPokemon().getMove2().getName())
             self.move_button_2.setToolTip(trainer.getCurrentPokemon().getMove2().getDescriptionText())
 
+            self.move_button_3.setText(trainer.getCurrentPokemon().getMove3().getName())
+            self.move_button_3.setToolTip(trainer.getCurrentPokemon().getMove3().getDescriptionText())
+
+            self.move_button_4.setText(trainer.getCurrentPokemon().getMove4().getName())
+            self.move_button_4.setToolTip(trainer.getCurrentPokemon().getMove4().getDescriptionText())
+
             self.move_button_1.setEnabled(True)
             self.move_button_2.setEnabled(True)
+            self.move_button_3.setEnabled(True)
+            self.move_button_4.setEnabled(True)
         
         #Set team
         self.switch_button_1.setText(trainer.getTeam()[0].getName())
@@ -205,6 +215,8 @@ class MainWindow(QWidget):
         self.waitingAction = False
         self.move_button_1.setEnabled(False)
         self.move_button_2.setEnabled(False)
+        self.move_button_3.setEnabled(False)
+        self.move_button_4.setEnabled(False)
         self.switch_button_1.setEnabled(False)
         self.switch_button_2.setEnabled(False)
         self.currentTrainer.setActionCommand(command)
@@ -220,6 +232,18 @@ class MainWindow(QWidget):
         A method executed by a button press, it calls the sendCommand method with the corresponding parameter
         """
         self.sendCommand("move_2")
+
+    def onclick_moveButton_3(self) -> None :
+        """
+        A method executed by a button press, it calls the sendCommand method with the corresponding parameter
+        """
+        self.sendCommand("move_2")
+
+    def onclick_moveButton_4(self) -> None :
+        """
+        A method executed by a button press, it calls the sendCommand method with the corresponding parameter
+        """
+        self.sendCommand("move_4")
 
     def onclick_switchButton_1(self) -> None:
         """

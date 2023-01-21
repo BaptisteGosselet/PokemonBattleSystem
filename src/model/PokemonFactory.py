@@ -39,38 +39,55 @@ class PokemonFactory() :
         #Init Moves
         self.moves = {
             "" : None,
-            "deflagration":     Move("Déflagration",110,85,self.types["feu"], True, 0, StatusEffect(BurnStatus(),10)),
-            "seisme" :          Move("Séisme", 100, 100, self.types["sol"], False, 0, None),
-            "eboulement" :      Move("Eboulement", 75, 90, self.types["roche"], False, 0, None),
-            "hydrocanon" :      Move("Hydrocanon", 120, 85, self.types["eau"], True, 0, None),
-            "ultralaser" :      Move("Ultralaser", 150, 90, self.types["normal"], True, 0, StatusEffect(RechargeStatus(), 100, True)),
-            "plaquage" :        Move("Plaquage", 85, 100, self.types["normal"], False, 0, StatusEffect(ParalysisStatus(), 30)), 
-            "psyko" :           Move("Psyko", 90, 100, self.types["psy"], 0, True, None),
-            "cage-eclair" :     Move("Cage-Eclair", 0, 90, self.types["electrik"], False, 0, StatusEffect(ParalysisStatus(), 100)), 
-            "hypnose" :         Move("Hypnose", 0, 70, self.types["psy"], 0, False, StatusEffect(SleepStatus(), 100)),
-            "ball'ombre":       Move("Ball'Ombre", 80, 100, self.types["spectre"], True, 0, SpdDropEffect(20)) 
+            "deflagration":         Move("Déflagration",110,85,self.types["feu"], True, 0, StatusEffect(BurnStatus(),10)),
+            "seisme" :              Move("Séisme", 100, 100, self.types["sol"], False, 0, None),
+            "eboulement" :          Move("Eboulement", 75, 90, self.types["roche"], False, 0, None),
+            "hydrocanon" :          Move("Hydrocanon", 120, 85, self.types["eau"], True, 0, None),
+            "ultralaser" :          Move("Ultralaser", 150, 90, self.types["normal"], True, 0, StatusEffect(RechargeStatus(), 100, True)),
+            "plaquage" :            Move("Plaquage", 85, 100, self.types["normal"], False, 0, StatusEffect(ParalysisStatus(), 30)), 
+            "psyko" :               Move("Psyko", 90, 100, self.types["psy"], 0, True, None),
+            "cage-eclair" :         Move("Cage-Eclair", 0, 90, self.types["electrik"], False, 0, StatusEffect(ParalysisStatus(), 100)), 
+            "toxik" :               Move("Toxik", 0, 90, self.types["poison"], False, 0, None), #100% poison
+            "hypnose" :             Move("Hypnose", 0, 70, self.types["psy"], 0, False, StatusEffect(SleepStatus(), 100)),
+            "ball'ombre":           Move("Ball'Ombre", 80, 100, self.types["spectre"], True, 0, SpdDropEffect(20)),
+            "exploforce":           Move("Exploforce", 120, 70, self.types["combat"], True, 0, None),
+            "psykoud'boul":         Move("Psykoud'boul", 80, 90, self.types["psy"], False, 0, None), #20% flinch
+            "bomb beurk":           Move("Bomb beurk", 90, 100, self.types["poison"], True, 0, None), #30% poison
+            "machouille":           Move("Machouille", 80, 100, self.types["tenebres"], False, 0, None), #20% def drop
+            "cascade":              Move("Cascade", 80, 100, self.types["eau"], False, 0, None), #20% flinch
+            "atterissage":          Move("Atterissage", 0, 100, self.types["vol"], False, 0, None), #50% heal
+            "explosion":            Move("Explosion", 250, 100, self.types["normal"], False, 0, None), #100% recoil
+            "danse draco":          Move("Danse Draco", 0, 100, self.types["dragon"], False, 0, None), #+1 atk, +1 vit
+            "vent violent":         Move("Vent Violent", 110, 70, self.types["vol"], True, 0, None) #30% confus 
+
         }
 
         #Init Pokemon
         self.pokemons = {
-            "dracaufeu" :   {"Nom":"Dracaufeu", "Type1":self.types["feu"], "Type2":self.types["vol"], 
+            "dracaufeu" :   {"Nom":"Dracaufeu", "Type1":self.types["feu"], "Type2":self.types["vol"],
                             "PV":78, "ATK":84, "DEF":78, "SPA":109, "SPD":85, "SPE":100, 
-                            "Move1":self.moves["deflagration"], "Move2":self.moves["seisme"]}, 
-            "leviator" :    {"Nom":"Leviator", "Type1":self.types["eau"], "Type2":self.types["vol"], 
+                            "Move1":self.moves["deflagration"], "Move2":self.moves["vent violent"],
+                            "Move3":self.moves["atterissage"], "Move4":self.moves["toxik"]}, 
+            "leviator" :    {"Nom":"Leviator", "Type1":self.types["eau"], "Type2":self.types["vol"],
                             "PV":95, "ATK":125, "DEF":79, "SPA":60, "SPD":100, "SPE":81, 
-                            "Move1":self.moves["hydrocanon"], "Move2":self.moves["ultralaser"]}, 
-            "grolem" :      {"Nom":"Grolem", "Type1":self.types["sol"], "Type2":self.types["roche"], 
+                            "Move1":self.moves["danse draco"], "Move2":self.moves["cascade"],
+                            "Move3":self.moves["seisme"], "Move4":self.moves["machouille"]},  
+            "grolem" :      {"Nom":"Grolem", "Type1":self.types["sol"], "Type2":self.types["roche"],
                             "PV":80, "ATK":120, "DEF":130, "SPA":55, "SPD":65, "SPE":45, 
-                            "Move1":self.moves["seisme"], "Move2":self.moves["eboulement"]}, 
-            "alakazam" :    {"Nom":"Alakazam", "Type1":self.types["psy"], "Type2":None, 
+                            "Move1":self.moves["seisme"], "Move2":self.moves["eboulement"],
+                            "Move3":self.moves["plaquage"], "Move4":self.moves["explosion"]}, 
+            "alakazam" :    {"Nom":"Alakazam", "Type1":self.types["psy"], "Type2":None,
                             "PV":55, "ATK":50, "DEF":45, "SPA":135, "SPD":95, "SPE":120, 
-                            "Move1":self.moves["psyko"], "Move2":self.moves["cage-eclair"]}, 
+                            "Move1":self.moves["psyko"], "Move2":self.moves["ball'ombre"],
+                            "Move3":self.moves["exploforce"], "Move4":self.moves["cage-eclair"]},  
             "ectoplasma" :  {"Nom":"Ectoplasma", "Type1":self.types["spectre"], "Type2":self.types["poison"], 
                             "PV":60, "ATK":65, "DEF":60, "SPA":130, "SPD":75, "SPE":110, 
-                            "Move1":self.moves["ball'ombre"], "Move2":self.moves["hypnose"]},
+                            "Move1":self.moves["ball'ombre"], "Move2":self.moves["bomb beurk"],
+                            "Move3":self.moves["exploforce"], "Move4":self.moves["hypnose"]}, 
             "tauros":       {"Nom":"Tauros", "Type1":self.types["normal"], "Type2":None, 
                             "PV":75, "ATK":100, "DEF":95, "SPA":40, "SPD":70, "SPE":110, 
-                            "Move1":self.moves["plaquage"], "Move2":self.moves["ultralaser"]}
+                            "Move1":self.moves["plaquage"], "Move2":self.moves["seisme"],
+                            "Move3":self.moves["deflagration"], "Move4":self.moves["psykoud'boul"]}
         }
         
 
@@ -135,4 +152,4 @@ class PokemonFactory() :
             data["Nom"],
             data["Type1"], data["Type2"],
             data["PV"], data["ATK"], data["DEF"], data["SPA"], data["SPD"], data["SPE"],
-            data["Move1"],data["Move2"])
+            data["Move1"],data["Move2"],data["Move3"],data["Move4"])

@@ -8,7 +8,7 @@ from model.status.Status import Status
 
 class Pokemon : 
 
-    def __init__(self, name, type1, type2,  hp, atkStat, defStat, spaStat, spdStat, speStat, move1, move2):
+    def __init__(self, name, type1, type2,  hp, atkStat, defStat, spaStat, spdStat, speStat, move1, move2, move3, move4):
     
         self.name = name 
         self.type1 = type1
@@ -30,6 +30,8 @@ class Pokemon :
 
         self.move1 = move1
         self.move2 = move2
+        self.move3 = move3
+        self.move4 = move4
 
         self.status = None
 
@@ -46,6 +48,12 @@ class Pokemon :
 
     def getMove2(self)->Move:
         return self.move2
+
+    def getMove3(self)->Move:
+        return self.move3
+
+    def getMove4(self)->Move:
+        return self.move4
 
     def getPourcentageHP(self)->int:
         return ceil((self.current_HP / self.MAX_HP) * 100)
