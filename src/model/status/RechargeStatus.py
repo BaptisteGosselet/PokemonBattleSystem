@@ -7,6 +7,7 @@ class RechargeStatus(Status):
     def __init__(self):
         self.name = "Recharge"
         self.abbreviation = "RECHARGE"
+        self.recharge = False
 
     def canMove(self)->bool:
         return False
@@ -15,7 +16,10 @@ class RechargeStatus(Status):
         return False
 
     def applyStatus(self, pokemon):
-        pokemon.setStatus(None)
+        if(self.recharge):
+            pokemon.setStatus(None)
+        else:
+            self.recharge = True
 
     def getFailMessage(self, pokemon) -> str:
         return "{} doit se recharger".format(pokemon.getName())

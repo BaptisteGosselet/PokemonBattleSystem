@@ -2,6 +2,7 @@ from model.Move import Move
 from model.Pokemon import Pokemon
 from model.TypePkmn import TypePkmn
 from model.effect.StatusEffect import StatusEffect
+from model.status.BurnStatus import BurnStatus
 from model.status.ParalysisStatus import ParalysisStatus
 from model.status.RechargeStatus import RechargeStatus
 from model.status.SleepStatus import SleepStatus
@@ -37,7 +38,7 @@ class PokemonFactory() :
         #Init Moves
         self.moves = {
             "" : None,
-            "deflagration":     Move("Déflagration",110,85,self.types["feu"], True, 0, None), #10% de brûlure
+            "deflagration":     Move("Déflagration",110,85,self.types["feu"], True, 0, StatusEffect(BurnStatus(),10)),
             "seisme" :          Move("Séisme", 100, 100, self.types["sol"], False, 0, None),
             "eboulement" :      Move("Eboulement", 75, 90, self.types["roche"], False, 0, None),
             "hydrocanon" :      Move("Hydrocanon", 120, 85, self.types["eau"], True, 0, None),

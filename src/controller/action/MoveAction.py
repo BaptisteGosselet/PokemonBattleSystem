@@ -21,6 +21,8 @@ class MoveAction():
         self.peuEfficace = False
         self.superEfficace = False
 
+        self.failMessage = ""
+
     def getMove(self) -> Move:
         return self.move
 
@@ -53,6 +55,9 @@ class MoveAction():
 
     def getMissed(self) -> bool:
         return self.missed
+
+    def getFailMessage(self) -> str:
+        return self.failMessage
 
     def isFirst(self, action) -> bool:
         """
@@ -87,7 +92,7 @@ class MoveAction():
         Execute this action : calculate and apply damage and effect of the move
         @param opponentPokemon, the target of the move
         """
-        
+
         self.target = opponentPokemon
 
         pkmCanMove = True
@@ -149,22 +154,24 @@ class MoveAction():
 
                 if(not opponentPokemon.getIsKo() and not self.immunite):
                     if(self.move.getSndEffect() != None):
-                        
-                        pkmToStatus = opponentPokemon
-                        if(self.move.getSndEffect().getForUser()):
-                            pkmToStatus = self.myPokemon   
+                        if(not self.move.getSndEffect().getForUser()):
+                            self.statusSetted = self.move.getSndEffect().applyEffect(opponentPokemon)
+                
+                if(self.move.getSndEffect() != None):
+                    if(self.move.getSndEffect().getForUser()):
+                        self.statusSetted = self.move.getSndEffect().applyEffect(self.myPokemon)
 
-                        self.statusSetted = self.move.getSndEffect().applyEffect(pkmToStatus)
             
-                self.myPokemon.applyStatus()
-                opponentPokemon.applyStatus()
 
             else:
                 self.missed = True
 
         else:
+            self.failMessage = self.myPokemon.getStatus().getFailMessage(self.myPokemon)
             self.failByStatus = True
 
+
+        self.myPokemon.applyStatus()
         
         
         

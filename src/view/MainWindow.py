@@ -236,7 +236,7 @@ class MainWindow(QWidget):
         if(type(action)==MoveAction):
 
             if(action.getFailByStatus()):
-                self.displayText(action.getMyPokemon().getStatus().getFailMessage(action.getMyPokemon()),2)
+                self.displayText(action.getFailMessage(),2)
             else:
 
                 self.displayText("{} utilise {} !".format(action.getMyPokemon().getName(), action.getMove().getName()))

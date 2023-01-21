@@ -1,6 +1,7 @@
 from math import ceil
 from model.Move import Move
 from model.TypePkmn import TypePkmn
+from model.status.BurnStatus import BurnStatus
 from model.status.ParalysisStatus import ParalysisStatus
 from model.status.Status import Status
 
@@ -43,7 +44,12 @@ class Pokemon :
     def getPourcentageHP(self)->int:
         return ceil((self.current_HP / self.MAX_HP) * 100)
 
+    def getMaxHP(self)->int:
+        return self.MAX_HP
+
     def getAtkStat(self)->int:
+        if(type(self.status)==BurnStatus):
+            return self.atkStat // 2
         return self.atkStat
 
     def getDefStat(self)->int:
