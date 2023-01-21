@@ -4,6 +4,7 @@ from model.TypePkmn import TypePkmn
 from model.effect.StatusEffect import StatusEffect
 from model.status.ParalysisStatus import ParalysisStatus
 from model.status.RechargeStatus import RechargeStatus
+from model.status.SleepStatus import SleepStatus
 
 class PokemonFactory() : 
 
@@ -44,7 +45,7 @@ class PokemonFactory() :
             "plaquage" :        Move("Plaquage", 85, 100, self.types["normal"], False, 0, StatusEffect(ParalysisStatus(), 30)), 
             "psyko" :           Move("Psyko", 90, 100, self.types["psy"], 0, True, None),
             "cage-eclair" :     Move("Cage-Eclair", 0, 90, self.types["electrik"], False, 0, StatusEffect(ParalysisStatus(), 100)), 
-            "hypnose" :         Move("Hypnose", 0, 70, self.types["psy"], 0, False, None), #sommeil 100% 
+            "hypnose" :         Move("Hypnose", 0, 70, self.types["psy"], 0, False, StatusEffect(SleepStatus(), 100)),
             "ball'ombre":       Move("Ball'Ombre", 80, 100, self.types["spectre"], True, 0, None) #20% de baisse de def spé
         }
 

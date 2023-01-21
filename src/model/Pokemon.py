@@ -81,6 +81,10 @@ class Pokemon :
     def getStatus(self)->Status:
         return self.status
 
+    def applyStatus(self):
+        if(self.status != None):
+            self.status.applyStatus(self)
+
     def applyDamage(self, damage)->None:
         """
         Apply a number of damage to the HP, if current HPs are lower to 0 then the pokemon is K.O.

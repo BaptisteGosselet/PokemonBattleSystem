@@ -147,7 +147,7 @@ class MoveAction():
 
                     opponentPokemon.applyDamage(self.damage)
 
-                if(not opponentPokemon.getIsKo()):
+                if(not opponentPokemon.getIsKo() and not self.immunite):
                     if(self.move.getSndEffect() != None):
                         
                         pkmToStatus = opponentPokemon
@@ -156,6 +156,9 @@ class MoveAction():
 
                         self.statusSetted = self.move.getSndEffect().applyEffect(pkmToStatus)
             
+                self.myPokemon.applyStatus()
+                opponentPokemon.applyStatus()
+
             else:
                 self.missed = True
 
