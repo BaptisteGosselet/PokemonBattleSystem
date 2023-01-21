@@ -234,31 +234,33 @@ class MainWindow(QWidget):
         @param action, the action to show on the screen
         """
         if(type(action)==MoveAction):
-            
-            self.displayText("{} utilise {} !".format(action.getMyPokemon().getName(), action.getMove().getName()))
-            self.allyPokemon.refresh()
-            self.opponentPokemon.refresh()
 
-            if(action.getMissed()):
-                self.displayText("{} évite l'attaque...".format(action.getTarget().getName()), 2)
-            elif(action.getFailByStatus()):
+            if(action.getFailByStatus()):
                 self.displayText(action.getMyPokemon().getStatus().getFailMessage(action.getMyPokemon()),2)
-            else:    
-                if(action.getImmunite()):
-                    self.displayText("Ça n'affecte pas.")
-                else:
-                    if(action.getDamage()>0):
-                        self.displayText("{} perd {} PV.".format(action.getTarget().getName(), action.getDamage()))
+            else:
 
-                        if(action.getCoupCritique()):
-                            self.displayText("Coup Critique !")
+                self.displayText("{} utilise {} !".format(action.getMyPokemon().getName(), action.getMove().getName()))
+                self.allyPokemon.refresh()
+                self.opponentPokemon.refresh()
 
-                        if(action.getPeuEfficace()):
-                            self.displayText("Ce n'est pas très efficace...")
+                if(action.getMissed()):
+                    self.displayText("{} évite l'attaque...".format(action.getTarget().getName()), 2)
+                else:    
+                    if(action.getImmunite()):
+                        self.displayText("Ça n'affecte pas.")
+                    else:
+                        if(action.getDamage()>0):
+                            self.displayText("{} perd {} PV.".format(action.getTarget().getName(), action.getDamage()))
 
-                        elif(action.getSuperEfficace()):
-                            self.displayText("C'est super efficace !")
-                    
+                            if(action.getCoupCritique()):
+                                self.displayText("Coup Critique !")
+
+                            if(action.getPeuEfficace()):
+                                self.displayText("Ce n'est pas très efficace...")
+
+                            elif(action.getSuperEfficace()):
+                                self.displayText("C'est super efficace !")
+                        
 
                 if(self.opponentPokemon.getPokemon().getIsKo()):
                     self.displayText("{} est K.O. !!".format(self.opponentPokemon.getPokemon().getName(), action.getDamage()),3)

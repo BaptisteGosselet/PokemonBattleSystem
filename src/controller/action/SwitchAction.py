@@ -31,5 +31,10 @@ class SwitchAction():
         """
         Execute this action : do the switch of pokemon
         """
-        self.trainer.switchPokemon(self.indexTeam)
-        
+        if(self.trainer.getCurrentPokemon().getStatus() != None):
+            if(self.trainer.getCurrentPokemon().getStatus().canSwitch()):
+                self.trainer.switchPokemon(self.indexTeam)
+            else:
+                self.trainer.getCurrentPokemon().getStatus().applyStatus(self.trainer.getCurrentPokemon())
+        else:
+            self.trainer.switchPokemon(self.indexTeam)

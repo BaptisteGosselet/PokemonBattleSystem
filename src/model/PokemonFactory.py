@@ -1,8 +1,9 @@
 from model.Move import Move
 from model.Pokemon import Pokemon
 from model.TypePkmn import TypePkmn
-from model.effect.StatusEffect import SecondaryEffect
+from model.effect.StatusEffect import StatusEffect
 from model.status.ParalysisStatus import ParalysisStatus
+from model.status.RechargeStatus import RechargeStatus
 
 class PokemonFactory() : 
 
@@ -39,10 +40,10 @@ class PokemonFactory() :
             "seisme" :          Move("Séisme", 100, 100, self.types["sol"], False, 0, None),
             "eboulement" :      Move("Eboulement", 75, 90, self.types["roche"], False, 0, None),
             "hydrocanon" :      Move("Hydrocanon", 120, 85, self.types["eau"], True, 0, None),
-            "ultralaser" :      Move("Ultralaser", 150, 90, self.types["normal"], True, 0, None), #rechagement
-            "plaquage" :        Move("Plaquage", 85, 100, self.types["normal"], False, 0, None), #30% de paralysie
+            "ultralaser" :      Move("Ultralaser", 150, 90, self.types["normal"], True, 0, StatusEffect(RechargeStatus(), 100, True)),
+            "plaquage" :        Move("Plaquage", 85, 100, self.types["normal"], False, 0, StatusEffect(ParalysisStatus(), 30)), 
             "psyko" :           Move("Psyko", 90, 100, self.types["psy"], 0, True, None),
-            "cage-eclair" :     Move("Cage-Eclair", 0, 90, self.types["electrik"], False, 0, SecondaryEffect(ParalysisStatus(), 100)), #Paralysie 100% + attaque de status
+            "cage-eclair" :     Move("Cage-Eclair", 0, 90, self.types["electrik"], False, 0, StatusEffect(ParalysisStatus(), 100)), 
             "hypnose" :         Move("Hypnose", 0, 70, self.types["psy"], 0, False, None), #sommeil 100% 
             "ball'ombre":       Move("Ball'Ombre", 80, 100, self.types["spectre"], True, 0, None) #20% de baisse de def spé
         }

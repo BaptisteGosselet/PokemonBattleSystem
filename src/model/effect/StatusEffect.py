@@ -2,11 +2,20 @@ from random import randint
 from model.status.Status import Status
 from model.Pokemon import Pokemon
 
-class SecondaryEffect():
+class StatusEffect():
 
-    def __init__(self, status : Status, probability : int):
+    def __init__(self, status : Status, probability : int, forUser : bool = False):
         self.status = status
         self.probability = probability
+        self.forUser = forUser
+
+    def getForUser(self)->bool:
+        """
+        Indicate if the effect must be applied to the user of the move (or else to the opponent)
+        @return forUser attribute
+        """
+        return self.forUser
+
 
     def applyEffect(self, pokemon : Pokemon)->bool:
         """

@@ -149,7 +149,12 @@ class MoveAction():
 
                 if(not opponentPokemon.getIsKo()):
                     if(self.move.getSndEffect() != None):
-                        self.statusSetted = self.move.getSndEffect().applyEffect(opponentPokemon)
+                        
+                        pkmToStatus = opponentPokemon
+                        if(self.move.getSndEffect().getForUser()):
+                            pkmToStatus = self.myPokemon   
+
+                        self.statusSetted = self.move.getSndEffect().applyEffect(pkmToStatus)
             
             else:
                 self.missed = True
