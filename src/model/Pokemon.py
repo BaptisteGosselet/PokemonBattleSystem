@@ -105,35 +105,20 @@ class Pokemon :
         if(self.status != None):
             self.status.applyStatus(self)
 
-    def increaseAtk(self):
-        self.atkModif += 1  
+    def modifAtk(self, n:int):
+        self.atkModif += n
 
-    def decreaseAtk(self):
-        self.atkModif -= 1
+    def modifDef(self, n:int):
+        self.defModif += n  
 
-    def increaseDef(self):
-        self.defModif += 1  
+    def modifSpa(self, n:int):
+        self.spaModif += n  
 
-    def decreaseDef(self):
-        self.defModif -= 1
+    def modifSpd(self, n:int):
+        self.spdModif += n  
 
-    def increaseSpa(self):
-        self.spaModif += 1  
-
-    def decreaseSpa(self):
-        self.spaModif -= 1
-
-    def increaseSpd(self):
-        self.spdModif += 1  
-
-    def decreaseSpd(self):
-        self.spdModif -= 1
-
-    def increaseSpe(self):
-        self.speModif += 1  
-
-    def decreaseSpe(self):
-        self.speModif -= 1
+    def modifSpe(self, n:int):
+        self.speModif += n  
 
     def resetModif(self):
         self.atkModif = 0

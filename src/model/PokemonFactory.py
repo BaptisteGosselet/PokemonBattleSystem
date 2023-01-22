@@ -2,7 +2,7 @@ from model.Move import Move
 from model.Pokemon import Pokemon
 from model.TypePkmn import TypePkmn
 from model.effect.HealAndRecoilEffect import HealAndRecoilEffect
-from model.effect.SpdDropEffect import SpdDropEffect
+from model.effect.StatChangeEffect import StatChangeEffect
 from model.effect.StatusEffect import StatusEffect
 from model.status.BurnStatus import BurnStatus
 from model.status.ParalysisStatus import ParalysisStatus
@@ -51,16 +51,16 @@ class PokemonFactory() :
             "cage-eclair" :         Move("Cage-Eclair", 0, 90, self.types["electrik"], False, 0, StatusEffect(ParalysisStatus(), 100)), 
             "toxik" :               Move("Toxik", 0, 90, self.types["poison"], False, 0, StatusEffect(PoisonStatus(), 100)), 
             "hypnose" :             Move("Hypnose", 0, 70, self.types["psy"], 0, False, StatusEffect(SleepStatus(), 100)),
-            "ball'ombre":           Move("Ball'Ombre", 80, 100, self.types["spectre"], True, 0, SpdDropEffect(20)),
+            "ball'ombre":           Move("Ball'Ombre", 80, 100, self.types["spectre"], True, 0, StatChangeEffect([0,0,0,-1,0], 20)),
             "exploforce":           Move("Exploforce", 120, 70, self.types["combat"], True, 0, None),
             "psykoud'boul":         Move("Psykoud'boul", 80, 90, self.types["psy"], False, 0, None), #20% flinch
             "bomb beurk":           Move("Bomb beurk", 90, 100, self.types["poison"], True, 0, StatusEffect(PoisonStatus(), 30)),
-            "machouille":           Move("Machouille", 80, 100, self.types["tenebres"], False, 0, None), #20% def drop
+            "machouille":           Move("Machouille", 80, 100, self.types["tenebres"], False, 0, StatChangeEffect([0,-1,0,0,0], 20)),
             "cascade":              Move("Cascade", 80, 100, self.types["eau"], False, 0, None), #20% flinch
             "atterissage":          Move("Atterissage", 0, 100, self.types["vol"], False, 0, HealAndRecoilEffect(50, True)),
             "explosion":            Move("Explosion", 250, 100, self.types["normal"], False, 0, HealAndRecoilEffect(-100, True)),
-            "danse draco":          Move("Danse Draco", 0, 100, self.types["dragon"], False, 0, None), #+1 atk, +1 vit
-            "enroulement":          Move("Enroulement", 0, 100, self.types["normal"], False, 0, None), #+1 atk, +1 def
+            "danse draco":          Move("Danse Draco", 0, 100, self.types["dragon"], False, 0, StatChangeEffect([1,0,0,0,1], 100, True)),
+            "enroulement":          Move("Enroulement", 0, 100, self.types["normal"], False, 0, StatChangeEffect([1,1,0,0,0], 100, True)),
             "detricanon":           Move("Détricanon", 120, 80, self.types["poison"], False, 0, StatusEffect(PoisonStatus(), 30)), 
             "coup bas":             Move("Coup Bas", 70, 100, self.types["tenebres"], False, 1, None), 
             "vent violent":         Move("Vent Violent", 110, 70, self.types["vol"], True, 0, None) #30% confus 
