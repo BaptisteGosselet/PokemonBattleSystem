@@ -66,11 +66,18 @@ class PokemonFactory() :
             "soin":                 Move("Soin", 0, 100, self.types["normal"], False, 0, HealAndRecoilEffect(50, True)),
             "e-coque":              Move("E-Coque", 0, 100, self.types["normal"], False, 0, HealAndRecoilEffect(50, True)),
             "explosion":            Move("Explosion", 250, 100, self.types["normal"], False, 0, HealAndRecoilEffect(-100, True)),
+            "damocles":             Move("Damocles", 120, 100, self.types["normal"], False, 0, HealAndRecoilEffect(-25, True)),
             "danse draco":          Move("Danse Draco", 0, 100, self.types["dragon"], False, 0, StatChangeEffect([1,0,0,0,1], 100, True)),
             "enroulement":          Move("Enroulement", 0, 100, self.types["normal"], False, 0, StatChangeEffect([1,1,0,0,0], 100, True)),
+            "malediction":          Move("Malédiction", 0, 100, self.types["spectre"], False, 0, StatChangeEffect([0,1,0,1,0], 100, True)),
+            "tempete verte":        Move("Tempête Verte", 130, 90, self.types["plante"], True, 0, StatChangeEffect([0,0,-1,0,0], 100, True)),
             "detricanon":           Move("Détricanon", 120, 80, self.types["poison"], False, 0, StatusEffect(PoisonStatus(), 30)), 
+            "canicule":             Move("Canicule", 95, 90, self.types["feu"], True, 0, StatusEffect(BurnStatus(), 10)), 
+            "blizzard":             Move("Blizzard", 110, 75, self.types["glace"], True, 0, StatusEffect(BurnStatus(), 10)), #GEL
             "coup bas":             Move("Coup Bas", 70, 100, self.types["tenebres"], False, 1, None), 
             "double pied":          Move("Double Pied", 60, 100, self.types["combat"], False, 0, None), 
+            "pc glace":             Move("Puissance Cachée", 60, 100, self.types["glace"], True, 0, None), 
+            "pc feu":               Move("Puissance Cachée", 60, 100, self.types["feu"], True, 0, None), 
             "frappe atlas":         Move("Frappe Atlas", 100, 100, self.types["combat"], False, 0, None), 
             "exuviation" :          Move("Exuviation", 0, 100, self.types["normal"], False, 0, StatChangeEffect([1,-1,1,-1,1], 100, True)),
             "danse lames" :         Move("Danse Lames", 0, 100, self.types["normal"], False, 0, StatChangeEffect([2,0,0,0,0], 100, True)),
@@ -144,6 +151,26 @@ class PokemonFactory() :
                             "Move1":self.moves["roc-boulet"], "Move2":self.moves["seisme"],
                             "Move3":self.moves["megacorne"], "Move4":self.moves["danse lames"]},
 
+            "noadkoko":     {"Nom":"Noadkoko", "Type1":self.types["plante"], "Type2":self.types["psy"], 
+                            "PV":95, "ATK":95, "DEF":85, "SPA":125, "SPD":75, "SPE":55, 
+                            "Move1":self.moves["tempete verte"], "Move2":self.moves["psyko"],
+                            "Move3":self.moves["pc feu"], "Move4":self.moves["explosion"]},
+
+            "electhor":     {"Nom":"Electhor", "Type1":self.types["electrik"], "Type2":self.types["vol"], 
+                            "PV":90, "ATK":90, "DEF":85, "SPA":125, "SPD":90, "SPE":100, 
+                            "Move1":self.moves["tonnerre"], "Move2":self.moves["canicule"],
+                            "Move3":self.moves["pc glace"], "Move4":self.moves["atterissage"]},
+
+            "ronflex":     {"Nom":"Ronflex", "Type1":self.types["normal"], "Type2":None, 
+                            "PV":160, "ATK":110, "DEF":65, "SPA":65, "SPD":110, "SPE":30, 
+                            "Move1":self.moves["damocles"], "Move2":self.moves["seisme"],
+                            "Move3":self.moves["malediction"], "Move4":self.moves["soin"]},
+
+            "lippoutou":     {"Nom":"Lippoutou", "Type1":self.types["glace"], "Type2":self.types["psy"], 
+                            "PV":65, "ATK":50, "DEF":35, "SPA":115, "SPD":95, "SPE":95, 
+                            "Move1":self.moves["blizzard"], "Move2":self.moves["psyko"],
+                            "Move3":self.moves["exploforce"], "Move4":self.moves["hypnose"]},
+
             "tauros":       {"Nom":"Tauros", "Type1":self.types["normal"], "Type2":None, 
                             "PV":75, "ATK":100, "DEF":95, "SPA":40, "SPD":70, "SPE":110, 
                             "Move1":self.moves["plaquage"], "Move2":self.moves["seisme"],
@@ -151,11 +178,6 @@ class PokemonFactory() :
         }
 
 
-        # electhor, Discharge/Volt Switch - Heat Wave - HP Ice- Roost
-        # lippoutou, Blizzard - Psyko - Lovely Kiss - Rest
-        # noadkoko, Giga Drain - Psyko - HP Fire - Explosion
-        # rhinoferos, Rock Blast - Seisme - Megahorn - Sword Dance
-        # ronflex, Curse - Body Slam - Earthquake - Rest
         
     def initTypeTable(self):
         
