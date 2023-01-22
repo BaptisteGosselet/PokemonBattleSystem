@@ -61,6 +61,7 @@ class PokemonFactory() :
             "machouille":           Move("Machouille", 80, 100, self.types["tenebres"], False, 0, StatChangeEffect([0,-1,0,0,0], 20)),
             "cascade":              Move("Cascade", 80, 100, self.types["eau"], False, 0, StatusEffect(FlinchStatus(), 20)),
             "atterissage":          Move("Atterissage", 0, 100, self.types["vol"], False, 0, HealAndRecoilEffect(50, True)),
+            "soin":                 Move("Soin", 0, 100, self.types["normal"], False, 0, HealAndRecoilEffect(50, True)),
             "explosion":            Move("Explosion", 250, 100, self.types["normal"], False, 0, HealAndRecoilEffect(-100, True)),
             "danse draco":          Move("Danse Draco", 0, 100, self.types["dragon"], False, 0, StatChangeEffect([1,0,0,0,1], 100, True)),
             "enroulement":          Move("Enroulement", 0, 100, self.types["normal"], False, 0, StatChangeEffect([1,1,0,0,0], 100, True)),
@@ -68,6 +69,9 @@ class PokemonFactory() :
             "coup bas":             Move("Coup Bas", 70, 100, self.types["tenebres"], False, 1, None), 
             "exuviation" :          Move("Exuviation", 0, 100, self.types["normal"], False, 0, StatChangeEffect([1,-1,1,-1,1], 100, True)),
             "stalactite" :          MultipleMove("Stalactite", 25, 100, self.types["glace"], False, 0, None),
+            "tonnerre" :            Move("Tonnerre", 90, 100, self.types["electrik"], True, 0, StatusEffect(ParalysisStatus(), 10)),
+            "ebulition" :           Move("Ebulition", 90, 100, self.types["eau"], True, 0, StatusEffect(BurnStatus(), 30)),
+            "laser glace" :         Move("Laser Glace", 90, 100, self.types["glace"], True, 0, StatusEffect(ParalysisStatus(), 10)), #GEL 
             "vent violent":         Move("Vent Violent", 110, 70, self.types["vol"], True, 0, StatusEffect(ConfuseStatus(), 20)) 
 
         }
@@ -108,6 +112,16 @@ class PokemonFactory() :
                             "PV":50, "ATK":95, "DEF":180, "SPA":85, "SPD":45, "SPE":70, 
                             "Move1":self.moves["exuviation"], "Move2":self.moves["stalactite"],
                             "Move3":self.moves["hydrocanon"], "Move4":self.moves["explosion"]},
+
+            "staross":       {"Nom":"Staross", "Type1":self.types["eau"], "Type2":self.types["psy"], 
+                            "PV":60, "ATK":75, "DEF":85, "SPA":100, "SPD":85, "SPE":115, 
+                            "Move1":self.moves["hydrocanon"], "Move2":self.moves["tonnerre"],
+                            "Move3":self.moves["laser glace"], "Move4":self.moves["soin"]},
+
+            "flagadoss":     {"Nom":"Flagadoss", "Type1":self.types["eau"], "Type2":self.types["psy"], 
+                            "PV":95, "ATK":75, "DEF":110, "SPA":100, "SPD":80, "SPE":30, 
+                            "Move1":self.moves["ebulition"], "Move2":self.moves["psyko"],
+                            "Move3":self.moves["laser glace"], "Move4":self.moves["soin"]},
 
 
             "tauros":       {"Nom":"Tauros", "Type1":self.types["normal"], "Type2":None, 
