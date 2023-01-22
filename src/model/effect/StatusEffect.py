@@ -30,9 +30,10 @@ class StatusEffect():
 
                 if(type(self.status) == ParalysisStatus and pokemon.canParalyse()
                 or type(self.status) == PoisonStatus and pokemon.canPoison()):
-
-                    pokemon.setStatus(self.status)
-                    return True
+                    return False
+                    
+                pokemon.setStatus(self.status)
+                return True
             
             
             else:
