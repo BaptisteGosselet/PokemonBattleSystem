@@ -46,9 +46,11 @@ class PokemonFactory() :
             "" : None,
             "deflagration":         Move("Déflagration",110,85,self.types["feu"], True, 0, StatusEffect(BurnStatus(),10)),
             "seisme" :              Move("Séisme", 100, 100, self.types["sol"], False, 0, None),
+            "megacorne" :           Move("Mégacorne", 120, 85, self.types["insecte"], False, 0, None),
             "eboulement" :          Move("Eboulement", 75, 90, self.types["roche"], False, 0, None),
             "hydrocanon" :          Move("Hydrocanon", 120, 85, self.types["eau"], True, 0, None),
             "ultralaser" :          Move("Ultralaser", 150, 90, self.types["normal"], True, 0, StatusEffect(RechargeStatus(), 100, True)),
+            "roc-boulet" :          Move("Roc-Boulet", 150, 90, self.types["roche"], False, 0, StatusEffect(RechargeStatus(), 100, True)),
             "plaquage" :            Move("Plaquage", 85, 100, self.types["normal"], False, 0, StatusEffect(ParalysisStatus(), 30)), 
             "psyko" :               Move("Psyko", 90, 100, self.types["psy"], 0, True, None),
             "cage-eclair" :         Move("Cage-Eclair", 0, 90, self.types["electrik"], False, 0, StatusEffect(ParalysisStatus(), 100)), 
@@ -62,12 +64,16 @@ class PokemonFactory() :
             "cascade":              Move("Cascade", 80, 100, self.types["eau"], False, 0, StatusEffect(FlinchStatus(), 20)),
             "atterissage":          Move("Atterissage", 0, 100, self.types["vol"], False, 0, HealAndRecoilEffect(50, True)),
             "soin":                 Move("Soin", 0, 100, self.types["normal"], False, 0, HealAndRecoilEffect(50, True)),
+            "e-coque":              Move("E-Coque", 0, 100, self.types["normal"], False, 0, HealAndRecoilEffect(50, True)),
             "explosion":            Move("Explosion", 250, 100, self.types["normal"], False, 0, HealAndRecoilEffect(-100, True)),
             "danse draco":          Move("Danse Draco", 0, 100, self.types["dragon"], False, 0, StatChangeEffect([1,0,0,0,1], 100, True)),
             "enroulement":          Move("Enroulement", 0, 100, self.types["normal"], False, 0, StatChangeEffect([1,1,0,0,0], 100, True)),
             "detricanon":           Move("Détricanon", 120, 80, self.types["poison"], False, 0, StatusEffect(PoisonStatus(), 30)), 
             "coup bas":             Move("Coup Bas", 70, 100, self.types["tenebres"], False, 1, None), 
+            "double pied":          Move("Double Pied", 60, 100, self.types["combat"], False, 0, None), 
+            "frappe atlas":         Move("Frappe Atlas", 100, 100, self.types["combat"], False, 0, None), 
             "exuviation" :          Move("Exuviation", 0, 100, self.types["normal"], False, 0, StatChangeEffect([1,-1,1,-1,1], 100, True)),
+            "danse lames" :         Move("Danse Lames", 0, 100, self.types["normal"], False, 0, StatChangeEffect([2,0,0,0,0], 100, True)),
             "stalactite" :          MultipleMove("Stalactite", 25, 100, self.types["glace"], False, 0, None),
             "tonnerre" :            Move("Tonnerre", 90, 100, self.types["electrik"], True, 0, StatusEffect(ParalysisStatus(), 10)),
             "ebulition" :           Move("Ebulition", 90, 100, self.types["eau"], True, 0, StatusEffect(BurnStatus(), 30)),
@@ -123,6 +129,20 @@ class PokemonFactory() :
                             "Move1":self.moves["ebulition"], "Move2":self.moves["psyko"],
                             "Move3":self.moves["laser glace"], "Move4":self.moves["soin"]},
 
+            "voltali":     {"Nom":"Voltali", "Type1":self.types["electrik"], "Type2":None, 
+                            "PV":65, "ATK":65, "DEF":60, "SPA":110, "SPD":95, "SPE":130, 
+                            "Move1":self.moves["tonnerre"], "Move2":self.moves["ball'ombre"],
+                            "Move3":self.moves["double pied"], "Move4":self.moves["cage-eclair"]},
+            
+            "leveinard":     {"Nom":"Leveinard", "Type1":self.types["normal"], "Type2":None, 
+                            "PV":250, "ATK":5, "DEF":5, "SPA":35, "SPD":105, "SPE":50, 
+                            "Move1":self.moves["frappe atlas"], "Move2":self.moves["laser glace"],
+                            "Move3":self.moves["toxik"], "Move4":self.moves["e-coque"]},
+            
+            "rhinoferos":     {"Nom":"Rhinoferos", "Type1":self.types["roche"], "Type2":self.types["sol"], 
+                            "PV":105, "ATK":130, "DEF":120, "SPA":45, "SPD":45, "SPE":40, 
+                            "Move1":self.moves["roc-boulet"], "Move2":self.moves["seisme"],
+                            "Move3":self.moves["megacorne"], "Move4":self.moves["danse lames"]},
 
             "tauros":       {"Nom":"Tauros", "Type1":self.types["normal"], "Type2":None, 
                             "PV":75, "ATK":100, "DEF":95, "SPA":40, "SPD":70, "SPE":110, 
@@ -131,6 +151,7 @@ class PokemonFactory() :
         }
 
 
+        
     def initTypeTable(self):
         
         self.types["normal"].setWeaknesses([self.types["combat"]])
