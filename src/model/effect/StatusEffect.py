@@ -29,8 +29,8 @@ class StatusEffect():
         if(randint(0,100)<=self.probability):
             if(pokemon.getStatus() == None):
 
-                if(type(self.status) == ParalysisStatus and pokemon.canParalyse()
-                or type(self.status) == PoisonStatus and pokemon.canPoison()):
+                if(type(self.status) == ParalysisStatus and not pokemon.canParalyse()
+                or type(self.status) == PoisonStatus and not pokemon.canPoison()):
                     return False
                     
                 pokemon.setStatus(deepcopy(self.status))
