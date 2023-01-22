@@ -1,22 +1,59 @@
 # Pokemon Battle System
 
+*Projet de Baptiste GOSSELET*.
+
 ## Présentation du Projet
 
-Projet de Baptiste GOSSELET.
+L'idée de ce projet est de réaliser une reproduction simplifiée du système de combat des jeux Pokémon à la façon de [**Pokémon Showdown**](https://pokemonshowdown.com/).
 
-L'idée de ce projet est de réaliser une reproduction simplifiée du système de combat des jeux Pokémon. Ce programme s'inspire donc du simulateur **Pokémon Showdown**.
+Le jeu propose à deux dresseurs (dont l'un peut être contrôlé par l'ordinateur) de choisir trois Pokémon pour combattre. Le joueur parvenant à mettre K.O. l'équipe de son adversaire gagne la partie. 
 
-![GB](https://i.ytimg.com/vi/p9B5IyC0yfI/hqdefault.jpg)
-![SD](https://lh3.googleusercontent.com/nNVM-eEpuxenHf5OlCeuOINr-f7Gpg0jebk1He6liYO73bZ4thAYE8HfmDuhcCI7jWsQd3h80XZKBLb4heMYQxQynA=w640-h400-e365-rj-sc0x00ffffff)
+### Captures d'écran
 
-## Adaptation du système 
+![capture_1](./img/screenshots/capture_1.png)
+![capture_2](./img/screenshots/capture_2.png)
 
-Ce système de combat étant très complet, il est nécessaire de simplifier plusieurs mécaniques pour rendre le développement de ce projet possible dans le cadre de cette UE. 
-Les mécaniques conservées sont les suivantes : 
-- Dresseur : équipe de 1 à 6 Pokémon
+### Executer le programme
+
+Pour lancer ce jeu, il faut utiliser la commande `python3` avec le fichier `src/main.py` depuis le terminal :
+```bash
+python3 src/main.py
+``` 
+
+## Mécaniques implémentéss
+
+- Les Pokémon possèdent 4 attaques, celles-ci ont une puissance et une précision
+- L'échange : il est possible de retirer le Pokémon présent sur le terrain pour en amener un autre
+- Chaque Pokémon dispose de statistiques uniques correspondantes à l'attaque ou la défense de celui-ci
+- Les 18 types de Pokémon (feu, eau, etc.) sont implémentés avec leurs faiblesses et leurs resistances
+- La vitesse du Pokémon, et la priorité des attaques sont prises en compte pour déterminer l'ordre des actions
+- Certaines attaques ont des effets secondaires : comme une modification de statistique, un soin ou des dégâts de recul
+- Les statuts sont implémentés : la brûlure (inflige de petits dégâts chaque tour divise l'attaque par 2), la gelûre (même chose avec l'attaque spéciale), la paralysie empêchant d'attaquer ou encore le poison qui inflige des dégâts croissants
+
+
+## Pokémon disponibles
+
+Les Pokémons sont générés par le programme directement avec leurs attaques prédéfinies. Les Pokémon disponibles sont les suivants : 
+- Alakazam
+- Arbok
+- Crustabri
+- Dracaufeu
+- Ectoplasma
+- Electhor
+- Flagadoss
+- Grolem
+- Leveinard
+- Leviator
+- Lippoutou
+- Noadkoko
+- Rhinoferos
+- Ronflex
+- Staross
+- Tauros 
+- Voltali
+
+
+
+Les Pokémons disponibles
+
 - Liste des Pokémon : https://www.smogon.com/dex/rb/formats/ou/
-- Pokémon : base stat (pas d'EV/IV, pas de Spé) + un seul type + 2 capacités prédéfinies 
-- Capacité : puissance + précision + type + effet secondaire + priorité de l'attaque (pas de catégorie physique/spécial)
-- Type : les 15 premiers types 
-- Statuts : Poison, Sommeil, Paralysie
-- Action : Attaquer ou Changer
