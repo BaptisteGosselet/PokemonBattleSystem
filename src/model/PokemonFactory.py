@@ -1,6 +1,7 @@
 from model.Move import Move
 from model.Pokemon import Pokemon
 from model.TypePkmn import TypePkmn
+from model.effect.HealAndRecoilEffect import HealAndRecoilEffect
 from model.effect.SpdDropEffect import SpdDropEffect
 from model.effect.StatusEffect import StatusEffect
 from model.status.BurnStatus import BurnStatus
@@ -56,8 +57,8 @@ class PokemonFactory() :
             "bomb beurk":           Move("Bomb beurk", 90, 100, self.types["poison"], True, 0, StatusEffect(PoisonStatus(), 30)),
             "machouille":           Move("Machouille", 80, 100, self.types["tenebres"], False, 0, None), #20% def drop
             "cascade":              Move("Cascade", 80, 100, self.types["eau"], False, 0, None), #20% flinch
-            "atterissage":          Move("Atterissage", 0, 100, self.types["vol"], False, 0, None), #50% heal
-            "explosion":            Move("Explosion", 250, 100, self.types["normal"], False, 0, None), #100% recoil
+            "atterissage":          Move("Atterissage", 0, 100, self.types["vol"], False, 0, HealAndRecoilEffect(50, True)),
+            "explosion":            Move("Explosion", 250, 100, self.types["normal"], False, 0, HealAndRecoilEffect(-100, True)),
             "danse draco":          Move("Danse Draco", 0, 100, self.types["dragon"], False, 0, None), #+1 atk, +1 vit
             "enroulement":          Move("Enroulement", 0, 100, self.types["normal"], False, 0, None), #+1 atk, +1 def
             "detricanon":           Move("Détricanon", 120, 80, self.types["poison"], False, 0, StatusEffect(PoisonStatus(), 30)), 

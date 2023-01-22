@@ -113,9 +113,10 @@ class PokemonLayout(QVBoxLayout):
         """
         Refresh pokemon's datas such as his HP or status
         """
-        self.health_bar.setValue(self.pokemon.getPourcentageHP())
-        
-        if(self.pokemon.getStatus() != None):
-            self.name.setText("{} ({})".format(self.pokemon.getName(),self.pokemon.getStatus().getAbbreviation()))
-        else:
-            self.name.setText(self.pokemon.getName())
+        if(self.pokemon != None):
+            self.health_bar.setValue(self.pokemon.getPourcentageHP())
+            
+            if(self.pokemon.getStatus() != None):
+                self.name.setText("{} ({})".format(self.pokemon.getName(),self.pokemon.getStatus().getAbbreviation()))
+            else:
+                self.name.setText(self.pokemon.getName())

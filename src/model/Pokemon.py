@@ -14,7 +14,7 @@ class Pokemon :
         self.type1 = type1
         self.type2 = type2
         
-        self.MAX_HP = 2*hp+100+10
+        self.MAX_HP = 2*hp+110
         self.current_HP = self.MAX_HP
         self.atkStat = atkStat
         self.defStat = defStat
@@ -141,6 +141,12 @@ class Pokemon :
         self.spaModif = 0
         self.spdModif = 0
         self.speModif = 0
+
+    def heal(self, pv)->None:
+        if(not self.isKo):
+            self.current_HP += pv
+            if(self.current_HP > self.MAX_HP):
+                self.current_HP = self.MAX_HP
 
     def applyDamage(self, damage)->None:
         """
