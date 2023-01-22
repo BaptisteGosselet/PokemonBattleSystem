@@ -1,4 +1,6 @@
 from random import randint
+from model.status.ParalysisStatus import ParalysisStatus
+from model.status.PoisonStatus import PoisonStatus
 from model.status.Status import Status
 from model.Pokemon import Pokemon
 
@@ -25,8 +27,14 @@ class StatusEffect():
         """
         if(randint(0,100)<=self.probability):
             if(pokemon.getStatus() == None):
-                pokemon.setStatus(self.status)
-                return True
+
+                if(type(self.status) == ParalysisStatus and pokemon.canParalyse()
+                or type(self.status) == PoisonStatus and pokemon.canPoison()):
+
+                    pokemon.setStatus(self.status)
+                    return True
+            
+            
             else:
                 return False
         return False

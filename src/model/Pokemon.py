@@ -156,3 +156,27 @@ class Pokemon :
         if(self.current_HP < 0):
             self.current_HP = 0
             self.isKo = True
+
+    def canParalyse(self)->bool:
+        """
+        Check if the pokemon can be paralysed (electrik type pokemon can't be paralysed)
+        @return if the status is possible on this pokemon
+        """
+        if(self.type1.getName() == "Electrik"):
+            return False
+        elif(self.type2 != None):
+            if(self.type2.getName() == "Electrik"):
+                return False
+        return True
+
+    def canPoison(self)->bool:
+        """
+        Check if the pokemon can be poisonned (poison type pokemon can't be poisonned)
+        @return if the status is possible on this pokemon
+        """
+        if(self.type1.getName() == "Poison"):
+            return False
+        elif(self.type2 != None):
+            if(self.type2.getName() == "Poison"):
+                return False
+        return True
