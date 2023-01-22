@@ -2,6 +2,7 @@ from math import ceil
 from model.move.Move import Move
 from model.TypePkmn import TypePkmn
 from model.status.BurnStatus import BurnStatus
+from model.status.FreezeStatus import FreezeStatus
 from model.status.ParalysisStatus import ParalysisStatus
 from model.status.Status import Status
 
@@ -70,6 +71,8 @@ class Pokemon :
         return int(self.defStat + (self.defModif*25/100))
 
     def getSpaStat(self)->int:
+        if(type(self.status)==FreezeStatus):
+            return int(self.spaStat // 2 + (self.spaModif*25/100))
         return int(self.spaStat + (self.spaModif*25/100))
 
     def getSpdStat(self)->int:

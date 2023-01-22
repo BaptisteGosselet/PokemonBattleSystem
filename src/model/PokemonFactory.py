@@ -8,6 +8,7 @@ from model.move.MultipleMove import MultipleMove
 from model.status.BurnStatus import BurnStatus
 from model.status.ConfuseStatus import ConfuseStatus
 from model.status.FlinchStatus import FlinchStatus
+from model.status.FreezeStatus import FreezeStatus
 from model.status.ParalysisStatus import ParalysisStatus
 from model.status.PoisonStatus import PoisonStatus
 from model.status.RechargeStatus import RechargeStatus
@@ -73,7 +74,7 @@ class PokemonFactory() :
             "tempete verte":        Move("Tempête Verte", 130, 90, self.types["plante"], True, 0, StatChangeEffect([0,0,-1,0,0], 100, True)),
             "detricanon":           Move("Détricanon", 120, 80, self.types["poison"], False, 0, StatusEffect(PoisonStatus(), 30)), 
             "canicule":             Move("Canicule", 95, 90, self.types["feu"], True, 0, StatusEffect(BurnStatus(), 10)), 
-            "blizzard":             Move("Blizzard", 110, 75, self.types["glace"], True, 0, StatusEffect(BurnStatus(), 10)), #GEL
+            "blizzard":             Move("Blizzard", 110, 75, self.types["glace"], True, 0, StatusEffect(FreezeStatus(), 10)),
             "coup bas":             Move("Coup Bas", 70, 100, self.types["tenebres"], False, 1, None), 
             "double pied":          Move("Double Pied", 60, 100, self.types["combat"], False, 0, None), 
             "pc glace":             Move("Puissance Cachée", 60, 100, self.types["glace"], True, 0, None), 
@@ -84,7 +85,7 @@ class PokemonFactory() :
             "stalactite" :          MultipleMove("Stalactite", 25, 100, self.types["glace"], False, 0, None),
             "tonnerre" :            Move("Tonnerre", 90, 100, self.types["electrik"], True, 0, StatusEffect(ParalysisStatus(), 10)),
             "ebulition" :           Move("Ebulition", 90, 100, self.types["eau"], True, 0, StatusEffect(BurnStatus(), 30)),
-            "laser glace" :         Move("Laser Glace", 90, 100, self.types["glace"], True, 0, StatusEffect(ParalysisStatus(), 10)), #GEL 
+            "laser glace" :         Move("Laser Glace", 90, 100, self.types["glace"], True, 0, StatusEffect(FreezeStatus(), 10)), 
             "vent violent":         Move("Vent Violent", 110, 70, self.types["vol"], True, 0, StatusEffect(ConfuseStatus(), 20)) 
 
         }
