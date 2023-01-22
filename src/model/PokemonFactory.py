@@ -5,6 +5,7 @@ from model.effect.HealAndRecoilEffect import HealAndRecoilEffect
 from model.effect.StatChangeEffect import StatChangeEffect
 from model.effect.StatusEffect import StatusEffect
 from model.status.BurnStatus import BurnStatus
+from model.status.ConfuseStatus import ConfuseStatus
 from model.status.FlinchStatus import FlinchStatus
 from model.status.ParalysisStatus import ParalysisStatus
 from model.status.PoisonStatus import PoisonStatus
@@ -57,14 +58,14 @@ class PokemonFactory() :
             "psykoud'boul":         Move("Psykoud'boul", 80, 90, self.types["psy"], False, 0, StatusEffect(FlinchStatus(), 20)), 
             "bomb beurk":           Move("Bomb beurk", 90, 100, self.types["poison"], True, 0, StatusEffect(PoisonStatus(), 30)),
             "machouille":           Move("Machouille", 80, 100, self.types["tenebres"], False, 0, StatChangeEffect([0,-1,0,0,0], 20)),
-            "cascade":              Move("Cascade", 80, 100, self.types["eau"], False, 0, StatusEffect(FlinchStatus(), 100)), #20% flinch
+            "cascade":              Move("Cascade", 80, 100, self.types["eau"], False, 0, StatusEffect(FlinchStatus(), 20)),
             "atterissage":          Move("Atterissage", 0, 100, self.types["vol"], False, 0, HealAndRecoilEffect(50, True)),
             "explosion":            Move("Explosion", 250, 100, self.types["normal"], False, 0, HealAndRecoilEffect(-100, True)),
             "danse draco":          Move("Danse Draco", 0, 100, self.types["dragon"], False, 0, StatChangeEffect([1,0,0,0,1], 100, True)),
             "enroulement":          Move("Enroulement", 0, 100, self.types["normal"], False, 0, StatChangeEffect([1,1,0,0,0], 100, True)),
             "detricanon":           Move("Détricanon", 120, 80, self.types["poison"], False, 0, StatusEffect(PoisonStatus(), 30)), 
             "coup bas":             Move("Coup Bas", 70, 100, self.types["tenebres"], False, 1, None), 
-            "vent violent":         Move("Vent Violent", 110, 70, self.types["vol"], True, 0, None) #30% confus 
+            "vent violent":         Move("Vent Violent", 110, 70, self.types["vol"], True, 0, StatusEffect(ConfuseStatus(), 20)) 
 
         }
 
