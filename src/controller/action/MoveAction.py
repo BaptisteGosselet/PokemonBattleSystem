@@ -80,7 +80,7 @@ class MoveAction():
 
         myMovePrio = self.getMove().getPriority()
         oppMovePrio = action.getMove().getPriority()
-        
+
         if(myMovePrio > oppMovePrio):
             return True
         elif(myMovePrio < oppMovePrio):

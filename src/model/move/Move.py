@@ -3,7 +3,7 @@ from model.TypePkmn import TypePkmn
 
 class Move():
 
-    def __init__(self, name, power, accuracy, type, isSpecial, priority, sndEffect):
+    def __init__(self, name, power, accuracy, type, isSpecial:bool, priority:int, sndEffect):
 
         self.name = name
         self.power = power
