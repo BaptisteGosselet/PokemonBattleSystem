@@ -1,3 +1,4 @@
+from copy import deepcopy
 from random import randint
 from model.status.ParalysisStatus import ParalysisStatus
 from model.status.PoisonStatus import PoisonStatus
@@ -32,7 +33,7 @@ class StatusEffect():
                 or type(self.status) == PoisonStatus and pokemon.canPoison()):
                     return False
                     
-                pokemon.setStatus(self.status)
+                pokemon.setStatus(deepcopy(self.status))
                 return True
             
             

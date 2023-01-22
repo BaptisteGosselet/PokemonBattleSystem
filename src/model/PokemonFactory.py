@@ -151,6 +151,11 @@ class PokemonFactory() :
         }
 
 
+        # electhor, Discharge/Volt Switch - Heat Wave - HP Ice- Roost
+        # lippoutou, Blizzard - Psyko - Lovely Kiss - Rest
+        # noadkoko, Giga Drain - Psyko - HP Fire - Explosion
+        # rhinoferos, Rock Blast - Seisme - Megahorn - Sword Dance
+        # ronflex, Curse - Body Slam - Earthquake - Rest
         
     def initTypeTable(self):
         
