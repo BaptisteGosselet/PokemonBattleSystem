@@ -1,5 +1,5 @@
 from math import ceil
-from model.Move import Move
+from model.move.Move import Move
 from model.TypePkmn import TypePkmn
 from model.status.BurnStatus import BurnStatus
 from model.status.ParalysisStatus import ParalysisStatus

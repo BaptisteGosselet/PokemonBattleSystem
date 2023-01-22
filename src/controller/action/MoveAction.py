@@ -1,5 +1,5 @@
 import random
-from model.Move import Move
+from model.move.Move import Move
 from controller.action.SwitchAction import SwitchAction
 from model.Pokemon import Pokemon
 

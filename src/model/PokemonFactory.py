@@ -1,9 +1,10 @@
-from model.Move import Move
+from model.move.Move import Move
 from model.Pokemon import Pokemon
 from model.TypePkmn import TypePkmn
 from model.effect.HealAndRecoilEffect import HealAndRecoilEffect
 from model.effect.StatChangeEffect import StatChangeEffect
 from model.effect.StatusEffect import StatusEffect
+from model.move.MultipleMove import MultipleMove
 from model.status.BurnStatus import BurnStatus
 from model.status.ConfuseStatus import ConfuseStatus
 from model.status.FlinchStatus import FlinchStatus
@@ -65,6 +66,8 @@ class PokemonFactory() :
             "enroulement":          Move("Enroulement", 0, 100, self.types["normal"], False, 0, StatChangeEffect([1,1,0,0,0], 100, True)),
             "detricanon":           Move("Détricanon", 120, 80, self.types["poison"], False, 0, StatusEffect(PoisonStatus(), 30)), 
             "coup bas":             Move("Coup Bas", 70, 100, self.types["tenebres"], False, 1, None), 
+            "exuviation" :          Move("Exuviation", 0, 100, self.types["normal"], False, 0, StatChangeEffect([1,-1,1,-1,1], 100, True)),
+            "stalactite" :          MultipleMove("Stalactite", 25, 100, self.types["glace"], False, 0, None),
             "vent violent":         Move("Vent Violent", 110, 70, self.types["vol"], True, 0, StatusEffect(ConfuseStatus(), 20)) 
 
         }
@@ -101,12 +104,18 @@ class PokemonFactory() :
                             "Move1":self.moves["enroulement"], "Move2":self.moves["detricanon"],
                             "Move3":self.moves["seisme"], "Move4":self.moves["coup bas"]},
 
+            "crustabri":       {"Nom":"Crustabri", "Type1":self.types["eau"], "Type2":self.types["glace"], 
+                            "PV":50, "ATK":95, "DEF":180, "SPA":85, "SPD":45, "SPE":70, 
+                            "Move1":self.moves["exuviation"], "Move2":self.moves["stalactite"],
+                            "Move3":self.moves["hydrocanon"], "Move4":self.moves["explosion"]},
+
+
             "tauros":       {"Nom":"Tauros", "Type1":self.types["normal"], "Type2":None, 
                             "PV":75, "ATK":100, "DEF":95, "SPA":40, "SPD":70, "SPE":110, 
                             "Move1":self.moves["plaquage"], "Move2":self.moves["seisme"],
                             "Move3":self.moves["deflagration"], "Move4":self.moves["psykoud'boul"]}
         }
-        
+
 
     def initTypeTable(self):
         
