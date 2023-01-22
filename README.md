@@ -20,7 +20,7 @@ Pour lancer ce jeu, il faut utiliser la commande `python3` avec le fichier `src/
 python3 src/main.py
 ``` 
 
-## Mécaniques implémentéss
+## Mécaniques implémentées
 
 - Les Pokémon possèdent 4 attaques, celles-ci ont une puissance et une précision
 - L'échange : il est possible de retirer le Pokémon présent sur le terrain pour en amener un autre
