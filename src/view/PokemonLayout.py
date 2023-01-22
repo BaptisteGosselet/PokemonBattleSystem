@@ -69,6 +69,7 @@ class PokemonLayout(QVBoxLayout):
         pix = pix.scaled(150, 150, QtCore.Qt.KeepAspectRatio)
         self.sprite.setPixmap(pix)
 
+
         self.refresh()
 
         self.view.displayText()
