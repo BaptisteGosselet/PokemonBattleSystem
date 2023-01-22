@@ -237,7 +237,7 @@ class MainWindow(QWidget):
         """
         A method executed by a button press, it calls the sendCommand method with the corresponding parameter
         """
-        self.sendCommand("move_2")
+        self.sendCommand("move_3")
 
     def onclick_moveButton_4(self) -> None :
         """
