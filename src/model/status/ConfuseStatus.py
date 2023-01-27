@@ -31,4 +31,4 @@ class ConfuseStatus(Status):
         self.turn += 1
 
     def getStatusMessage(self) -> str:
-        return "Le Pokémon s'endort."
+        return "Le Pokémon devient confus."
