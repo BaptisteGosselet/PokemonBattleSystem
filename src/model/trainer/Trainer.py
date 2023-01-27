@@ -54,8 +54,6 @@ class Trainer() :
             self.action = SwitchAction(self, 0)
         elif(self.actionCommand == "switch_2"):
             self.action = SwitchAction(self, 1)
-        else:
-            print("Erreur")
 
     def getAction(self):
         return self.action

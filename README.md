@@ -31,29 +31,12 @@ python3 src/main.py
 - Les statuts sont implémentés : la brûlure (inflige de petits dégâts chaque tour divise l'attaque par 2), la gelûre (même chose avec l'attaque spéciale), la paralysie empêchant d'attaquer ou encore le poison qui inflige des dégâts croissants
 
 
-## Pokémon disponibles
+## A faire
 
-Les Pokémons sont générés par le programme directement avec leurs attaques prédéfinies. Les Pokémon disponibles sont les suivants : 
-- Alakazam
-- Arbok
-- Crustabri
-- Dracaufeu
-- Ectoplasma
-- Electhor
-- Flagadoss
-- Grolem
-- Leveinard
-- Leviator
-- Lippoutou
-- Noadkoko
-- Rhinoferos
-- Ronflex
-- Staross
-- Tauros 
-- Voltali
+Joueur Ordinateur
+Affichage des attaques
+Affichage des pokemon
+Affichage du choix des pokemons
+Bug - 0 PV quand non touché
+Bug - stats bougent pas
 
-
-
-Les Pokémons disponibles
-
-- Liste des Pokémon : https://www.smogon.com/dex/rb/formats/ou/

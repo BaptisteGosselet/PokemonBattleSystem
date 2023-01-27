@@ -108,7 +108,7 @@ class PokemonLayout(QVBoxLayout):
         sprite_filename += self.pokemon.getName().lower()
         sprite_filename += ".png"
         return sprite_filename
-
+        
     def refresh(self) -> None:
         """
         Refresh pokemon's datas such as his HP or status
