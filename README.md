@@ -36,6 +36,8 @@ python3 src/main.py
 Joueur Ordinateur
 Affichage des attaques
 Affichage des pokemon
+Affichage du nombre de pokémon
+z move ? teracristal ?
 Affichage du choix des pokemons
 Bug - 0 PV quand non touché
 Bug - stats bougent pas

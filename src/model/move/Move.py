@@ -39,11 +39,20 @@ class Move():
         """
         @return the description to display on hover the move button
         """
+        categorie = "Statut"
+
+        if(self.power == 0):
+            return "Type : {}\n{}".format(self.type.getName(), categorie)
+
+
         if(self.isSpecial):
-            return "Puissance : {}\nPrécision : {}\nSpécial".format(self.power, self.accuracy)
-        elif(self.power == 0):
-            return "Précision : {}\nStatut".format(self.accuracy)
+            categorie = "Special"
         else:
-            return "Puissance : {}\nPrécision : {}\nPhysique".format(self.power, self.accuracy)
+            categorie = "Physique"
+        
+        return "Puissance : {}\tType : {}\nPrécision : {}\t{}".format(self.power, self.type.getName(), self.accuracy, categorie)
+
+
+
 
         
