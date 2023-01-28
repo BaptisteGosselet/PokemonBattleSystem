@@ -47,6 +47,9 @@ class TrainerGeneratorPopup(QDialog):
 
         self.setLayout(globalLayout)
 
+        self.onClick_rand1()
+        self.onClick_rand2()
+
         self.exec()
 
     def onClick_rand1(self):
