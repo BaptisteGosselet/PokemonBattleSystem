@@ -156,6 +156,7 @@ class MainWindow(QWidget):
                         pkmFactory.generatePokemon(combos_J2[1].currentText()), 
                         pkmFactory.generatePokemon(combos_J2[2].currentText()), 
                     ], self.opponentPokemon)
+            trainer_2.setOpponent(trainer_1)
         else : 
             trainer_2 = Trainer(saisieNom_J2.toPlainText(), [
                         pkmFactory.generatePokemon(combos_J2[0].currentText()), 
