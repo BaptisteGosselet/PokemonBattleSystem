@@ -22,6 +22,7 @@ class MoveAction():
         self.superEfficace = False
 
         self.failMessage = ""
+        self.niveau = 50
 
     def getMove(self) -> Move:
         return self.move
@@ -116,7 +117,7 @@ class MoveAction():
                 if(self.move.getPower() != 0):
 
                     #Dégât au niveau 100
-                    self.damage = 42 
+                    self.damage = 0.4 * self.niveau + 2 
 
                     #Puissance multiplié par la stat d'Atk/Def ou de Spa/Spd
                     moveIsSpecial = self.move.getIsSpecial()
@@ -183,6 +184,45 @@ class MoveAction():
 
 
         self.myPokemon.applyStatus()
+        
+    def simulate(self, opponentPokemon:Pokemon) -> int:
+        """
+        Execute a simulation of this action : calculate damage
+        @param opponentPokemon, the target of the move
+        @return estimed damage
+        """
+
+        estimedDamage = 0
+        if(self.move.getPower() != 0):
+
+            estimedDamage = 0.4 * self.niveau + 2 
+
+            #Puissance multiplié par la stat d'Atk/Def ou de Spa/Spd
+            moveIsSpecial = self.move.getIsSpecial()
+
+            if (moveIsSpecial):
+                estimedDamage *= self.move.getPower() * self.myPokemon.getSpaStat() / opponentPokemon.getSpdStat()
+            else:
+                estimedDamage *= self.move.getPower() * self.myPokemon.getAtkStat() / opponentPokemon.getDefStat()
+
+            estimedDamage = estimedDamage / 50 + 2
+     
+            #STAB
+            if(self.move.getType() == self.myPokemon.getType1() or self.move.getType() == self.myPokemon.getType2()):
+                estimedDamage *= 1.5
+
+            #Faiblesse et resistance de type
+            multType = opponentPokemon.getType1().getMultiplicator(self.move.getType())
+            if(opponentPokemon.getType2() != None):
+                multType *= opponentPokemon.getType2().getMultiplicator(self.move.getType())
+
+            estimedDamage *= multType
+            
+            estimedDamage = int(estimedDamage)
+            if(estimedDamage <= 0 and not self.immunite):
+                estimedDamage = 1
+
+        return estimedDamage
         
         
         
