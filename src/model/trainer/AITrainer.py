@@ -15,7 +15,50 @@ class AITrainer(Trainer) :
         Choose and generate an action to play
         """
 
-        print("AITRAINER OK :",self.opponent.getName())
+        substitute = self.opponent.getCurrentPokemon().generateSubstitute()
+        print("AITRAINER OK :",substitute.getName())
+
+        my_actions = [
+            MoveAction(self.currentPokemon, self.currentPokemon.getMove1()),
+            MoveAction(self.currentPokemon, self.currentPokemon.getMove2()),
+            MoveAction(self.currentPokemon, self.currentPokemon.getMove3()),
+            MoveAction(self.currentPokemon, self.currentPokemon.getMove4()),
+        ]
+
+        betterAction = None
+        statusActions = []
+
+        maxDamage = 0
+        for a in my_actions:
+            if(a.getMove().getPower()==0):
+                statusActions.append(a)
+            else:
+                simulation = a.simulate(self.opponent.getCurrentPokemon())
+                if(simulation > maxDamage):
+                    maxDamage = simulation
+                    betterAction = a
+
+        print(betterAction.getMove().getName())
+        
+
+
+        #Est-ce que je tombe K.O. à la prochaine pire attaque ?
+            # Je suis full PV ?
+                #Switch sur celui qui prends le moins de dégats
+                #/(je ne suis pas full pv)
+            #/ Je suis celui qui fait le plus de dégat par rapport à l'opposant ?
+                # Attaquer avec la plus puissante attaque
+                
+                #Est-ce que je suis celui qui fait le plus de dégat de mon équipe ?
+                    # j'attaque
+
+                    # Est-ce que le meilleur survit au switch ?
+                        #switch
+
+                        #j'attaque
+
+
+       
 
         if(self.currentPokemon.getIsKo()):
             for i in range(len(self.team)):
