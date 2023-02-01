@@ -59,6 +59,9 @@ class Pokemon :
     def getPourcentageHP(self)->int:
         return ceil((self.current_HP / self.MAX_HP) * 100)
 
+    def getCurrentHP(self)->int:
+        return self.current_HP
+
     def getMaxHP(self)->int:
         return self.MAX_HP
 

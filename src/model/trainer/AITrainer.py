@@ -1,6 +1,8 @@
 from controller.action.MoveAction import MoveAction
 from controller.action.SwitchAction import SwitchAction
+from model.Pokemon import Pokemon
 from model.trainer.Trainer import Trainer
+from random import choice
 
 class AITrainer(Trainer) :
 
@@ -15,31 +17,35 @@ class AITrainer(Trainer) :
         Choose and generate an action to play
         """
 
-        substitute = self.opponent.getCurrentPokemon().generateSubstitute()
-        print("AITRAINER OK :",substitute.getName())
-
-        my_actions = [
+        my_moveActions = [
             MoveAction(self.currentPokemon, self.currentPokemon.getMove1()),
             MoveAction(self.currentPokemon, self.currentPokemon.getMove2()),
             MoveAction(self.currentPokemon, self.currentPokemon.getMove3()),
-            MoveAction(self.currentPokemon, self.currentPokemon.getMove4()),
+            MoveAction(self.currentPokemon, self.currentPokemon.getMove4())
         ]
 
-        betterAction = None
-        statusActions = []
+        opp_moveActions = [
+            MoveAction(self.currentPokemon, self.opponent.getCurrentPokemon().getMove1()),
+            MoveAction(self.currentPokemon, self.opponent.getCurrentPokemon().getMove2()),
+            MoveAction(self.currentPokemon, self.opponent.getCurrentPokemon().getMove3()),
+            MoveAction(self.currentPokemon, self.opponent.getCurrentPokemon().getMove4())
+        ]
 
-        maxDamage = 0
-        for a in my_actions:
-            if(a.getMove().getPower()==0):
-                statusActions.append(a)
-            else:
-                simulation = a.simulate(self.opponent.getCurrentPokemon())
-                if(simulation > maxDamage):
-                    maxDamage = simulation
-                    betterAction = a
-
-        print(betterAction.getMove().getName())
+        myBestMove = self.findBestMove(my_moveActions, self.opponent.getCurrentPokemon())
+        oppBestMove = self.findBestMove(opp_moveActions, self.currentPokemon)
         
+        myDamage = oppBestMove.simulate(self.currentPokemon)
+        oppDamage = myBestMove.simulate(self.opponent.getCurrentPokemon())
+
+        if(myDamage >= self.currentPokemon.getCurrentHP()):
+            #Je K.O.
+            if(self.currentPokemon.getPourcentageHP() == 100):
+                pass
+                #Je full pv
+            else:
+                pass
+                #j'ai déjà pris des dommages
+
 
 
         #Est-ce que je tombe K.O. à la prochaine pire attaque ?
@@ -70,3 +76,29 @@ class AITrainer(Trainer) :
         
     def getIsAI(self):
         return True
+
+    def findBestMove(self, actions, target:Pokemon):
+        """
+        @param a array of the 4 MoveAction of the launcher
+        @return the best move to do 
+        """
+        betterAction = None
+        statusActions = []
+
+        maxDamage = 0
+        for a in actions:
+            if(a.getMove().getPower()==0):
+                statusActions.append(a)
+            else:
+                simulation = a.simulate(target)
+                if(simulation > maxDamage):
+                    maxDamage = simulation
+                    betterAction = a
+
+        if((len(statusActions) > 1) and
+            target.getCurrentHP()/2 > maxDamage and target.getStatus() == None
+            or betterAction == None): 
+            
+            betterAction = choice(statusActions)
+
+        return betterAction
