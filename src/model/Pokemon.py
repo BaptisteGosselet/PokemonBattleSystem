@@ -168,18 +168,3 @@ class Pokemon :
             if(self.type2.getName() == "Poison"):
                 return False
         return True
-
-    def generateSubstitute(self):
-        """
-        Generate an instance from this Pokemon to allow the AITrainer to make a choice
-        @return a substitute of this instance
-        """
-        sub = Pokemon(
-            self.name, self.type1, self.type2, 
-            self.current_HP, self.getAtkStat(), self.getDefStat(), 
-            self.getSpaStat(), self.getSpdStat(), self.getSpeStat(), 
-            self.move1, self.move2, self.move3, self.move4)
-        
-        sub.setStatus(self.status)
-
-        return sub
