@@ -354,7 +354,7 @@ class PokemonFactory() :
         self.types["normal"].setWeaknesses([self.types["combat"]])
         self.types["normal"].setImmunities([self.types["spectre"]])        
         self.types["feu"].setWeaknesses([self.types["eau"],self.types["roche"],self.types["sol"]])
-        self.types["feu"].setResistances([self.types["feu"],self.types["insecte"],self.types["plante"]])
+        self.types["feu"].setResistances([self.types["feu"],self.types["insecte"],self.types["plante"],self.types["glace"],self.types["acier"],self.types["fee"]])
         self.types["plante"].setWeaknesses([self.types["feu"],self.types["glace"],self.types["insecte"],self.types["poison"],self.types["vol"]])
         self.types["plante"].setResistances([self.types["eau"],self.types["electrik"],self.types["plante"],self.types["sol"]])
         self.types["eau"].setWeaknesses([self.types["electrik"],self.types["plante"]])
