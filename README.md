@@ -33,12 +33,18 @@ python3 src/main.py
 
 ## A faire
 
-Joueur Ordinateur
-Affichage des attaques
-Affichage des pokemon
-Affichage du nombre de pokémon
-z move ? teracristal ?
-Affichage du choix des pokemons
-Bug - 0 PV quand non touché
-Bug - stats bougent pas
+### Bug
+- Bug - 0 PV quand non touché
+- Bug Fermer fenêtre
+- Bug - stats bougent pas
 
+### A implémenter
+- Joueur Ordinateur
+- Affichage des pokemon (current)
+- Affichage des pokemon (team)
+- Affichage du nombre de pokémon du trainer
+- Mécanique Bonus, z move ? teracristal ?
+
+### Autres
+- Documentation 
+- Test unitaire
