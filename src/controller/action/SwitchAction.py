@@ -38,3 +38,6 @@ class SwitchAction():
                 self.trainer.getCurrentPokemon().getStatus().applyStatus(self.trainer.getCurrentPokemon())
         else:
             self.trainer.switchPokemon(self.indexTeam)
+
+    def getCommingPokemon(self):
+        self.trainer.getTeam()[self.indexTeam]

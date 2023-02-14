@@ -46,47 +46,15 @@ class AITrainer(Trainer) :
         myBestMove = self.findBestMove(my_moveActions, self.opponent.getCurrentPokemon())
         oppBestMove = self.findBestMove(opp_moveActions, self.currentPokemon)
         
-        myDamage = oppBestMove.simulate(self.currentPokemon)
-        oppDamage = myBestMove.simulate(self.opponent.getCurrentPokemon())
+        myDamage = myBestMove.simulate(self.opponent.getCurrentPokemon())
+        oppDamage = oppBestMove.simulate(self.currentPokemon)
 
-        if(myDamage >= self.currentPokemon.getCurrentHP()):
-            
-            #L'attaque me mets K.O.
-            if(self.currentPokemon.getPourcentageHP() > 50):
-                return self.findBestSwitch()
-            else:
-                if(self.currentPokemon.getSpe() >= self.opponent.getCurrentPokemon().getSpe()):
-                    return self.findBestMove(my_moveActions, self.opponent.getCurrentPokemon())
-                else:
-                    return self.findBestMove(self.filterPriorityMoves(my_moveActions), self.opponent.getCurrentPokemon())
+        #L'attaque me mets K.O et j'ai encore beaucoup de PV.
+        if(myDamage >= self.currentPokemon.getCurrentHP() and self.currentPokemon.getPourcentageHP() > 50):
+            return self.findBestSwitch()
 
-        else:
-
-            #L'attaque ne me mets pas K.O.
-            if(myDamage >= oppDamage):
-                return self.findBestMove(my_moveActions, self.opponent.getCurrentPokemon())
-            else:
-
-               #Est-ce que je suis celui qui fait le plus de dégat de ma team ?
-                # Oui -> attaque
-                
-                # Non -> Est-ce qu'il survit au switch ?
-                    #Oui -> Switch
-                    #non -> attaque
-
-                
-                #voir si je suis celui qui fait le plus de dég de ma team
-            
-
-                #non, il y en a un autre 
-                #s'il survit au switch -> switch 
-                #sinon j'attaque
-                
-                pass
-
-
-
-        return MoveAction(self.currentPokemon, self.currentPokemon.getMove1())
+        print("atk")
+        return self.findBestMove(my_moveActions, self.opponent.getCurrentPokemon())
 
         
     def getIsAI(self):
@@ -127,7 +95,7 @@ class AITrainer(Trainer) :
         #Check if the switch is possible
         everyoneIsKo = True
         for pkm in self.team:
-            everyoneIsKo = everyoneIsKo and pkm.isKo()
+            everyoneIsKo = everyoneIsKo and pkm.getIsKo()
 
         if(everyoneIsKo):
             return self.findBestMove()
@@ -141,8 +109,8 @@ class AITrainer(Trainer) :
 
         total_worseDamage = 0
         index_pkm = None
-        for p in len(self.team):
-            if(self.team[p].isKo()):
+        for p in range(len(self.team)):
+            if(self.team[p].getIsKo()):
                 continue
             else:
 
@@ -176,26 +144,3 @@ class AITrainer(Trainer) :
             return prios
         else:
             return moveActions
-
-    def getPkmIndexOfBestMove(self):
-        """
-        TODO
-        Find the index of the pokemon with the best move in the team (and the current pokemon)
-        @return the index of the pokemon on the team (or -1 if it's the current pokemon)
-        """
-
-        teamCopy = []
-        teamCopy.append(self.currentPokemon)
-        teamCopy.append(self.team)
-
-        for pkmIndex in teamCopy:
-                
-            moveActions = [
-                MoveAction(self.currentPokemon, self.currentPokemon.getMove1()),
-                MoveAction(self.currentPokemon, self.currentPokemon.getMove2()),
-                MoveAction(self.currentPokemon, self.currentPokemon.getMove3()),
-                MoveAction(self.currentPokemon, self.currentPokemon.getMove4())
-            ]
-            
-            bestDamage = self.findBestMove(moveActions, self.opponent.getCurrentPokemon()).simulate(self.opponent.getCurrentPokemon())
-        pass# return pkm_index -1

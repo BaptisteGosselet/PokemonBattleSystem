@@ -39,7 +39,7 @@ python3 src/main.py
 - Bug - stats bougent pas
 
 ### A implémenter
-- Joueur Ordinateur
+- Joueur Ordinateur (voir la condition qui ne se fait pas)
 - Affichage des pokemon (current)
 - Affichage des pokemon (team)
 - Affichage du nombre de pokémon du trainer
