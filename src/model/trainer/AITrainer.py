@@ -53,7 +53,6 @@ class AITrainer(Trainer) :
         if(myDamage >= self.currentPokemon.getCurrentHP() and self.currentPokemon.getPourcentageHP() > 50):
             return self.findBestSwitch()
 
-        print("atk")
         return self.findBestMove(my_moveActions, self.opponent.getCurrentPokemon())
 
         

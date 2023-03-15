@@ -80,6 +80,12 @@ class MainWindow(QWidget):
         playButton.clicked.connect(self.onClick_newGameButton)
         playButton.setMinimumSize(150,50)
         mainLayout.addWidget(playButton,1,0) 
+        
+        #Quit Button
+        playButton = QPushButton("Quitter")
+        playButton.clicked.connect(self.onClick_quitButton)
+        playButton.setMinimumSize(150,50)
+        mainLayout.addWidget(playButton,1,2) 
 
         self.setLayout(mainLayout)
 
@@ -117,6 +123,9 @@ class MainWindow(QWidget):
 
     def onClick_newGameButton(self) -> None:
         self.controller.newGame()
+
+    def onClick_quitButton(self) -> None:
+        exit()
     
     def generateTrainers(self, pkmFactory : PokemonFactory) -> list[Trainer]:
         """

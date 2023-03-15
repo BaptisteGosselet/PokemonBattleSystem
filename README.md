@@ -39,17 +39,15 @@ python3 test/mainTest.py
 ## A faire
 
 ### Bug
+- Bug - Explosion
 - Bug - 0 PV quand non touché
-- Bug Fermer fenêtre
 - Bug - stats bougent pas
 
 ### A implémenter
-- Joueur Ordinateur (voir la condition qui ne se fait pas)
 - Affichage des pokemon (current)
 - Affichage des pokemon (team)
-- Affichage du nombre de pokémon du trainer
-- Mécanique Bonus, z move ? teracristal ?
 
 ### Autres
-- Documentation 
+- Documentation
+- rapport 
 - Test unitaire
