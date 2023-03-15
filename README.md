@@ -15,10 +15,15 @@ Le jeu propose à deux dresseurs (dont l'un peut être contrôlé par l'ordinate
 
 ### Executer le programme
 
-Pour lancer ce jeu, il faut utiliser la commande `python3` avec le fichier `src/main.py` depuis le terminal :
+Pour lancer ce jeu, il faut utiliser la commande `python3` avec le fichier `src/main.py` depuis la racine du projet :
 ```bash
 python3 src/main.py
 ``` 
+
+Pour lancer les tests, il s'agit du fichier `test/mainTest.py`
+```bash
+python3 test/mainTest.py
+```
 
 ## Mécaniques implémentées
 
