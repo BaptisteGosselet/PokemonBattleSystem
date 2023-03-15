@@ -1,6 +1,8 @@
-def testPkm():
+def testPkm1():
     return False
 
+def testPkm2():
+    return True
 
 
 """
