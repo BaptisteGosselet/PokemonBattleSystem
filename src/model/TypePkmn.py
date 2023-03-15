@@ -20,6 +20,7 @@ class TypePkmn:
     def getMultiplicator(self, typ)->float:
         """
         Calculate a damage multiplicator regarding to weaknesses and resistances of this type
+        A <arg> attack on the <self> type
         """
         
         for i in self.immunities:

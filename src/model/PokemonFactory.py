@@ -411,3 +411,6 @@ class PokemonFactory() :
             data["Type1"], data["Type2"],
             data["PV"], data["ATK"], data["DEF"], data["SPA"], data["SPD"], data["SPE"],
             data["Move1"],data["Move2"],data["Move3"],data["Move4"])
+
+    def getTypes(self):
+        return self.types
