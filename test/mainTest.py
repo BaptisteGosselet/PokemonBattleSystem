@@ -1,7 +1,9 @@
 import inspect
+import sys
+sys.path.insert(1, 'src')
 
 import PokemonTest
-
+import PokemonFactoryTest
 
 class color:
 
@@ -49,7 +51,9 @@ def launch_test():
     """
     launch all tests
     """
+
     test_a_module(PokemonTest)
+    test_a_module(PokemonFactoryTest)
 
 
 
