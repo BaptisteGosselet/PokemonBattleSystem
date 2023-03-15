@@ -1,0 +1,2 @@
+def getMultiplicatorTest():
+    return False

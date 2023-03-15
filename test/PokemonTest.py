@@ -1,5 +1,3 @@
-import testUtils
-
 def getPourcentageHP_Test():
     #return ceil((self.current_HP / self.MAX_HP) * 100)
     return False
