@@ -144,7 +144,7 @@ class Pokemon :
         Apply a number of damage to the HP, if current HPs are lower to 0 then the pokemon is K.O.
         """
         self.current_HP -= damage
-        if(self.current_HP < 0):
+        if(self.current_HP <= 0):
             self.current_HP = 0
             self.isKo = True
 

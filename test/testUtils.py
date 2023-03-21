@@ -7,3 +7,7 @@ def genererTypes_sol_electrik():
     pkmFactory = PokemonFactory()
     types = pkmFactory.getTypes()
     return types["sol"], types["electrik"]
+
+def genererUnPokemon():
+    pkmFact = PokemonFactory()
+    return pkmFact.generatePokemon("pikachu")

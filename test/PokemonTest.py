@@ -1,12 +1,17 @@
+import testUtils
+
 def getPourcentageHP_Test():
-    #return ceil((self.current_HP / self.MAX_HP) * 100)
-    return False
+    poke = testUtils.genererUnPokemon()
+    maxHp = poke.getMaxHP()
+    poke.applyDamage(maxHp/2)
+    return poke.getPourcentageHP() == 50
 
 def getCurrentHP_Test():
-    return False
-
-def getMaxHP_Test():
-    return False
+    poke = testUtils.genererUnPokemon()
+    maxHp = poke.getMaxHP()
+    poke.applyDamage(30)
+    expectedHp = maxHp-30
+    return poke.getCurrentHP() == expectedHp
 
 def getAtkStat_Test():
     #quand brûlé
@@ -29,11 +34,15 @@ def modifAtk_Test():
     return False
 
 def heal_Test():
-    return False
+    poke = testUtils.genererUnPokemon()
+    poke.applyDamage(50)
+    poke.heal(30) #-20
+    return poke.getCurrentHP() == (poke.getMaxHP() - 20)
 
 def applyDamage_Test():
-    #infliger des dégats et voir si ko
-    return False
+    poke = testUtils.genererUnPokemon()
+    poke.applyDamage(poke.getMaxHP())
+    return poke.getIsKo()
 
 def canParalyse_Test():
     #type electrik
