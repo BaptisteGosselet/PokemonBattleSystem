@@ -18,6 +18,8 @@ class FlinchStatus(Status):
     def applyStatus(self, pokemon):
         if(self.flinched):
             pokemon.setStatus(None)
+        else:
+            self.flinched = True
 
     def getStatusMessage(self) -> str:
         return ""

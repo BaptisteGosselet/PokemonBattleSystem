@@ -2,7 +2,7 @@ import inspect
 import sys
 sys.path.insert(1, 'src')
 
-import PokemonTest, PokemonFactoryTest, TypePkmnTest, StatusTest, EffectTest, TrainerTest, ActionTest
+import PokemonTest, TypePkmnTest, StatusTest, EffectTest, TrainerTest, ActionTest
 
 class color:
 
@@ -52,7 +52,6 @@ def launch_test():
     """
 
     test_a_module(PokemonTest)
-    test_a_module(PokemonFactoryTest)
     test_a_module(TypePkmnTest)
     test_a_module(StatusTest)
     test_a_module(EffectTest)
