@@ -68,23 +68,23 @@ class Pokemon :
     def getAtkStat(self)->int:
         if(type(self.status)==BurnStatus):
             return int(self.atkStat // 2 + (self.atkModif*25/100))
-        return int(self.atkStat + (self.atkModif*25/100))
+        return int(self.atkStat + self.atkStat * (self.atkModif*25/100))
 
     def getDefStat(self)->int:
-        return int(self.defStat + (self.defModif*25/100))
+        return int(self.defStat + self.defStat * (self.defModif*25/100))
 
     def getSpaStat(self)->int:
         if(type(self.status)==FreezeStatus):
             return int(self.spaStat // 2 + (self.spaModif*25/100))
-        return int(self.spaStat + (self.spaModif*25/100))
+        return int(self.spaStat + self.spaStat * (self.spaModif*25/100))
 
     def getSpdStat(self)->int:
-        return int(self.spdStat + (self.spdModif*25/100))
+        return int(self.spdStat + self.spdStat * (self.spdModif*25/100))
 
     def getSpeStat(self)->int:
         if(type(self.status)==ParalysisStatus):
             return int(self.speStat // 4 + (self.speModif*25/100))
-        return int(self.speStat + (self.speModif*25/100))
+        return int(self.speStat + self.speStat * (self.speModif*25/100))
 
     def getIsKo(self)->bool:
         return self.isKo

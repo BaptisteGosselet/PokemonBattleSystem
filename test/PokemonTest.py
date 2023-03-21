@@ -9,16 +9,16 @@ def getPourcentageHP_Test():
 def getCurrentHP_Test():
     poke = testUtils.genererUnPokemon()
     maxHp = poke.getMaxHP()
+    poke.applyDamage(30)
     expectedHp = maxHp-30
     return poke.getCurrentHP() == expectedHp
 
-def applyStatus_Test():
-    #si déjà status ne rien faire
-    return False
-
 def modifAtk_Test():
-    #voir getatk ensuite
-    return False
+    poke = testUtils.genererUnPokemon()
+    atk_0 = poke.getAtkStat()
+    poke.modifAtk(1)
+    atk_1 = poke.getAtkStat()
+    return atk_1 == (atk_0 + int(atk_0*25/100))
 
 def heal_Test():
     poke = testUtils.genererUnPokemon()

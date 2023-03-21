@@ -26,5 +26,6 @@ def recharge_Test():
 def sleep_Test():
     return False
 
-#canMove
-#applyStatus
+def applyStatus_Test():
+    #si déjà status ne rien faire
+    return False
