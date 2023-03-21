@@ -9,21 +9,8 @@ def getPourcentageHP_Test():
 def getCurrentHP_Test():
     poke = testUtils.genererUnPokemon()
     maxHp = poke.getMaxHP()
-    poke.applyDamage(30)
     expectedHp = maxHp-30
     return poke.getCurrentHP() == expectedHp
-
-def getAtkStat_Test():
-    #quand brûlé
-    return False
-
-def getSpaStat_Test():
-    #quand freeze
-    return False
-
-def getSpeStat_Test():
-    #quand paralysé
-    return False
 
 def applyStatus_Test():
     #si déjà status ne rien faire
@@ -45,11 +32,16 @@ def applyDamage_Test():
     return poke.getIsKo()
 
 def canParalyse_Test():
-    #type electrik
-    return False
+    poke_normal = testUtils.genererPokemonAvecUnType("normal")
+    poke_type = testUtils.genererPokemonAvecUnType("electrik")
+    return poke_normal.canParalyse() and (not poke_type.canParalyse())
 
 def canPoison_Test():
-    return False
+    poke_normal = testUtils.genererPokemonAvecUnType("normal")
+    poke_type = testUtils.genererPokemonAvecUnType("poison")
+    return poke_normal.canPoison() and (not poke_type.canPoison())
 
 def canFreeze_Test():
-    return False
+    poke_normal = testUtils.genererPokemonAvecUnType("normal")
+    poke_type = testUtils.genererPokemonAvecUnType("glace")
+    return poke_normal.canFreeze() and (not poke_type.canFreeze())

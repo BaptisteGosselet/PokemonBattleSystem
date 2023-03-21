@@ -1,4 +1,8 @@
+#from model.status import ParalysisStatus, BurnStatus, PoisonStatus, FreezeStatus
+
+
 def burn_Test():
+    #effet + chmgt stat
     return False
 
 def confuse_Test():
