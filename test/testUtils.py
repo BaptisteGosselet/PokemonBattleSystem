@@ -1,5 +1,7 @@
 from model.PokemonFactory import PokemonFactory
 from model.Pokemon import Pokemon
+from model.status.ParalysisStatus import ParalysisStatus
+from model.status.PoisonStatus import PoisonStatus
 
 def toto():
     print("toto")
@@ -16,3 +18,6 @@ def genererUnPokemon():
 def genererPokemonAvecUnType(recherche):
     pkmFact = PokemonFactory()
     return Pokemon("Toto", pkmFact.getTypes()[recherche], None, 1, 1, 1, 1, 1, 1, None, None, None, None)
+
+def genererParalysieEtPoison():
+    return ParalysisStatus(), PoisonStatus()
