@@ -27,27 +27,18 @@ python3 test/mainTest.py
 
 ## Mécaniques implémentées
 
-- Les Pokémon possèdent 4 attaques, celles-ci ont une puissance et une précision
-- L'échange : il est possible de retirer le Pokémon présent sur le terrain pour en amener un autre
-- Chaque Pokémon dispose de statistiques uniques correspondantes à l'attaque ou la défense de celui-ci
-- Les 18 types de Pokémon (feu, eau, etc.) sont implémentés avec leurs faiblesses et leurs resistances
-- La vitesse du Pokémon, et la priorité des attaques sont prises en compte pour déterminer l'ordre des actions
-- Certaines attaques ont des effets secondaires : comme une modification de statistique, un soin ou des dégâts de recul
-- Les statuts sont implémentés : la brûlure (inflige de petits dégâts chaque tour divise l'attaque par 2), la gelûre (même chose avec l'attaque spéciale), la paralysie empêchant d'attaquer ou encore le poison qui inflige des dégâts croissants
+Au lancement de la partie, les joueurs peuvent choisir les 3 pokemons avec lesquels il va combattre. 
+Le logiciel permet une option de randomisation et de joueur ordinateur.
 
+Les attaques des pokémons sont pré-définies et sont au nombre de 4. Si le joueur veut attaquer, il devra choisir entre l'une de ces 4 options. Comme dans le jeu original, chaque capacité possède une puissance, une précision, un type, et un éventuel effet, soit de soin ou de statuts. Le survol de la sourie sur l'attaque permet de lire sa description.
 
-## A faire
+Le switch est une mécanique de jeu fondamentale de Pokemon qui consiste à retirer le Pokémon utilisé et de l'échanger avec l'un de son équipe.
+Etant donné que les pokemons sont avantagés face à certains autres, il est parfois justifié de faire cet échange. 
 
-### Bug
-- Bug - Explosion
-- Bug - 0 PV quand non touché
-- Bug - stats bougent pas
+Les Pokemons possèdent des caractéristiques uniques : des statistiques qui déterminent la puissance de leurs attaques ou leur résistance, 
+ainsi que d'un ou deux types qui ont des effets multiplicateurs de dégât selon l'attaque utilisée.
 
-### A implémenter
-- Affichage des pokemon (current)
-- Affichage des pokemon (team)
+Les joueurs choisissent leurs actions à tour de rôle, mais ce qui détermine l'ordre d'attaque sont la comparaison de vitesse des deux pokemons en jeu, 
+la priorité des attaques, ou bien le switch qui agit toujours avant l'attaque adverse.
 
-### Autres
-- Documentation
-- rapport 
-- Test unitaire
+Enfin, le simulateur implémente aussi les effets de statuts qui sont des malus dû à des effets secondaires d'attaques : la brûlure (inflige de petits dégâts chaque tour divise l'attaque par 2), la gelûre (même chose avec l'attaque spéciale), la paralysie empêchant d'attaquer ou encore le poison qui inflige des dégâts croissants, etc.
