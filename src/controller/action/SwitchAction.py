@@ -40,4 +40,7 @@ class SwitchAction():
             self.trainer.switchPokemon(self.indexTeam)
 
     def getCommingPokemon(self):
-        self.trainer.getTeam()[self.indexTeam]
+        return self.trainer.getTeam()[self.indexTeam]
+
+    def getPokemon(self):
+        return self.trainer.getCurrentPokemon()

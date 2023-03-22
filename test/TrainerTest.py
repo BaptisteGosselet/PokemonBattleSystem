@@ -1,31 +1,18 @@
-
-def initTrainer_Test():
-    #créer un trainer
-    #voir s'il possède les bons pokemons
-    #voir si les pokemons ont le bon trainer
-    #voir le current pokemon
-    return False
+from MockTrainer import MockTrainer
 
 def waitForAction_Test():
-    #utiliser un trainer non ia
-    #Faire un mock de la view (sans héritage)
-    #(fonctionne avec un setActionCommand, pas un argument)
-    #verifier le self.action/getAction
-    return False
+    trainer = MockTrainer()
+    a = trainer.getAction()
+    trainer.waitForAction(trainer.getView())
+    return a == None and trainer.getAction() != None
 
 def switchPokemon_Test():
-    #vérifier aussi la view
-    return False
+    trainer = MockTrainer()
+    poke = trainer.getCurrentPokemon()
+    trainer.switchPokemon(1)
+    return trainer.getCurrentPokemon() != poke
 
 def canContinue_Test():
-    return False
-
-def findBestMove_Test():
-    return False
-
-def findBestSwitch_Test():
-    return False
-
-def filterPriorityMoves_Test():
-    #il s'agit d'actions
-    return False
+    trainer = MockTrainer()
+    trainer.setAllKO()
+    return not trainer.canContinue()

@@ -27,6 +27,9 @@ class MoveAction():
     def getMove(self) -> Move:
         return self.move
 
+    def getPokemon(self):
+        return self.getMyPokemon()
+
     def getMyPokemon(self) -> Pokemon:
         return self.myPokemon
 
